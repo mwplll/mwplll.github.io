@@ -20,19 +20,9 @@
 
 
 
+	<meta name="keywords" content="java," />
 
-    <meta name="keywords" content="Hexo,next" />
-
-
-
-
-
-    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.1" />
-
-
-
-
-  <title> markdown常用标记 // Keep Going! </title>
+  <title> java基础（1） // Keep Going! </title>
 </head>
 
 <body>
@@ -114,7 +104,7 @@
           
           
             
-              markdown常用标记
+              java基础（1）
             
           
         </h1>
@@ -123,7 +113,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-04-07
+            发表于 2015-04-09
           
         </span>
 
@@ -132,7 +122,7 @@
             <span class="post-category">
               &nbsp; | &nbsp; 分类于
               
-                <a href="/categories/markdown/">markdown</a>
+                <a href="/categories/java/">java</a>
 
                 
                 
@@ -146,8 +136,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/07/markdown常用标记/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/07/markdown常用标记/"></span>
+            <a href="/2015/04/10/java基础（1）/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/10/java基础（1）/"></span>
             </a>
           </span>
           
@@ -162,129 +152,10 @@
         
 
         
-          <h2 id="1_基本语法">1 基本语法</h2><h3 id="Markdown代码">Markdown代码</h3><pre><code>单个回车
-视为空格
-
-连续回车两次
-
-才是分段
-
-行尾加两个空格，这里-&gt;  
-即可段内换行
-
-<span class="keyword">*</span>这些文字显示为斜体<span class="keyword">*</span>
-
-<span class="keyword">*</span><span class="keyword">*</span>这些文字显示为粗体<span class="keyword">*</span><span class="keyword">*</span>
-</code></pre><h3 id="效果">效果</h3><p>单个回车<br>视为空格</p>
-<p>连续回车两次</p>
-<p>才是分段</p>
-<p>行尾加两个空格，这里-&gt;<br>即可段内换行</p>
-<p><em>这些文字显示为斜体</em></p>
-<p><strong>这些文字显示为粗体</strong></p>
-<h2 id="2_程序代码的表示">2 程序代码的表示</h2><h3 id="Markdown代码-1">Markdown代码</h3><pre><code>行的开头空<span class="number">4</span>个空格，表示程序代码，markdown能自动识别语言，进行代码染色，例如：  
-Javascript:
-    <span class="function"><span class="keyword">function</span> <span class="title">fib</span><span class="params">(b)</span></span>{
-        <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;
-        <span class="keyword">var</span> tmp;
-        <span class="keyword">while</span>(--n &gt;= <span class="number">0</span>){
-            tmp = a;
-            a += b;
-            b = tmp;
-        }
-        <span class="keyword">return</span> a;
-    }
-</code></pre><h3 id="效果-1">效果</h3><pre><code><span class="function"><span class="keyword">function</span> <span class="title">fib</span><span class="params">(b)</span></span>{
-            <span class="keyword">var</span> a = <span class="number">1</span>, b = <span class="number">1</span>;
-            <span class="keyword">var</span> tmp;
-            <span class="keyword">while</span>(--n &gt;= <span class="number">0</span>){
-                tmp = a;
-                a += b;
-                b = tmp;
-            }
-            <span class="keyword">return</span> a;
-    }
-</code></pre><h2 id="3_标题的表示">3 标题的表示</h2><h3 id="Markdown代码-2">Markdown代码</h3><pre><code>&gt; 表示引用文字内容
-
-<span class="preprocessor">#表示这是一级标题</span>
-<span class="preprocessor">##表示这是二级标题</span>
-<span class="preprocessor">###表示这是三级标题</span>
-<span class="preprocessor">####表示这是四级标题</span>
-<span class="preprocessor">#####表示这是五级标题</span>
-<span class="preprocessor">######表示这是六级标题</span>
-
-也可以这样表示大标题
-=
-
-这样表示小标题
--
-</code></pre><h3 id="效果-2">效果</h3><blockquote>
-<p>表示引用文字内容</p>
-</blockquote>
-<h1 id="表示这是一级标题">表示这是一级标题</h1><h2 id="表示这是二级标题">表示这是二级标题</h2><h3 id="表示这是三级标题">表示这是三级标题</h3><h4 id="表示这是四级标题">表示这是四级标题</h4><h5 id="表示这是五级标题">表示这是五级标题</h5><h6 id="表示这是六级标题">表示这是六级标题</h6><p>也可以这样表示大标题<br>=</p>
-<p>这样表示小标题<br>-</p>
-<h2 id="4_列表">4 列表</h2><h3 id="Markdown代码-3">Markdown代码</h3><pre><code>-<span class="ruby">--
-</span>上面是一条分隔线
-
-
--<span class="ruby"> 这是无序列表项目
-</span>-<span class="ruby"> 这是无序列表项目
-</span>-<span class="ruby"> 这是无序列表项目
-</span>
-两个列表之间不能相邻，否则会解释为嵌套的列表
-
-1. 这是有序列表项目
-2. 这是有序列表项目
-3. 这是有序列表项目
-
-下面这个是嵌套的列表
-
--<span class="ruby"> 外层列表项目
-</span> 1. 内层列表项目
- 2. 内层列表项目
- 3. 内层列表项目
--<span class="ruby"> 外层列表项目</span>
-</code></pre><h3 id="效果-3">效果</h3><hr>
-<p>上面是一条分隔线</p>
-<ul>
-<li>这是无序列表项目</li>
-<li>这是无序列表项目</li>
-<li>这是无序列表项目</li>
-</ul>
-<p>两个列表之间不能相邻，否则会解释为嵌套的列表</p>
-<ol>
-<li>这是有序列表项目</li>
-<li>这是有序列表项目</li>
-<li>这是有序列表项目</li>
-</ol>
-<p>下面这个是嵌套的列表</p>
-<ul>
-<li>外层列表项目<ol>
-<li>内层列表项目</li>
-<li>内层列表项目</li>
-<li>内层列表项目</li>
-</ol>
-</li>
-<li>外层列表项目</li>
-</ul>
-<h2 id="5_链接">5 链接</h2><h3 id="Markdown代码-4">Markdown代码</h3><pre><code>直接把一个URL显示为超级连接：
-
-也可以这样：[<span class="link_label">mwplll的博客</span>](<span class="link_url">https://mwplll.github.io</span>)
-
-图像和链接非常类似，区别在开头加一个惊叹号： ![<span class="link_label">这是本文的封面图</span>](<span class="link_url">http://zjd90.b0.upaiyun.com//design/room/5d1359747a882ce1bc778ceb87e55375.jpg!350x350</span>)
-
-此外，还可以以索引方式把url都列在文章的最后，例如这样：
-
-[<span class="link_label">mwplll的博客</span>][<span class="link_reference">1</span>]
-![<span class="link_label">这是本文的封面图</span>][<span class="link_reference">2</span>]
-
-[<span class="link_reference">1</span>]:<span class="link_url">https://mwplll.github.io</span>
-[<span class="link_reference">2</span>]:<span class="link_url">http://zjd90.b0.upaiyun.com//design/room/5d1359747a882ce1bc778ceb87e55375.jpg!350x350</span>
-</code></pre><h3 id="效果-4">效果</h3><p>直接把一个URL显示为超级连接：</p>
-<p>也可以这样：<a href="https://mwplll.github.io" target="_blank" rel="external">mwplll的博客</a></p>
-<p>图像和链接非常类似，区别在开头加一个惊叹号： <img src="http://zjd90.b0.upaiyun.com/design/room/5d1359747a882ce1bc778ceb87e55375.jpg!350x350" alt="这是本文的封面图"></p>
-<p>此外，还可以以索引方式把url都列在文章的最后，例如这样：</p>
-<p><a href="https://mwplll.github.io" target="_blank" rel="external">mwplll的博客</a><br><img src="http://zjd90.b0.upaiyun.com/design/room/5d1359747a882ce1bc778ceb87e55375.jpg!350x350" alt="这是本文的封面图"></p>
-
+          <p>   写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-10月份正式招聘，还有4各月，这个时间，我决定开始学习java，刷leetcode，不知道最终能否有所收获，但我想试一试，如果能成功，也给所有向我这样非计算机专业出身，又想找互联网的软件开发的，时间很紧的情况下基础还不够的同仁们一个信心，相信天道酬勤、事在人为，我们能行！</p>
+<hr>
+<pre><code><span class="built_in">printf</span>();
+</code></pre>
         
       </div>
     
@@ -292,18 +163,24 @@ Javascript:
     
       <div class="post-footer">
         
+          <div class="post-tags">
+            
+              <a href="/tags/java/">
+                #java
+              </a>
+            
+          </div>
+        
 
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/04/09/svn常用命令/">svn常用命令</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/04/07/hexo简介/">hexo简介</a>
+                <a href="/2015/04/09/svn常用命令/">svn常用命令</a>
               
             </div>
           </div>
@@ -320,8 +197,8 @@ Javascript:
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/04/07/markdown常用标记/"
-             data-title="markdown常用标记" data-url="http://mwplll.github.io/2015/04/07/markdown常用标记/">
+        <div class="ds-thread" data-thread-key="2015/04/10/java基础（1）/"
+             data-title="java基础（1）" data-url="http://mwplll.github.io/2015/04/10/java基础（1）/">
         </div>
 
       
@@ -403,7 +280,7 @@ Javascript:
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_基本语法"><span class="nav-number">1.</span> <span class="nav-text">1 基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown代码"><span class="nav-number">1.1.</span> <span class="nav-text">Markdown代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">1.2.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_程序代码的表示"><span class="nav-number">2.</span> <span class="nav-text">2 程序代码的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">Markdown代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果-1"><span class="nav-number">2.2.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_标题的表示"><span class="nav-number">3.</span> <span class="nav-text">3 标题的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown代码-2"><span class="nav-number">3.1.</span> <span class="nav-text">Markdown代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果-2"><span class="nav-number">3.2.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表示这是一级标题"><span class="nav-number"></span> <span class="nav-text">表示这是一级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#表示这是二级标题"><span class="nav-number">1.</span> <span class="nav-text">表示这是二级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表示这是三级标题"><span class="nav-number">1.1.</span> <span class="nav-text">表示这是三级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#表示这是四级标题"><span class="nav-number">1.1.1.</span> <span class="nav-text">表示这是四级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#表示这是五级标题"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">表示这是五级标题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#表示这是六级标题"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">表示这是六级标题</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_列表"><span class="nav-number">2.</span> <span class="nav-text">4 列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown代码-3"><span class="nav-number">2.1.</span> <span class="nav-text">Markdown代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果-3"><span class="nav-number">2.2.</span> <span class="nav-text">效果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5_链接"><span class="nav-number">3.</span> <span class="nav-text">5 链接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown代码-4"><span class="nav-number">3.1.</span> <span class="nav-text">Markdown代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果-4"><span class="nav-number">3.2.</span> <span class="nav-text">效果</span></a></li></ol></li></ol></div>
+            <p class="post-toc-empty">此文章未包含目录</p>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
