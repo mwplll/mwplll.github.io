@@ -20,9 +20,9 @@
 
 
 
-	<meta name="keywords" content="“svn”," />
+	<meta name="keywords" content="c,基础," />
 
-  <title> svn常用命令 // Keep Going! </title>
+  <title> C基础（1）——易错基础整理 // Keep Going! </title>
 </head>
 
 <body>
@@ -104,7 +104,7 @@
           
           
             
-              svn常用命令
+              C基础（1）——易错基础整理
             
           
         </h1>
@@ -113,7 +113,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-04-09
+            发表于 2015-04-11
           
         </span>
 
@@ -122,7 +122,7 @@
             <span class="post-category">
               &nbsp; | &nbsp; 分类于
               
-                <a href="/categories/svn/">svn</a>
+                <a href="/categories/C/">C</a>
 
                 
                 
@@ -136,8 +136,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/09/svn常用命令/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/09/svn常用命令/"></span>
+            <a href="/2015/04/11/C基础（1）——易错常考基础整理/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/C基础（1）——易错常考基础整理/"></span>
             </a>
           </span>
           
@@ -152,7 +152,31 @@
         
 
         
-          
+          <h3 id="数据类型">数据类型</h3><ol>
+<li>数据类型转化<br>字节小的可以向字节大的自动转换，但字节大的不能向字节小的自动转换<br>如：字符类型可自动转化为整型，整型可自动转化为浮点类型</li>
+<li>char类型转化为int类型遵循ASCII码的对应值<br><a href="http://www.cnblogs.com/xmxu/archive/2012/07/10/2584032.html" target="_blank" rel="external">ASCII码表</a></li>
+<li>强制类型转换<br>强制转化后的运算结果不遵循四舍五入原则;<br>转换后不会改变原数据的类型及变量值，只在本次运算中临时性转换。</li>
+</ol>
+<h3 id="运算符">运算符</h3><ol>
+<li>如果相除的两个数都是整数的话，则结果也为整数，小数部分省略;而两个数中有一个为小数，结果则为小数，如：9.0/2 = 4.500000</li>
+<li>取余运算中注意：该运算<strong>只适合用两个整数</strong>进行取余运算，如：10%3 = 1；而10.0%3则是错误的；运算后的符号取决于被模数的符号，如(-10)%3 = -1;而10%(-3) = 1。</li>
+<li>运算符优先级，（）最高</li>
+<li>闰年计算方法，（1）普通年份能被4整除但不能被100整除；（2）后两位为0的年份能被400整除；则为闰年  y%400==0||(y%4==0&amp;&amp;y%100!=0)</li>
+</ol>
+<h3 id="结构语句">结构语句</h3><ol>
+<li><p>c语言中for中使用的变量<strong>一定要在循环之前定义</strong>。如以下的用法就是错误的：</p>
+<pre><code><span class="comment">//各表达式中的变量一定要在for循环之前定义</span>
+<span class="keyword">for</span>(<span class="built_in">int</span> <span class="built_in">num</span>=<span class="number">0</span>;<span class="built_in">num</span>&lt;=<span class="number">10</span>;<span class="built_in">num</span>++){
+    printf(<span class="string">'%d\n'</span>,<span class="built_in">num</span>);
+}
+</code></pre><p> 相对的，在C++中，以上表达式就是正确的。</p>
+</li>
+<li><p>在实际开发中一般最多用到三层重循环；</p>
+</li>
+<li>在多层循环中，一个break语句只能跳出当前循环；</li>
+<li>switch语句，后面表达式语句只能是<strong>整型或者字符类型</strong>；在case后，<strong>允许有多个语句</strong>，可以不用{}括起来。</li>
+</ol>
+<h3 id="函数">函数</h3>
         
       </div>
     
@@ -162,8 +186,12 @@
         
           <div class="post-tags">
             
-              <a href="/tags/“svn”/">
-                #“svn”
+              <a href="/tags/c/">
+                #c
+              </a>
+            
+              <a href="/tags/基础/">
+                #基础
               </a>
             
           </div>
@@ -173,13 +201,11 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/04/10/java基础（1）/">java基础（1）</a>
-              
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/04/07/markdown常用标记/">markdown常用标记</a>
+                <a href="/2015/04/10/java基础（1）/">java基础（1）</a>
               
             </div>
           </div>
@@ -196,8 +222,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/04/09/svn常用命令/"
-             data-title="svn常用命令" data-url="http://mwplll.github.io/2015/04/09/svn常用命令/">
+        <div class="ds-thread" data-thread-key="2015/04/11/C基础（1）——易错常考基础整理/"
+             data-title="C基础（1）——易错基础整理" data-url="http://mwplll.github.io/2015/04/11/C基础（1）——易错常考基础整理/">
         </div>
 
       
@@ -279,7 +305,7 @@
         <div class="post-toc">
           
           
-            <p class="post-toc-empty">此文章未包含目录</p>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">2.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构语句"><span class="nav-number">3.</span> <span class="nav-text">结构语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
