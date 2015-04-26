@@ -22,7 +22,7 @@
 
 	<meta name="keywords" content="c,基础," />
 
-  <title> C基础（1）——易错基础整理 // Keep Going! </title>
+  <title> C基础1——数据类型、运算符、结构、函数、数组 // Keep Going! </title>
 </head>
 
 <body>
@@ -104,7 +104,7 @@
           
           
             
-              C基础（1）——易错基础整理
+              C基础1——数据类型、运算符、结构、函数、数组
             
           
         </h1>
@@ -136,8 +136,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/11/C基础（1）——易错常考基础整理/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/C基础（1）——易错常考基础整理/"></span>
+            <a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/"></span>
             </a>
           </span>
           
@@ -176,7 +176,47 @@
 <li>在多层循环中，一个break语句只能跳出当前循环；</li>
 <li>switch语句，后面表达式语句只能是<strong>整型或者字符类型</strong>；在case后，<strong>允许有多个语句</strong>，可以不用{}括起来。</li>
 </ol>
-<h3 id="函数">函数</h3>
+<h3 id="函数">函数</h3><ol>
+<li>void函数中可以有执行代码块，但是不能有返回值，另void函数中如果有return语句，该语句只能起到结束函数运行的功能。其格式为：return;</li>
+<li><p>在复合语句中也可以定义局部变量，其作用域只在复合语句内部。</p>
+<pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
+<span class="keyword">int</span> x = <span class="number">77</span>;
+<span class="function"><span class="keyword">void</span> <span class="title">fn1</span><span class="params">()</span>
+</span>{
+    <span class="built_in">printf</span>(<span class="string">"fn1(): x=%d\n"</span>, x);       
+}
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="keyword">int</span> x = <span class="number">10</span>;
+    <span class="keyword">if</span>(x&gt;<span class="number">0</span>)
+    {
+        <span class="keyword">int</span> x = <span class="number">100</span>;
+        x /= <span class="number">2</span>;
+        <span class="built_in">printf</span>(<span class="string">"if语句内, x=%d\n"</span>, x);       
+    }
+    <span class="built_in">printf</span>(<span class="string">"main方法内, x=%d\n"</span>, x);
+    fn1();
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p> 输出结果为：</p>
+<pre><code><span class="keyword">if</span>语句内, <span class="variable">x=</span><span class="number">50</span>
+main方法内, <span class="variable">x=</span><span class="number">10</span>
+fn1(): <span class="variable">x=</span><span class="number">77</span>
+</code></pre></li>
+<li><p>C语言中存储类别分为四类：自动（auto）、静态（static）、寄存器的（register）和外部的（extern）。</p>
+</li>
+<li>静态局部变量属于静态存储类别，在静态存储区内分配存储单元，在程序整个运行期间都不释放；静态局部变量在编译时赋初值，即<strong>只赋初值一次</strong>；如果在定义局部变量时不赋初值的话，则对静态局部变量来说，编译时<strong>自动赋初值0（对数值型变量）或空字符（对字符变量）</strong>。</li>
+<li><p>内部函数与外部函数。内部函数定义：</p>
+<pre><code><span class="value">static</span> <span class="attr_selector">[数据类型]</span> 函数名(<span class="attr_selector">[参数]</span>)
+</code></pre><p> 内部函数<strong>只能在其所处的源文件中使用</strong>，因此在不同的文件中出现相同的函数名称的内部函数是没有问题的。</p>
+</li>
+</ol>
+<h3 id="数组">数组</h3><ol>
+<li>在声明数组后没有进行初始化的时候，静态（static）和外部（extern）类型的数组元素初始化元素为0，自动（auto）类型的数组的元素初始化值不确定。</li>
+<li>C语言<strong>不提供</strong>计算数组长度的方法；</li>
+<li>数组名作为函数实参传递时，函数定义处作为接收参数的数组类型形参既可以指定长度也可以不指定长度。</li>
+</ol>
+
         
       </div>
     
@@ -222,8 +262,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/04/11/C基础（1）——易错常考基础整理/"
-             data-title="C基础（1）——易错基础整理" data-url="http://mwplll.github.io/2015/04/11/C基础（1）——易错常考基础整理/">
+        <div class="ds-thread" data-thread-key="2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/"
+             data-title="C基础1——数据类型、运算符、结构、函数、数组" data-url="http://mwplll.github.io/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/">
         </div>
 
       
@@ -305,7 +345,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">2.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构语句"><span class="nav-number">3.</span> <span class="nav-text">结构语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">2.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构语句"><span class="nav-number">3.</span> <span class="nav-text">结构语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">5.</span> <span class="nav-text">数组</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
