@@ -365,9 +365,30 @@
 <p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
 <p>You may assume that each input would have exactly one solution.</p>
 <p>Input: numbers={2, 7, 11, 15}, target=9<br>Output: index1=1, index2=2</p>
-<h3 id="分析">分析</h3><p>1、暴力求解，直接做两层循环找出两个数所在的位置，但时间复杂度为O(n^2)，会超时<br>2、先做一个快排<br>    /<em><br>     1、暴力求解，时间复杂度为O(n^2),会超时: Time Limit Exceeded
-     </em>/<br>    int<em> twoSum1(int</em> nums, int numsSize, int target) {<br>        int <em>a = (int </em>)malloc(2<em>sizeof(int));<br>        int </em>index=(int <em>)malloc(numsSize</em>sizeof(int));<br>        int i=0;<br>        int j=0;<br>        for(i=0;i&lt;numsSize;i++){<br>            index[i] = i+1;<br>        }<br>        for(i=0;i&lt;numsSize;i++){<br>            for(j=i+1;j&lt;numsSize;j++){<br>                if(nums[i]+nums[j] == target){<br>                    a[0] = index[i];<br>                    a[1] = index[j];<br>                    break;<br>                }<br>            }<br>        }<br>        return a;<br>    }</p>
-
+<h3 id="分析">分析</h3><p>1、暴力求解，直接做两层循环找出两个数所在的位置，但时间复杂度为O(n^2)，会超时<br>2、先做一个快排</p>
+<pre><code><span class="comment">/*
+ 1、暴力求解，时间复杂度为O(n^2),会超时: Time Limit Exceeded
+ */</span>
+<span class="keyword">int</span>* twoSum1(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target) {
+    <span class="keyword">int</span> *a = (<span class="keyword">int</span> *)malloc(<span class="number">2</span>*sizeof(<span class="keyword">int</span>));
+    <span class="keyword">int</span> *<span class="keyword">index</span>=(<span class="keyword">int</span> *)malloc(numsSize*sizeof(<span class="keyword">int</span>));
+    <span class="keyword">int</span> i=<span class="number">0</span>;
+    <span class="keyword">int</span> j=<span class="number">0</span>;
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
+        <span class="keyword">index</span>[i] = i+<span class="number">1</span>;
+    }
+    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
+        <span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;numsSize;j++){
+            <span class="keyword">if</span>(nums[i]+nums[j] == target){
+                a[<span class="number">0</span>] = <span class="keyword">index</span>[i];
+                a[<span class="number">1</span>] = <span class="keyword">index</span>[j];
+                <span class="keyword">break</span>;
+            }
+        }
+    }
+    <span class="keyword">return</span> a;
+}
+</code></pre>
           
         
       </div>
