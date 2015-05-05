@@ -219,13 +219,13 @@ fn1(): <span class="variable">x=</span><span class="number">77</span>
 （<span class="number">2</span>）、char 字符串名称[长度] = {<span class="string">'字符1'</span>,<span class="string">'字符2'</span>,<span class="keyword">...</span>,<span class="string">'字符n'</span>,<span class="string">'\0'</span>};
 </code></pre>采用第2种方式的时候最后一个元素必须是’\0’，’\0’表示字符串的结束标志；<br>采用第2种方式的时候在数组中<strong>不能写中文</strong>。</li>
 <li>常用的字符串函数<pre><code><span class="comment">//(1)strlen(s),获得字符串的长度（单位字节），其中汉字和字母的长度是不一样的。</span>
-strlen(<span class="string">"慕课网"</span>)；<span class="comment">//值为3</span>
+strlen(<span class="string">"慕课网"</span>)；<span class="comment">//值为9</span>
 strlen(<span class="string">"Love"</span>);<span class="comment">//值为4</span>
 <span class="comment">//(2)strcmp(s1,s2),比较字符串</span>
 <span class="comment">/*strcmp()在比较的时候会把字符串先转换成ASCII码再进行比较,返回的结果为0表示s1和s2的ASCII码相等,返回结果为1表示s1比s2的ASCII码大,返回结果为-1表示s1比s2的ASCII码小*/</span>
 <span class="keyword">strcmp</span>(<span class="string">"a"</span>,<span class="string">"b"</span>);<span class="comment">//值为-1</span>
 <span class="comment">//(3)strcpy(s1,s2),字符串拷贝</span>
-<span class="comment">/*strcpy()拷贝之后会覆盖原来字符串且不能对字符串常量进行拷贝*/</span>
+<span class="comment">/*strcpy()拷贝之后会覆盖原来字符串*/</span>
 <span class="comment">//(4)strcat(s1,s2),把字符串s2拼接到字符串s1后</span>
 <span class="comment">/*strcat在使用时s1与s2指的内存空间不能重叠，且s1要有足够的空间来容纳要复制的字符串*/</span>
 <span class="comment">//(5)atoi(s1),字符串转换为整数</span>
@@ -259,6 +259,8 @@ stoi(<span class="string">'100'</span>);<span class="comment">//值为100</span>
         
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2015/04/27/C基础2——指针、链表、文件/">C基础2——指针、链表、文件</a>
               
             </div>
 
@@ -326,21 +328,21 @@ stoi(<span class="string">'100'</span>);<span class="comment">//值为100</span>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
           <a href="/archives">
-            <span class="site-state-item-count">5</span>
+            <span class="site-state-item-count">9</span>
             <span class="site-state-item-name">日志</span>
           </a>
         </div>
 
         <div class="site-state-item site-state-categories">
           <a href="/categories">
-            <span class="site-state-item-count">5</span>
+            <span class="site-state-item-count">7</span>
             <span class="site-state-item-name">分类</span>
           </a>
         </div>
 
         <div class="site-state-item site-state-tags">
           <a href="/tags">
-            <span class="site-state-item-count">4</span>
+            <span class="site-state-item-count">7</span>
             <span class="site-state-item-name">标签</span>
           </a>
         </div>

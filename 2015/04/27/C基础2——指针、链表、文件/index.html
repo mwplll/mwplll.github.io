@@ -20,9 +20,9 @@
 
 
 
-	<meta name="keywords" content="java," />
+	<meta name="keywords" content="c,基础," />
 
-  <title> java基础（1） // Keep Going! </title>
+  <title> C基础2——指针、链表、文件 // Keep Going! </title>
 </head>
 
 <body>
@@ -104,7 +104,7 @@
           
           
             
-              java基础（1）
+              C基础2——指针、链表、文件
             
           
         </h1>
@@ -113,7 +113,7 @@
       <div class="post-meta">
         <span class="post-time">
           
-            发表于 2015-04-09
+            发表于 2015-04-27
           
         </span>
 
@@ -122,7 +122,7 @@
             <span class="post-category">
               &nbsp; | &nbsp; 分类于
               
-                <a href="/categories/java/">java</a>
+                <a href="/categories/C/">C</a>
 
                 
                 
@@ -136,8 +136,8 @@
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/04/10/java基础（1）/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/10/java基础（1）/"></span>
+            <a href="/2015/04/27/C基础2——指针、链表、文件/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/27/C基础2——指针、链表、文件/"></span>
             </a>
           </span>
           
@@ -152,10 +152,19 @@
         
 
         
-          <p>   写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-10月份正式招聘，还有4各月，这个时间，我决定开始学习java，刷leetcode，不知道最终能否有所收获，但我想试一试，如果能成功，也给所有向我这样非计算机专业出身，又想找互联网的软件开发的，时间很紧的情况下基础还不够的同仁们一个信心，相信天道酬勤、事在人为，我们能行！</p>
-<hr>
-<pre><code><span class="built_in">printf</span>();
-</code></pre>
+          <h3 id="指针">指针</h3><ol>
+<li>*p的区别<pre><code>int <span class="keyword">*</span>p;
+<span class="keyword">*</span>p = 10;
+</code></pre>这里的两个<em>p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，</em>表示其后的变量是指针；后者*p代表指针p所指向的变量。</li>
+<li>指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它<strong>指向一个不确定的单元</strong>，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*p=NULL;</li>
+<li>指针每一次加1或者减1，并非指针的值加1或者减1，而是加上或者减去该指针所指向的那个变量数据类型的长度，即它指向的存储单元所占用的字节数。</li>
+<li>在函数定义时，被声明为数组的形参<strong>实际上是一个指针</strong>。当传递数组时，按值调用传递它的基地址，数组元素本身不被复制。</li>
+<li><p>scanf()和gets()函数的区别：scanf()只能输入不能带有空格的字符串，gets()可输入空格，遇回车符输入结束；</p>
+<p>printf()和puts()的区别：后者输出字符串会自动换行。</p>
+</li>
+<li>calloc与malloc动态内存分配函数。其中calloc在动态分配内存后，自动初始化该内存空间为0，而malloc不会。</li>
+</ol>
+<h3 id="结构">结构</h3>
         
       </div>
     
@@ -165,8 +174,12 @@
         
           <div class="post-tags">
             
-              <a href="/tags/java/">
-                #java
+              <a href="/tags/c/">
+                #c
+              </a>
+            
+              <a href="/tags/基础/">
+                #基础
               </a>
             
           </div>
@@ -176,13 +189,13 @@
           <div class="post-nav">
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/">C基础1——数据类型、运算符、结构、函数、数组</a>
+                <a href="/2015/04/27/leetcode-1-Two-Sum/">leetcode(1)-Two Sum</a>
               
             </div>
 
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2015/04/09/svn常用命令/">svn常用命令</a>
+                <a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/">C基础1——数据类型、运算符、结构、函数、数组</a>
               
             </div>
           </div>
@@ -199,8 +212,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/04/10/java基础（1）/"
-             data-title="java基础（1）" data-url="http://mwplll.github.io/2015/04/10/java基础（1）/">
+        <div class="ds-thread" data-thread-key="2015/04/27/C基础2——指针、链表、文件/"
+             data-title="C基础2——指针、链表、文件" data-url="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/">
         </div>
 
       
@@ -282,7 +295,7 @@
         <div class="post-toc">
           
           
-            <p class="post-toc-empty">此文章未包含目录</p>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">2.</span> <span class="nav-text">结构</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
