@@ -156,28 +156,117 @@
 <p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
 <p>You may assume that each input would have exactly one solution.</p>
 <p>Input: numbers={2, 7, 11, 15}, target=9<br>Output: index1=1, index2=2</p>
-<h3 id="分析">分析</h3><p>1、暴力求解，直接做两层循环找出两个数所在的位置，但时间复杂度为O(n^2)，会超时<br>2、先做一个快排</p>
-<pre><code><span class="comment">/*
+<h3 id="分析">分析</h3><p>1、暴力求解，直接做两层循环找出两个数所在的位置，但时间复杂度为O(n^2)，会超时<br>2、先进行一个快排，两个指针分别指向首(i)尾(j)，若和大于要求值则 j—，否则i++</p>
+<h3 id="代码">代码</h3><pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
+<span class="comment">/*
  1、暴力求解，时间复杂度为O(n^2),会超时: Time Limit Exceeded
  */</span>
 <span class="keyword">int</span>* twoSum1(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target) {
-    <span class="keyword">int</span> *a = (<span class="keyword">int</span> *)malloc(<span class="number">2</span>*sizeof(<span class="keyword">int</span>));
-    <span class="keyword">int</span> *<span class="keyword">index</span>=(<span class="keyword">int</span> *)malloc(numsSize*sizeof(<span class="keyword">int</span>));
+    <span class="keyword">int</span> *a = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">2</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
+    <span class="keyword">int</span> *index=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(numsSize*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
     <span class="keyword">int</span> i=<span class="number">0</span>;
     <span class="keyword">int</span> j=<span class="number">0</span>;
     <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
-        <span class="keyword">index</span>[i] = i+<span class="number">1</span>;
+        index[i] = i+<span class="number">1</span>;
     }
     <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
         <span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;numsSize;j++){
             <span class="keyword">if</span>(nums[i]+nums[j] == target){
-                a[<span class="number">0</span>] = <span class="keyword">index</span>[i];
-                a[<span class="number">1</span>] = <span class="keyword">index</span>[j];
+                a[<span class="number">0</span>] = index[i];
+                a[<span class="number">1</span>] = index[j];
                 <span class="keyword">break</span>;
             }
         }
     }
     <span class="keyword">return</span> a;
+}
+<span class="comment">/*
+ 2、先进行一个快排，两个指针分别指向首(i)尾(j)，若和大于要求值则 j--，否则i++
+ */</span>
+<span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span>
+</span>{
+    <span class="keyword">int</span> temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+    <span class="keyword">return</span>;
+
+}
+
+<span class="comment">//快速排序函数，另外一个数组是为了交换时下标也跟着交换</span>
+<span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> ind[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span>
+</span>{
+    <span class="keyword">if</span>(left&gt;right)
+        <span class="keyword">return</span>;
+    <span class="keyword">int</span> i=left;
+    <span class="keyword">int</span> j=right;
+    <span class="keyword">int</span> mid=(left+right)/<span class="number">2</span>;
+    swap(&amp;arr[mid],&amp;arr[left]);
+    swap(&amp;ind[mid],&amp;ind[left]);
+    <span class="keyword">int</span> temp=arr[left];
+    <span class="keyword">while</span>(i!=j)
+    {
+        <span class="keyword">while</span>(arr[j]&gt;=temp &amp;&amp; i&lt;j)
+            j--;
+        <span class="keyword">while</span>(arr[i]&lt;=temp &amp;&amp; i&lt;j)
+            i++;
+
+        <span class="keyword">if</span>(i&lt;j)
+        {
+            swap(&amp;arr[i],&amp;arr[j]);
+            swap(&amp;ind[i],&amp;ind[j]);
+        }
+    }
+    swap(&amp;arr[i],&amp;arr[left]);
+    swap(&amp;ind[i],&amp;ind[left]);
+
+    sort(arr,ind,left,i-<span class="number">1</span>);
+    sort(arr,ind,i+<span class="number">1</span>,right);
+
+}
+
+<span class="keyword">int</span> *twoSum2(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target) {
+    <span class="keyword">int</span> *a=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">2</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
+    <span class="keyword">int</span> *index=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(numsSize*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
+    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numsSize;i++)
+        index[i]=i+<span class="number">1</span>;
+    a[<span class="number">0</span>]=a[<span class="number">1</span>]=-<span class="number">1</span>;
+    sort(nums,index,<span class="number">0</span>,numsSize-<span class="number">1</span>);
+    <span class="keyword">int</span> i=<span class="number">0</span>;
+    <span class="keyword">int</span> j=numsSize-<span class="number">1</span>;
+    <span class="keyword">while</span> (i!=j) {
+        <span class="keyword">if</span>(nums[i]+nums[j]==target)
+        {
+            <span class="keyword">if</span>(index[i]&gt;index[j])
+            {
+                a[<span class="number">0</span>]=index[j];
+                a[<span class="number">1</span>]=index[i];
+            }
+            <span class="keyword">else</span>
+            {
+                a[<span class="number">0</span>]=index[i];
+                a[<span class="number">1</span>]=index[j];
+            }
+            <span class="keyword">break</span>;
+        }
+        <span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(nums[i]+nums[j]&lt;target)</span>
+            i++</span>;
+        <span class="keyword">else</span>
+            j--;
+    }
+    <span class="keyword">return</span> a;
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>{
+    <span class="comment">// insert code here...</span>
+    <span class="comment">//printf("Hello, World!\n");</span>
+    <span class="keyword">int</span> nums[<span class="number">6</span>] = {<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>};
+    <span class="keyword">int</span> numsSize = <span class="number">6</span>;
+    <span class="keyword">int</span> target = <span class="number">13</span>;
+    <span class="keyword">int</span> *indexCur;
+    indexCur = twoSum2(nums, numsSize, target);
+    <span class="built_in">printf</span>(<span class="string">"%d\n%d\n"</span>,indexCur[<span class="number">0</span>],indexCur[<span class="number">1</span>]);
+    <span class="keyword">return</span> <span class="number">0</span>;
 }
 </code></pre>
         
@@ -306,7 +395,7 @@
         <div class="post-toc">
           
           
-            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li></ol></div>
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
           
         </div>
         <div class="post-toc-indicator-bottom post-toc-indicator"></div>
