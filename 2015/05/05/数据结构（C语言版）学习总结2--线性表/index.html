@@ -17,7 +17,11 @@
 除最后一个元素，均有唯一的后继
 除第一个元素之外，均有唯一的前驱
 
-2.1 线性表的类型定义">
+2.1 线性表的类型定义
+对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后再是对有序表进行操作。
+
+2.2 线性表的顺序表示和实现
+顺序映像指用一组地址连续的存储单元来依次存储线性表中的数据元素">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构（C语言版）学习总结2--线性表">
 <meta property="og:url" content="http://mwplll.github.io/2015/05/05/数据结构（C语言版）学习总结2--线性表/index.html">
@@ -28,7 +32,11 @@
 除最后一个元素，均有唯一的后继
 除第一个元素之外，均有唯一的前驱
 
-2.1 线性表的类型定义">
+2.1 线性表的类型定义
+对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后再是对有序表进行操作。
+
+2.2 线性表的顺序表示和实现
+顺序映像指用一组地址连续的存储单元来依次存储线性表中的数据元素">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构（C语言版）学习总结2--线性表">
 <meta name="twitter:description" content="线性结构的基本特征
@@ -37,7 +45,11 @@
 除最后一个元素，均有唯一的后继
 除第一个元素之外，均有唯一的前驱
 
-2.1 线性表的类型定义">
+2.1 线性表的类型定义
+对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后再是对有序表进行操作。
+
+2.2 线性表的顺序表示和实现
+顺序映像指用一组地址连续的存储单元来依次存储线性表中的数据元素">
 
     
     <link rel="alternative" href="/atom.xml" title="MWP&#39;s Blog" type="application/atom+xml">
@@ -115,7 +127,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_线性表的顺序表示和实现"><span class="toc-number">3.</span> <span class="toc-text">2.2 线性表的顺序表示和实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_线性表的链式表示和实现"><span class="toc-number">4.</span> <span class="toc-text">2.3 线性表的链式表示和实现</span></a></li></ol>
 		
 		</div>
 		
@@ -125,7 +137,18 @@
 <li>除最后一个元素，均有<strong>唯一的后继</strong></li>
 <li>除第一个元素之外，均有<strong>唯一的前驱</strong></li>
 </ol>
-<h3 id="2-1_线性表的类型定义">2.1 线性表的类型定义</h3>  
+<h3 id="2-1_线性表的类型定义">2.1 线性表的类型定义</h3><ol>
+<li>对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后再是对有序表进行操作。</li>
+</ol>
+<h3 id="2-2_线性表的顺序表示和实现">2.2 线性表的顺序表示和实现</h3><ol>
+<li>顺序映像指用一组地址连续的存储单元来依次存储线性表中的数据元素。</li>
+<li>插入顺序表元素和删除顺序表元素时间复杂度O(n);</li>
+<li>顺序表的优点：可以对表的元素直接进行读取；缺点：当进行插入或者删除操作时，需要移动之后的所有元素。</li>
+</ol>
+<h3 id="2-3_线性表的链式表示和实现">2.3 线性表的链式表示和实现</h3><ol>
+<li>链式映像用一组地址任意的存储单元来存储数据元素。<br>元素+指针=结点；链表：“结点的序列”</li>
+</ol>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -191,7 +214,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_线性表的顺序表示和实现"><span class="toc-number">3.</span> <span class="toc-text">2.2 线性表的顺序表示和实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_线性表的链式表示和实现"><span class="toc-number">4.</span> <span class="toc-text">2.3 线性表的链式表示和实现</span></a></li></ol>
  
   </div>
 
@@ -213,7 +236,7 @@
 		  
 		
 		  
-			<li><a href="/categories/java/" title="java">java<sup>1</sup></a></li>
+			<li><a href="/categories/java/" title="java">java<sup>2</sup></a></li>
 		  
 		
 		  
@@ -246,7 +269,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/基础/" title="基础">基础<sup>4</sup></a></li>
+				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
 			
 		
 			
@@ -259,6 +282,10 @@
 		
 			
 				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
 			
 		
 			
@@ -279,10 +306,6 @@
 		
 			
 				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
 			
 		
 		</ul>
