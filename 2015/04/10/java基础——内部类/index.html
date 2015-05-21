@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>java基础（1） | MWP&#39;s Blog</title>
+    <title>java基础——内部类 | MWP&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-">
+    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java基础（1）">
-<meta property="og:url" content="http://mwplll.github.io/2015/04/10/java基础（1）/index.html">
+<meta property="og:title" content="java基础——内部类">
+<meta property="og:url" content="http://mwplll.github.io/2015/04/10/java基础——内部类/index.html">
 <meta property="og:site_name" content="MWP's Blog">
-<meta property="og:description" content="写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-">
+<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java基础（1）">
-<meta name="twitter:description" content="写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-">
+<meta name="twitter:title" content="java基础——内部类">
+<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
 
     
     <link rel="alternative" href="/atom.xml" title="MWP&#39;s Blog" type="application/atom+xml">
@@ -81,7 +81,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/10/java基础（1）/" title="java基础（1）" itemprop="url">java基础（1）</a>
+      <a href="/2015/04/10/java基础——内部类/" title="java基础——内部类" itemprop="url">java基础——内部类</a>
   </h1>
   <p class="article-author">By
        
@@ -101,10 +101,7 @@
 		
 		</div>
 		
-		<p>   写在前面：在研二，马上面临着毕业找工作，这段时间不断有些公司开始招实习。自己本身来自于一个非计算机专业（浙大的电子信息技术与仪器，很多人应该没听过），在实验室做的项目是用verilog写FPGA的逻辑代码，自学了php,做了个小项目（算是创业吧，但终究在正规的大型互联网公司的工程师看来应该是非常幼稚的）。想去找一份互联网行业的软件开发工作，投了简历之后结果可想而知，不是表刷就是笔试不过。到8月份-10月份正式招聘，还有4各月，这个时间，我决定开始学习java，刷leetcode，不知道最终能否有所收获，但我想试一试，如果能成功，也给所有向我这样非计算机专业出身，又想找互联网的软件开发的，时间很紧的情况下基础还不够的同仁们一个信心，相信天道酬勤、事在人为，我们能行！</p>
-<hr>
-<pre><code><span class="built_in">printf</span>();
-</code></pre>  
+		  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -117,7 +114,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/java/">java</a>
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/基础/">基础</a>
   </div>
 
 </div>
@@ -126,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/04/10/java基础（1）/" data-title="java基础（1） | MWP&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/04/10/java基础——内部类/" data-title="java基础——内部类 | MWP&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -160,7 +157,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/10/java基础（1）/" data-title="java基础（1）" data-url="http://mwplll.github.io/2015/04/10/java基础（1）/"></div>
+	<div class="ds-thread" data-thread-key="2015/04/10/java基础——内部类/" data-title="java基础——内部类" data-url="http://mwplll.github.io/2015/04/10/java基础——内部类/"></div>
 </section>
 
 
@@ -225,7 +222,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
+				<li><a href="/tags/基础/" title="基础">基础<sup>6</sup></a></li>
 			
 		
 			
@@ -241,11 +238,11 @@
 			
 		
 			
-				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
 			
 		
 			
