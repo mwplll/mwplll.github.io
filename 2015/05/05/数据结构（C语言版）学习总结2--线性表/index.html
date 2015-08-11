@@ -52,14 +52,9 @@
 顺序映像指用一组地址连续的存储单元来依次存储线性表中的数据元素">
 
     
-    <link rel="alternative" href="/atom.xml" title="威威小威的博客" type="application/atom+xml">
-    
     
     <link rel="icon" href="/img/favicon.ico">
     
-    
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
@@ -69,10 +64,6 @@
       
 <div>
 		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="威威小威的博客" title="威威小威的博客"/></a>
-			</div>
-			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="威威小威的博客">威威小威的博客</a></h1>
 				<h2 class="blog-motto">keep going!多尝试就不会害怕！</h2>
@@ -123,6 +114,13 @@
   </p>
 </header>
 	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_线性表的顺序表示和实现"><span class="toc-number">3.</span> <span class="toc-text">2.2 线性表的顺序表示和实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_线性表的链式表示和实现"><span class="toc-number">4.</span> <span class="toc-text">2.3 线性表的链式表示和实现</span></a></li></ol>
+		
+		</div>
 		
 		<h3 id="线性结构的基本特征">线性结构的基本特征</h3><ol>
 <li>集合中必存在唯一的一个“<strong>第一元素</strong>”；</li>
@@ -203,6 +201,13 @@
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性结构的基本特征"><span class="toc-number">1.</span> <span class="toc-text">线性结构的基本特征</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1_线性表的类型定义"><span class="toc-number">2.</span> <span class="toc-text">2.1 线性表的类型定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2_线性表的顺序表示和实现"><span class="toc-number">3.</span> <span class="toc-text">2.2 线性表的顺序表示和实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3_线性表的链式表示和实现"><span class="toc-number">4.</span> <span class="toc-text">2.3 线性表的链式表示和实现</span></a></li></ol>
+ 
+  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -314,10 +319,6 @@
   
 
 
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
 </aside>
 </div>
     </div>
@@ -398,6 +399,8 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
