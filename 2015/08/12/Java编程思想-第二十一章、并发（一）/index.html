@@ -4,22 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>面试经历--蘑菇街 | 威威小威的博客</title>
+    <title>Java编程思想 - 第二十一章、并发（一） | 威威小威的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="今天上午9点去参加了蘑菇街的面试，去面试前，已向同学了解到，蘑菇街校招实习生面试一般会三面一次性进行，两次技术面，一次HR面，如果某一面没过，就会直接让你回来了。我在技术一面后就让回来等通知，应该是被刷了，就当是一次经验积累吧。  刚到蘑菇街公司，在前台会让你填一张个人简要信息的表格，过会面试官过来把这张表格和你在网上提交的简历一起拿去，去11楼一个小房间开始面试。  面试的内容主要以项目为主，从">
+    <meta name="description" content="21.1小节：为什么要学习并发？总结起来就是两点：
+
+速度
+设计可管理性
+
+速度非常容易理解，我举个例子就可以说明问题：
+
+现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面试经历--蘑菇街">
-<meta property="og:url" content="http://mwplll.github.io/2015/05/06/面试经历-蘑菇街/index.html">
+<meta property="og:title" content="Java编程思想 - 第二十一章、并发（一）">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/12/Java编程思想-第二十一章、并发（一）/index.html">
 <meta property="og:site_name" content="威威小威的博客">
-<meta property="og:description" content="今天上午9点去参加了蘑菇街的面试，去面试前，已向同学了解到，蘑菇街校招实习生面试一般会三面一次性进行，两次技术面，一次HR面，如果某一面没过，就会直接让你回来了。我在技术一面后就让回来等通知，应该是被刷了，就当是一次经验积累吧。  刚到蘑菇街公司，在前台会让你填一张个人简要信息的表格，过会面试官过来把这张表格和你在网上提交的简历一起拿去，去11楼一个小房间开始面试。  面试的内容主要以项目为主，从">
+<meta property="og:description" content="21.1小节：为什么要学习并发？总结起来就是两点：
+
+速度
+设计可管理性
+
+速度非常容易理解，我举个例子就可以说明问题：
+
+现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="面试经历--蘑菇街">
-<meta name="twitter:description" content="今天上午9点去参加了蘑菇街的面试，去面试前，已向同学了解到，蘑菇街校招实习生面试一般会三面一次性进行，两次技术面，一次HR面，如果某一面没过，就会直接让你回来了。我在技术一面后就让回来等通知，应该是被刷了，就当是一次经验积累吧。  刚到蘑菇街公司，在前台会让你填一张个人简要信息的表格，过会面试官过来把这张表格和你在网上提交的简历一起拿去，去11楼一个小房间开始面试。  面试的内容主要以项目为主，从">
+<meta name="twitter:title" content="Java编程思想 - 第二十一章、并发（一）">
+<meta name="twitter:description" content="21.1小节：为什么要学习并发？总结起来就是两点：
+
+速度
+设计可管理性
+
+速度非常容易理解，我举个例子就可以说明问题：
+
+现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
 
     
     
@@ -72,14 +93,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/06/面试经历-蘑菇街/" title="面试经历--蘑菇街" itemprop="url">面试经历--蘑菇街</a>
+      <a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/" title="Java编程思想 - 第二十一章、并发（一）" itemprop="url">Java编程思想 - 第二十一章、并发（一）</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-06T09:15:50.000Z" itemprop="datePublished"> 发表于 2015-05-06</time>
+    <time datetime="2015-08-11T17:37:09.000Z" itemprop="datePublished"> 发表于 2015-08-12</time>
     
   </p>
 </header>
@@ -88,22 +109,29 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a></li></ol>
 		
 		</div>
 		
-		<p>  今天上午9点去参加了蘑菇街的面试，去面试前，已向同学了解到，蘑菇街校招实习生面试一般会三面一次性进行，两次技术面，一次HR面，如果某一面没过，就会直接让你回来了。我在技术一面后就让回来等通知，应该是被刷了，就当是一次经验积累吧。<br>  刚到蘑菇街公司，在前台会让你填一张个人简要信息的表格，过会面试官过来把这张表格和你在网上提交的简历一起拿去，去11楼一个小房间开始面试。<br>  面试的内容主要以项目为主，从项目展开，问相关的知识点，问得很深，他会抓住一个点，一直不断地问，直到你答不出来为止。<br>  我做过一个家装O2O的网站，自我介绍后，就是让我介绍一下这个项目。介绍完了根据项目问的主要问题：</p>
-<ol>
-<li>采用了DapperPHP框架，请说明采用这个框架的原因。</li>
-<li>给这个框架增加了Lib层，请说明原因</li>
-<li>团队人员组成，每个人分别是做什么的（这个问题面试官主要还是想了解你在这个项目中做了什么，发挥了什么作用）</li>
-<li>当我说后台的数据库设计是我做的，他会问为什么要那样设计，要求当场画ER图；还问订单部分的数据库设计，同样要求是当场画ER图</li>
-<li>中间提到数据库优化，要求介绍一下具体做了哪些优化，为什么要做那些优化，优化后实际的效果是什么，还会要求当场写SQL语句。</li>
-<li>问我在数据库方面看了那些书。（平时书看得少就惨了，我说只看了mysql必知必会，网络上搜索的知识点比较多）</li>
-<li><p>问在程序开发中最不喜欢的事是什么？（这个问题当时答得太nc了，被问了一个多小时，这个时候已经完全不知道自己在说什么了，居然说不喜欢程序调试时很烦，有时逻辑是对的，但上板调试又出错。答完了之后直接就例行公事问我有什么想问他的，就让我回去等通知了）</p>
-<p>总体来说，面试是以项目展开，知识点会问得很细，很深，所以准备这种面试必须将自己做的项目各个方面研究透，不能被问倒。另外，像问程序开发中最不喜欢的事，千万不能老老实实回答说不喜欢繁琐了，或许可以说沟通不充分，信息不透明，比如我们实验室（实验室的项目是秘密级的）</p>
-</li>
-</ol>
+		<h3 id="21-1小节：为什么要学习并发？">21.1小节：为什么要学习并发？</h3><p>总结起来就是两点：</p>
+<ul>
+<li>速度</li>
+<li>设计可管理性</li>
+</ul>
+<p>速度非常容易理解，我举个例子就可以说明问题：</p>
+<blockquote>
+<p>现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空、然后是光线等等）。你会如何初始化？先自己思考1分钟。</p>
+</blockquote>
+<p>如果让一个初学者回答，一般而言会按照这个物体在游戏中的重要程度一个一个按顺序渲染，而这个想法就是<strong>顺序编程</strong>的思维。那么，问题来了：挖掘机……噗，不对，假如每个物体的渲染速度都为10ms，刚才那些元素总和为1000个。那么，等用户可以看到完整的效果就需要10s，10s 是什么概念？想想平时打开网页，如果超过5s 还没有内容，你是不是立即就关闭了？那么这里的10s 简直就是不可理喻。</p>
+<p><strong>而这就是并发要解决的第一个问题：速度，或者成为性能</strong></p>
+<p>现在一个高手来了，它将这1000个元素按照重要程度做一个排序（当然，这都是离线搞好的），然后“同时”去完成 N（假如为10） 个元素的渲染。那么，看到完整的效果就需要1s。为什么可以这样做呢？因为现在机器无论是 Server 端还是 Client 端，都有2-8核的处理器，只要我们充分压榨它们的性能，就能让程序跑的更快。<strong>当然，这个例子是最最最最简单的，而且它有个重要特征就是每个元素都是独立的。如果它们之间有关联，情况就会更复杂，后面我们再讨论</strong></p>
+<p>速度问题说过了，再说下设计可管理性。那么，什么是设计可管理性呢？</p>
+<p>仔细看了21.1.2小节，但是讲的很晦涩。我尝试着说下自己的看法吧。设计可管理性可以认为是程序的结构。比如广泛使用的消息系统，一个 server，多个 client。如果你不使用并发，先给 client1发送消息，然后 client2……但是如果在这个期间clientN 对刚才那个消息的内容做了改变怎么办？还是举个例子：</p>
+<blockquote>
+<p>最典型的是扣费系统，现在 server 总余额是1000.10个 client，当前余额都是100.然后 server 计算后决定给每个 client分100.但是 client6没分到钱之前余额花光了，它现在要花费180，你分给100肯定不够。那么，server 如何办？？是重新收回前面 client 分到的钱还是忽略 client6的请求，继续给100？</p>
+</blockquote>
+<p>这个问题相当头疼，因为这样你需要在服务器端写很多繁琐的代码。但是如果有了并发，你可以在让不同的线程负责不同的模块，比如有个线程专门处理分开过程中 client 的响应，然后更改总余额。比如刚才的例子，如果 client 在分开过程中请求说“我需要180”，这个线程会根据情况（server 这次都给100，client6要180），那么我就可以多给 client6一点，少给后面一点。如果后面不够，我再从前面匀一点出来。</p>
+<p>总之，有了并发。可以让程序的组织更加简单且具有伸缩性。当然，这些是我的片面理解，不一定正确。如果你对这块有更深入的了解，欢迎指正<del>~</del></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -111,13 +139,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/求职笔试面试/">求职笔试面试</a>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/经验/">经验</a><a href="/tags/面试/">面试</a>
+  <span></span> <a href="/tags/Java编程思想/">Java编程思想</a>
   </div>
 
 </div>
@@ -126,7 +154,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/05/06/面试经历-蘑菇街/" data-title="面试经历--蘑菇街 | 威威小威的博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/12/Java编程思想-第二十一章、并发（一）/" data-title="Java编程思想 - 第二十一章、并发（一） | 威威小威的博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -139,19 +167,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/07/leetcode-2-Add-Two-Number/" title="leetcode(2)_Add Two Number">
-  <strong>上一篇：</strong><br/>
-  <span>
-  leetcode(2)_Add Two Number</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/05/数据结构（C语言版）学习总结2--线性表/"  title="数据结构（C语言版）学习总结2--线性表">
+<a href="/2015/05/28/java基础——通过异常处理错误/"  title="java基础——通过异常处理错误">
  <strong>下一篇：</strong><br/> 
- <span>数据结构（C语言版）学习总结2--线性表
+ <span>java基础——通过异常处理错误
 </span>
 </a>
 </div>
@@ -160,7 +180,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/06/面试经历-蘑菇街/" data-title="面试经历--蘑菇街" data-url="http://mwplll.github.io/2015/05/06/面试经历-蘑菇街/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/12/Java编程思想-第二十一章、并发（一）/" data-title="Java编程思想 - 第二十一章、并发（一）" data-url="http://mwplll.github.io/2015/08/12/Java编程思想-第二十一章、并发（一）/"></div>
 </section>
 
 
@@ -170,7 +190,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a></li></ol>
  
   </div>
 
