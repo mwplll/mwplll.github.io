@@ -83,6 +83,80 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/04/27/C基础2——指针、链表、文件/" title="C基础2——指针、链表、文件" itemprop="url">C基础2——指针、链表、文件</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-27T13:23:33.000Z" itemprop="datePublished"> 发表于 2015-04-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="指针">指针</h3><ol>
+<li>*p的区别<pre><code>int <span class="keyword">*</span>p;
+<span class="keyword">*</span>p = 10;
+</code></pre>这里的两个<em>p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，</em>表示其后的变量是指针；后者*p代表指针p所指向的变量。</li>
+<li>指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它<strong>指向一个不确定的单元</strong>，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*p=NULL;</li>
+<li>指针每一次加1或者减1，并非指针的值加1或者减1，而是加上或者减去该指针所指向的那个变量数据类型的长度，即它指向的存储单元所占用的字节数。</li>
+<li>在函数定义时，被声明为数组的形参<strong>实际上是一个指针</strong>。当传递数组时，按值调用传递它的基地址，数组元素本身不被复制。</li>
+<li><p>scanf()和gets()函数的区别：scanf()只能输入不能带有空格的字符串，gets()可输入空格，遇回车符输入结束；</p>
+<p>printf()和puts()的区别：后者输出字符串会自动换行。</p>
+</li>
+<li>calloc与malloc动态内存分配函数。其中calloc在动态分配内存后，自动初始化该内存空间为0，而malloc不会。</li>
+</ol>
+<h3 id="结构">结构</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/C/">C</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/c/">c</a><a href="/tags/基础/">基础</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/27/C基础2——指针、链表、文件/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/27/C基础2——指针、链表、文件/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/" title="C基础1——数据类型、运算符、结构、函数、数组" itemprop="url">C基础1——数据类型、运算符、结构、函数、数组</a>
   </h1>
   <p class="article-author">By
@@ -608,7 +682,7 @@ Javascript:
 		  
 		
 		  
-			<li><a href="/categories/java/" title="java">java<sup>2</sup></a></li>
+			<li><a href="/categories/java/" title="java">java<sup>3</sup></a></li>
 		  
 		
 		  
@@ -641,11 +715,15 @@ Javascript:
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/基础/" title="基础">基础<sup>6</sup></a></li>
+				<li><a href="/tags/基础/" title="基础">基础<sup>7</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>3</sup></a></li>
 			
 		
 			
@@ -658,10 +736,6 @@ Javascript:
 		
 			
 				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java/" title="java">java<sup>2</sup></a></li>
 			
 		
 			

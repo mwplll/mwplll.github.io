@@ -4,25 +4,42 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>leetcode(1)-Two Sum | MWP&#39;s Blog</title>
+    <title>java基础——通过异常处理错误 | MWP&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="题目Given an array of integers, find two numbers such that they add up to a specific target number.
-The function twoSum should return indices of the two numbers such that they add up to the target, wher">
+    <meta name="description" content="异常简介
+java中的异常类全部继承于throwable类。
+
+处理异常try-catch以及try-catch-finally
+异常抛出throw,throws
+自定义异常自定义异常要继承于 Exception 类或者其子类。
+异常链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode(1)-Two Sum">
-<meta property="og:url" content="http://mwplll.github.io/2015/04/27/leetcode-1-Two-Sum/index.html">
+<meta property="og:title" content="java基础——通过异常处理错误">
+<meta property="og:url" content="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/index.html">
 <meta property="og:site_name" content="MWP's Blog">
-<meta property="og:description" content="题目Given an array of integers, find two numbers such that they add up to a specific target number.
-The function twoSum should return indices of the two numbers such that they add up to the target, wher">
+<meta property="og:description" content="异常简介
+java中的异常类全部继承于throwable类。
+
+处理异常try-catch以及try-catch-finally
+异常抛出throw,throws
+自定义异常自定义异常要继承于 Exception 类或者其子类。
+异常链">
+<meta property="og:image" content="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB1.png">
+<meta property="og:image" content="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB2.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode(1)-Two Sum">
-<meta name="twitter:description" content="题目Given an array of integers, find two numbers such that they add up to a specific target number.
-The function twoSum should return indices of the two numbers such that they add up to the target, wher">
+<meta name="twitter:title" content="java基础——通过异常处理错误">
+<meta name="twitter:description" content="异常简介
+java中的异常类全部继承于throwable类。
+
+处理异常try-catch以及try-catch-finally
+异常抛出throw,throws
+自定义异常自定义异常要继承于 Exception 类或者其子类。
+异常链">
 
     
     <link rel="alternative" href="/atom.xml" title="MWP&#39;s Blog" type="application/atom+xml">
@@ -84,14 +101,14 @@ The function twoSum should return indices of the two numbers such that they add 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/27/leetcode-1-Two-Sum/" title="leetcode(1)-Two Sum" itemprop="url">leetcode(1)-Two Sum</a>
+      <a href="/2015/05/28/java基础——通过异常处理错误/" title="java基础——通过异常处理错误" itemprop="url">java基础——通过异常处理错误</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-27T13:29:03.000Z" itemprop="datePublished"> 发表于 2015-04-27</time>
+    <time datetime="2015-05-28T01:46:59.000Z" itemprop="datePublished"> 发表于 2015-05-28</time>
     
   </p>
 </header>
@@ -100,140 +117,30 @@ The function twoSum should return indices of the two numbers such that they add 
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常简介"><span class="toc-number">1.</span> <span class="toc-text">异常简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理异常"><span class="toc-number">2.</span> <span class="toc-text">处理异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常抛出"><span class="toc-number">3.</span> <span class="toc-text">异常抛出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义异常"><span class="toc-number">4.</span> <span class="toc-text">自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常链"><span class="toc-number">5.</span> <span class="toc-text">异常链</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="题目">题目</h3><p>Given an array of integers, find two numbers such that they add up to a specific target number.</p>
-<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
-<p>You may assume that each input would have exactly one solution.</p>
-<p>Input: numbers={2, 7, 11, 15}, target=9<br>Output: index1=1, index2=2</p>
-<h3 id="分析">分析</h3><p>1、暴力求解，直接做两层循环找出两个数所在的位置，但时间复杂度为O(n^2)，会超时<br>2、先进行一个快排，两个指针分别指向首(i)尾(j)，若和大于要求值则 j—，否则i++</p>
-<h3 id="代码">代码</h3><pre><code><span class="preprocessor">#<span class="keyword">include</span> &lt;stdio.h&gt;</span>
-<span class="comment">/*
- 1、暴力求解，时间复杂度为O(n^2),会超时: Time Limit Exceeded
- */</span>
-<span class="keyword">int</span>* twoSum1(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target) {
-    <span class="keyword">int</span> *a = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">2</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
-    <span class="keyword">int</span> *index=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(numsSize*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
-    <span class="keyword">int</span> i=<span class="number">0</span>;
-    <span class="keyword">int</span> j=<span class="number">0</span>;
-    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
-        index[i] = i+<span class="number">1</span>;
-    }
-    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;numsSize;i++){
-        <span class="keyword">for</span>(j=i+<span class="number">1</span>;j&lt;numsSize;j++){
-            <span class="keyword">if</span>(nums[i]+nums[j] == target){
-                a[<span class="number">0</span>] = index[i];
-                a[<span class="number">1</span>] = index[j];
-                <span class="keyword">break</span>;
-            }
-        }
-    }
-    <span class="keyword">return</span> a;
-}
-<span class="comment">/*
- 2、先进行一个快排，两个指针分别指向首(i)尾(j)，若和大于要求值则 j--，否则i++
- */</span>
-<span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span>
-</span>{
-    <span class="keyword">int</span> temp;
-    temp = *x;
-    *x = *y;
-    *y = temp;
-    <span class="keyword">return</span>;
-
-}
-
-<span class="comment">//快速排序函数，另外一个数组是为了交换时下标也跟着交换</span>
-<span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> arr[],<span class="keyword">int</span> ind[],<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span>
-</span>{
-    <span class="keyword">if</span>(left&gt;right)
-        <span class="keyword">return</span>;
-    <span class="keyword">int</span> i=left;
-    <span class="keyword">int</span> j=right;
-    <span class="keyword">int</span> mid=(left+right)/<span class="number">2</span>;
-    swap(&amp;arr[mid],&amp;arr[left]);
-    swap(&amp;ind[mid],&amp;ind[left]);
-    <span class="keyword">int</span> temp=arr[left];
-    <span class="keyword">while</span>(i!=j)
-    {
-        <span class="keyword">while</span>(arr[j]&gt;=temp &amp;&amp; i&lt;j)
-            j--;
-        <span class="keyword">while</span>(arr[i]&lt;=temp &amp;&amp; i&lt;j)
-            i++;
-
-        <span class="keyword">if</span>(i&lt;j)
-        {
-            swap(&amp;arr[i],&amp;arr[j]);
-            swap(&amp;ind[i],&amp;ind[j]);
-        }
-    }
-    swap(&amp;arr[i],&amp;arr[left]);
-    swap(&amp;ind[i],&amp;ind[left]);
-
-    sort(arr,ind,left,i-<span class="number">1</span>);
-    sort(arr,ind,i+<span class="number">1</span>,right);
-
-}
-
-<span class="keyword">int</span> *twoSum2(<span class="keyword">int</span>* nums, <span class="keyword">int</span> numsSize, <span class="keyword">int</span> target) {
-    <span class="keyword">int</span> *a=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="number">2</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
-    <span class="keyword">int</span> *index=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>(numsSize*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));
-    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;numsSize;i++)
-        index[i]=i+<span class="number">1</span>;
-    a[<span class="number">0</span>]=a[<span class="number">1</span>]=-<span class="number">1</span>;
-    sort(nums,index,<span class="number">0</span>,numsSize-<span class="number">1</span>);
-    <span class="keyword">int</span> i=<span class="number">0</span>;
-    <span class="keyword">int</span> j=numsSize-<span class="number">1</span>;
-    <span class="keyword">while</span> (i!=j) {
-        <span class="keyword">if</span>(nums[i]+nums[j]==target)
-        {
-            <span class="keyword">if</span>(index[i]&gt;index[j])
-            {
-                a[<span class="number">0</span>]=index[j];
-                a[<span class="number">1</span>]=index[i];
-            }
-            <span class="keyword">else</span>
-            {
-                a[<span class="number">0</span>]=index[i];
-                a[<span class="number">1</span>]=index[j];
-            }
-            <span class="keyword">break</span>;
-        }
-        <span class="function"><span class="keyword">else</span> <span class="title">if</span><span class="params">(nums[i]+nums[j]&lt;target)</span>
-            i++</span>;
-        <span class="keyword">else</span>
-            j--;
-    }
-    <span class="keyword">return</span> a;
-}
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>{
-    <span class="comment">// insert code here...</span>
-    <span class="comment">//printf("Hello, World!\n");</span>
-    <span class="keyword">int</span> nums[<span class="number">6</span>] = {<span class="number">2</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>};
-    <span class="keyword">int</span> numsSize = <span class="number">6</span>;
-    <span class="keyword">int</span> target = <span class="number">13</span>;
-    <span class="keyword">int</span> *indexCur;
-    indexCur = twoSum2(nums, numsSize, target);
-    <span class="built_in">printf</span>(<span class="string">"%d\n%d\n"</span>,indexCur[<span class="number">0</span>],indexCur[<span class="number">1</span>]);
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-</code></pre>  
+		<h3 id="异常简介">异常简介</h3><ol>
+<li>java中的异常类全部继承于throwable类。<br><img src="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB1.png" alt="异常类关系图"><br><img src="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB2.png" alt="异常类关系图2"></li>
+</ol>
+<h3 id="处理异常">处理异常</h3><p>try-catch以及try-catch-finally</p>
+<h3 id="异常抛出">异常抛出</h3><p>throw,throws</p>
+<h3 id="自定义异常">自定义异常</h3><p>自定义异常要继承于 Exception 类或者其子类。</p>
+<h3 id="异常链">异常链</h3>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  <a class="article-category-link" href="/categories/java/">java</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/leetcode/">leetcode</a>
+  <span></span> <a href="/tags/java/">java</a><a href="/tags/基础/">基础</a>
   </div>
 
 </div>
@@ -242,7 +149,7 @@ The function twoSum should return indices of the two numbers such that they add 
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/04/27/leetcode-1-Two-Sum/" data-title="leetcode(1)-Two Sum | MWP&#39;s Blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/" data-title="java基础——通过异常处理错误 | MWP&#39;s Blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -255,19 +162,11 @@ The function twoSum should return indices of the two numbers such that they add 
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/05/数据结构（C语言版）学习总结1--绪论/" title="数据结构（C语言版）学习总结1--绪论">
-  <strong>上一篇：</strong><br/>
-  <span>
-  数据结构（C语言版）学习总结1--绪论</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/27/C基础2——指针、链表、文件/"  title="C基础2——指针、链表、文件">
+<a href="/2015/05/15/java基础——mac下配置JDK环境变量/"  title="java基础——mac下配置JDK环境变量">
  <strong>下一篇：</strong><br/> 
- <span>C基础2——指针、链表、文件
+ <span>java基础——mac下配置JDK环境变量
 </span>
 </a>
 </div>
@@ -276,7 +175,7 @@ The function twoSum should return indices of the two numbers such that they add 
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/27/leetcode-1-Two-Sum/" data-title="leetcode(1)-Two Sum" data-url="http://mwplll.github.io/2015/04/27/leetcode-1-Two-Sum/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/28/java基础——通过异常处理错误/" data-title="java基础——通过异常处理错误" data-url="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/"></div>
 </section>
 
 
@@ -286,7 +185,7 @@ The function twoSum should return indices of the two numbers such that they add 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题目"><span class="toc-number">1.</span> <span class="toc-text">题目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">3.</span> <span class="toc-text">代码</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常简介"><span class="toc-number">1.</span> <span class="toc-text">异常简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理异常"><span class="toc-number">2.</span> <span class="toc-text">处理异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常抛出"><span class="toc-number">3.</span> <span class="toc-text">异常抛出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义异常"><span class="toc-number">4.</span> <span class="toc-text">自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常链"><span class="toc-number">5.</span> <span class="toc-text">异常链</span></a></li></ol>
  
   </div>
 
