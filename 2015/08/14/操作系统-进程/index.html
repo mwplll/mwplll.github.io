@@ -4,42 +4,52 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>java基础——通过异常处理错误 | 威威小威的博客</title>
+    <title>操作系统-进程 | 威威小威的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="异常简介
-java中的异常类全部继承于throwable类。
+    <meta name="description" content="1、进程的基本概念
+什么是进程，包括哪些部分进程是执行中的程序，进程不等同于程序代码，程序代码只是进程的一部分。进程包括：(1)程序代码块 （2）当前活动，这个（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运行期间动态分配的内存
 
-处理异常try-catch以及try-catch-finally
-异常抛出throw,throws
-自定义异常自定义异常要继承于 Exception 类或者其子类。
-异常链">
+进程状态
+
+进程控制块（PCB process control block）
+
+线程
+
+
+2、进">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java基础——通过异常处理错误">
-<meta property="og:url" content="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/index.html">
+<meta property="og:title" content="操作系统-进程">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/14/操作系统-进程/index.html">
 <meta property="og:site_name" content="威威小威的博客">
-<meta property="og:description" content="异常简介
-java中的异常类全部继承于throwable类。
+<meta property="og:description" content="1、进程的基本概念
+什么是进程，包括哪些部分进程是执行中的程序，进程不等同于程序代码，程序代码只是进程的一部分。进程包括：(1)程序代码块 （2）当前活动，这个（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运行期间动态分配的内存
 
-处理异常try-catch以及try-catch-finally
-异常抛出throw,throws
-自定义异常自定义异常要继承于 Exception 类或者其子类。
-异常链">
-<meta property="og:image" content="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB1.png">
-<meta property="og:image" content="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB2.png">
+进程状态
+
+进程控制块（PCB process control block）
+
+线程
+
+
+2、进">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java基础——通过异常处理错误">
-<meta name="twitter:description" content="异常简介
-java中的异常类全部继承于throwable类。
+<meta name="twitter:title" content="操作系统-进程">
+<meta name="twitter:description" content="1、进程的基本概念
+什么是进程，包括哪些部分进程是执行中的程序，进程不等同于程序代码，程序代码只是进程的一部分。进程包括：(1)程序代码块 （2）当前活动，这个（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运行期间动态分配的内存
 
-处理异常try-catch以及try-catch-finally
-异常抛出throw,throws
-自定义异常自定义异常要继承于 Exception 类或者其子类。
-异常链">
+进程状态
+
+进程控制块（PCB process control block）
+
+线程
+
+
+2、进">
 
     
     
@@ -92,14 +102,14 @@ java中的异常类全部继承于throwable类。
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/28/java基础——通过异常处理错误/" title="java基础——通过异常处理错误" itemprop="url">java基础——通过异常处理错误</a>
+      <a href="/2015/08/14/操作系统-进程/" title="操作系统-进程" itemprop="url">操作系统-进程</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-28T01:46:59.000Z" itemprop="datePublished"> 发表于 2015-05-28</time>
+    <time datetime="2015-08-14T08:24:42.000Z" itemprop="datePublished"> 发表于 2015-08-14</time>
     
   </p>
 </header>
@@ -108,30 +118,34 @@ java中的异常类全部继承于throwable类。
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常简介"><span class="toc-number">1.</span> <span class="toc-text">异常简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理异常"><span class="toc-number">2.</span> <span class="toc-text">处理异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常抛出"><span class="toc-number">3.</span> <span class="toc-text">异常抛出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义异常"><span class="toc-number">4.</span> <span class="toc-text">自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常链"><span class="toc-number">5.</span> <span class="toc-text">异常链</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、进程的基本概念"><span class="toc-number">1.</span> <span class="toc-text">1、进程的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、进程的调度"><span class="toc-number">2.</span> <span class="toc-text">2、进程的调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、进程操作"><span class="toc-number">3.</span> <span class="toc-text">3、进程操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、进程间通信"><span class="toc-number">4.</span> <span class="toc-text">4、进程间通信</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="异常简介">异常简介</h3><ol>
-<li>java中的异常类全部继承于throwable类。<br><img src="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB1.png" alt="异常类关系图"><br><img src="http://mwp-blog.b0.upaiyun.com/java/java%E5%BC%82%E5%B8%B8%E7%B1%BB%E5%85%B3%E7%B3%BB2.png" alt="异常类关系图2"></li>
-</ol>
-<h3 id="处理异常">处理异常</h3><p>try-catch以及try-catch-finally</p>
-<h3 id="异常抛出">异常抛出</h3><p>throw,throws</p>
-<h3 id="自定义异常">自定义异常</h3><p>自定义异常要继承于 Exception 类或者其子类。</p>
-<h3 id="异常链">异常链</h3>  
+		<h3 id="1、进程的基本概念">1、进程的基本概念</h3><ul>
+<li>什么是进程，包括哪些部分<br>进程是<strong>执行中的程序</strong>，进程不等同于程序代码，程序代码只是进程的一部分。<br>进程包括：(1)程序代码块 （2）当前活动，这个<pre><code>（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运行期间动态分配的内存
+</code></pre></li>
+<li><p>进程状态</p>
+</li>
+<li><p>进程控制块（PCB process control block）</p>
+</li>
+<li><p>线程</p>
+</li>
+</ul>
+<h3 id="2、进程的调度">2、进程的调度</h3><h3 id="3、进程操作">3、进程操作</h3><h3 id="4、进程间通信">4、进程间通信</h3>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/java/">java</a>
+  <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/java/">java</a><a href="/tags/基础/">基础</a>
+  <span></span> <a href="/tags/操作系统/">操作系统</a>
   </div>
 
 </div>
@@ -140,7 +154,7 @@ java中的异常类全部继承于throwable类。
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/" data-title="java基础——通过异常处理错误 | 威威小威的博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/14/操作系统-进程/" data-title="操作系统-进程 | 威威小威的博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -153,19 +167,11 @@ java中的异常类全部继承于throwable类。
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/" title="Java编程思想 - 第二十一章、并发（一）">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Java编程思想 - 第二十一章、并发（一）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/15/java基础——mac下配置JDK环境变量/"  title="java基础——mac下配置JDK环境变量">
+<a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/"  title="Java编程思想 - 第二十一章、并发（一）">
  <strong>下一篇：</strong><br/> 
- <span>java基础——mac下配置JDK环境变量
+ <span>Java编程思想 - 第二十一章、并发（一）
 </span>
 </a>
 </div>
@@ -174,7 +180,7 @@ java中的异常类全部继承于throwable类。
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/28/java基础——通过异常处理错误/" data-title="java基础——通过异常处理错误" data-url="http://mwplll.github.io/2015/05/28/java基础——通过异常处理错误/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/14/操作系统-进程/" data-title="操作系统-进程" data-url="http://mwplll.github.io/2015/08/14/操作系统-进程/"></div>
 </section>
 
 
@@ -184,7 +190,7 @@ java中的异常类全部继承于throwable类。
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异常简介"><span class="toc-number">1.</span> <span class="toc-text">异常简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理异常"><span class="toc-number">2.</span> <span class="toc-text">处理异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常抛出"><span class="toc-number">3.</span> <span class="toc-text">异常抛出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义异常"><span class="toc-number">4.</span> <span class="toc-text">自定义异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异常链"><span class="toc-number">5.</span> <span class="toc-text">异常链</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、进程的基本概念"><span class="toc-number">1.</span> <span class="toc-text">1、进程的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、进程的调度"><span class="toc-number">2.</span> <span class="toc-text">2、进程的调度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、进程操作"><span class="toc-number">3.</span> <span class="toc-text">3、进程操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、进程间通信"><span class="toc-number">4.</span> <span class="toc-text">4、进程间通信</span></a></li></ol>
  
   </div>
 
