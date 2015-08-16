@@ -279,7 +279,7 @@ public class <span class="type">CallableDemo</span> {
 <li>sleep() VS TimeUnit.MILLISECONDS.sleep()。具体可以参照文档，但是更推荐直接看源码。源码其实也非常简单，但是为什么这样做？值得我们去思考，尤其推荐结合枚举那一章来学习 TimeUnit 源码，味道极佳：）</li>
 </ul>
 <h4 id="6-_控制线程优先级？">6. 控制线程优先级？</h4><p>线程的优先级将该线程的重要性传递给了调度器，调度器会倾向于让优先级高的线程先执行（个人认为并不绝对，取决与JVM的调度策略，如果是基于优先级的调度，才会让优先级高的先运行）。但是，<strong>试图操作线程的优先级通常是一种错误</strong></p>
-<p>还是看一下书上给的例程<br>        package concurrency;<br>        //: concurrency/SimplePriorities.java<br>        // Shows the use of thread priorities.<br>        import java.util.concurrent.*;</p>
+<p>还是看一下书上给的例程</p>
 <pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SimplePriorities</span> <span class="title">implements</span> <span class="title">Runnable</span> {
   <span class="keyword">private</span> <span class="keyword">int</span> countDown = <span class="number">5</span>;
   <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">double</span> d; <span class="comment">// No optimization</span>
@@ -545,6 +545,14 @@ caught java.lang.RuntimeException
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/08/16/Java编程思想-第二十一章、并发（三）/" title="Java编程思想-第二十一章、并发（三）">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Java编程思想-第二十一章、并发（三）</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/08/14/操作系统-进程/"  title="操作系统-进程">
@@ -586,7 +594,7 @@ caught java.lang.RuntimeException
 		  
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>4</sup></a></li>
 		  
 		
 		  
@@ -643,7 +651,7 @@ caught java.lang.RuntimeException
 			
 		
 			
-				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>3</sup></a></li>
 			
 		
 			
@@ -651,15 +659,19 @@ caught java.lang.RuntimeException
 			
 		
 			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
 			
 		
 			
@@ -671,11 +683,11 @@ caught java.lang.RuntimeException
 			
 		
 			
-				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
 			
 		
 		</ul>

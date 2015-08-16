@@ -1,0 +1,951 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java编程思想-第二十一章、并发（三） | 威威小威的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="威威小威">
+    
+
+    
+    <meta name="description" content="21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
+关于临界区的概念，可参考《操作系统概念》p168的临界区问题
+
+临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访问可能引发问题。
+
+1. 一个使用临界资源的例子现在有这样一个例子，简单的生产者——消费者模型，生产者生产数字，消费者检">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想-第二十一章、并发（三）">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（三）/index.html">
+<meta property="og:site_name" content="威威小威的博客">
+<meta property="og:description" content="21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
+关于临界区的概念，可参考《操作系统概念》p168的临界区问题
+
+临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访问可能引发问题。
+
+1. 一个使用临界资源的例子现在有这样一个例子，简单的生产者——消费者模型，生产者生产数字，消费者检">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编程思想-第二十一章、并发（三）">
+<meta name="twitter:description" content="21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
+关于临界区的概念，可参考《操作系统概念》p168的临界区问题
+
+临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访问可能引发问题。
+
+1. 一个使用临界资源的例子现在有这样一个例子，简单的生产者——消费者模型，生产者生产数字，消费者检">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="威威小威的博客">威威小威的博客</a></h1>
+				<h2 class="blog-motto">keep going，多尝试，就不会害怕...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mwplll.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/16/Java编程思想-第二十一章、并发（三）/" title="Java编程思想-第二十一章、并发（三）" itemprop="url">Java编程思想-第二十一章、并发（三）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-16T13:56:14.000Z" itemprop="datePublished"> 发表于 2015-08-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-3小节：共享资源如何处理呢？"><span class="toc-number">1.</span> <span class="toc-text">21.3小节：共享资源如何处理呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_一个使用临界资源的例子"><span class="toc-number">1.1.</span> <span class="toc-text">1. 一个使用临界资源的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_如何改进上面的例子？也就是如何使用锁机制？"><span class="toc-number">1.2.</span> <span class="toc-text">2. 如何改进上面的例子？也就是如何使用锁机制？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1）synchronized_的使用"><span class="toc-number">1.2.1.</span> <span class="toc-text">1）synchronized 的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2)_Lock_的使用"><span class="toc-number">1.2.2.</span> <span class="toc-text">2) Lock 的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3）_总结一下吧：）"><span class="toc-number">1.2.3.</span> <span class="toc-text">3） 总结一下吧：）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_原子性"><span class="toc-number">1.3.</span> <span class="toc-text">3. 原子性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_临界区"><span class="toc-number">1.4.</span> <span class="toc-text">4. 临界区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_更进一步"><span class="toc-number">1.5.</span> <span class="toc-text">5. 更进一步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_线程本地存储"><span class="toc-number">1.6.</span> <span class="toc-text">6. 线程本地存储</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="21-3小节：共享资源如何处理呢？">21.3小节：共享资源如何处理呢？</h3><p>这一小节其实也是基础知识，核心是处理<strong>临界资源、临界区</strong>，方法就是加锁。下面我们就简单说说。</p>
+<p>关于临界区的概念，可参考《操作系统概念》p168的临界区问题</p>
+<blockquote>
+<p>临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访问可能引发问题。</p>
+</blockquote>
+<h4 id="1-_一个使用临界资源的例子">1. 一个使用临界资源的例子</h4><p>现在有这样一个例子，简单的生产者——消费者模型，生产者生产数字，消费者检查数字（多个消费者），如何某个消费者发现数字不是偶数，那么全部消费者就停工。</p>
+<p>看一下生产者的代码：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">IntGenerator</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> canceled = <span class="keyword">false</span>;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span></span>;
+
+    <span class="comment">// Allow this to be canceled;</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>{
+        canceled = <span class="keyword">true</span>;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCanceled</span><span class="params">()</span> </span>{
+        <span class="keyword">return</span> canceled;
+    }
+}
+</code></pre><p>我们定义一个通用的生产者模型，后续可以有具体的实现。下面是一个实现：</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EvenGenerator</span> <span class="keyword">extends</span> <span class="title">IntGenerator</span> </span>{
+
+    <span class="keyword">private</span> <span class="keyword">int</span> currentEvenValue = <span class="number">0</span>;
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>{
+        ++currentEvenValue; <span class="comment">//Danger point here!</span>
+        ++currentEvenValue;
+        <span class="keyword">return</span> currentEvenValue;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        EvenChecker.test(<span class="keyword">new</span> EvenGenerator());
+    }
+
+}
+</code></pre><p>其中的 EvenChecker 就是消费者了，下面是消费者的代码：</p>
+<pre><code><span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EvenChecker</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="keyword">private</span> IntGenerator generator;
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id;
+    <span class="function"><span class="keyword">public</span> <span class="title">EvenChecker</span><span class="params">(IntGenerator g, <span class="keyword">int</span> ident)</span> </span>{
+        generator = g;
+        <span class="keyword">this</span>.id = ident;
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">while</span>(!generator.isCanceled()) {
+            <span class="keyword">int</span> val = generator.next();
+            <span class="keyword">if</span>(val % <span class="number">2</span> != <span class="number">0</span>) {
+                System.out.println(val + <span class="string">" not even!"</span>);
+                generator.cancel(); <span class="comment">// Cancels all EvenCheckers</span>
+            }
+        }
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(IntGenerator gp, <span class="keyword">int</span> count)</span> </span>{
+        System.out.println(<span class="string">"Press Control-C to exit!"</span>);
+        ExecutorService exec = Executors.newCachedThreadPool();
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {
+            exec.execute(<span class="keyword">new</span> EvenChecker(gp, i));
+        }
+        exec.shutdown();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(IntGenerator gp)</span> </span>{
+        test(gp, <span class="number">10</span>);
+    }
+}
+</code></pre><p>先整体看看代码，非常简单。一个生产者去生产数字（两次自加操作），N 个消费者（默认是10）去消费数字，发现非偶数就全部停工（通过 volatile 关键字，用volatile修饰的变量，线程在每次使用变量的时候，都会读取变量修改后的最新的值）。</p>
+<p>这个程序很快就会失败，因为 Java 的自加操作不是原子性的，所以如果一个线程在两次自加操作中间调用了 next()，那么就会产生非偶数了。那么，解决方案就是加锁。<strong>基本上所有的并发模式在解决线程冲突问题的时候，都是采用序列化访问共享资源的方案。这意味着在给定时刻只允许一个任务访问共享资源。</strong>通常这是通过在代码前面加上一条锁语句来实现的，这种机制就是所谓的<em>互斥量(mutex)</em>。</p>
+<h4 id="2-_如何改进上面的例子？也就是如何使用锁机制？">2. 如何改进上面的例子？也就是如何使用锁机制？</h4><p>首先定义一下临界资源和临界区：</p>
+<ul>
+<li>临界资源：共享资源一般是以对象形式存在的内存片段，也可以是文件、输入/输出端口，或者是打印机之类的东西</li>
+<li>临界区：有时，你只是希望<strong>防止多个线程同时访问方法内部的内部代码而不是整个方法</strong>，通过这种方式分离出来的代码段被称为临界区(critical section)，它也使用 synchronized 关键字建立。这里，synchronized 被用来指定<strong>某个对象，此对象的锁被用来对花括号内的代码进行同步控制</strong>。</li>
+</ul>
+<p>方法有两个：</p>
+<ol>
+<li>使用 synchronized 关键字</li>
+<li>使用 Lock 类</li>
+</ol>
+<p>这里提供了2个方法，那么我们就要给自己留一个疑问：</p>
+<blockquote>
+<p>为什么提供两种？什么情况下使用第一种，什么情况下使用第二种？</p>
+</blockquote>
+<h5 id="1）synchronized_的使用">1）synchronized 的使用</h5><p>要控制对共享资源的访问，得包装成一个对象。然后把所有要访问这个资源的方法标记为 synchronized。一般做法是使用 private 修饰这个临界资源的对象。注意，<strong>在使用并发时，将域设置为 private 是非常重要的，否则，synchronized 关键字就不能防止其他任务直接访问域，这样会产生冲突。</strong>基本的使用原则是：</p>
+<blockquote>
+<p>如果你正在写一个变量，它可能接下来将被另一个线程读取，或者正在读取一个上一次已经被另一个线程写过的变量，那么你必须使用同步，并且，读写线程都必须用相同的监视器锁同步。总之，每个访问临界资源的方法都必须被同步，否则它们就不会正确工作。</p>
+</blockquote>
+<p>比如用 synchronized 改进上面的例子：</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EvenGenerator</span> <span class="keyword">extends</span> <span class="title">IntGenerator</span> </span>{
+
+    <span class="keyword">private</span> <span class="keyword">int</span> currentEvenValue = <span class="number">0</span>;
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>{
+        ++currentEvenValue; <span class="comment">//Danger point here!</span>
+        ++currentEvenValue;
+        <span class="keyword">return</span> currentEvenValue;
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        EvenChecker.test(<span class="keyword">new</span> EvenGenerator());
+    }
+
+}
+</code></pre><p>用法说完了，也需要大概了解一下 synchronized 的工作原理（更具体的实现可以参考《深入理解 Java 虚拟机》）：</p>
+<ol>
+<li>synchronized 相当于一个标志，每个对象都有对象头，对象头中含有锁信息（也称为监视器）。每次使用某个对象的时候，会去检查是否被 synchronized 修饰，如果修饰了，就去看看当前的对象是否获取了锁，如果没有，就阻塞；如果获取了，就可以进行对应的逻辑。等执行完之后，就释放当前对象使用的锁。</li>
+<li>还有一个比较好玩的是对象头中的锁不是 boolean 类型的，意思就是锁可以计数（应该是整型）。一个获取当前对象的锁的方法，可以调用另一个 synchronized 的方法，这时锁计数就是2，以此类推。当锁的计数变为0时候，就该释放锁了。</li>
+<li>还有一点是，<strong>针对每个类，也有一个锁（作为类的 Class 对象的一部分），所以 synchronized static 方法可以在类的范围内防止对 static 数据的并发访问。</strong></li>
+</ol>
+<h5 id="2)_Lock_的使用">2) Lock 的使用</h5><p>Java SE5的 java.util.concurrent 类库还包含有定义在 java.util.concurrent.locks 中的显式的互斥机制。Lock 对象必须显式的创建、锁定和释放。因此，它与 synchronized 提供的锁机制相比，代码缺少优雅性。但是对于有些场景，使用 Lock 会更加灵活。</p>
+<p>使用 Lock 来改进上面的例子：</p>
+<pre><code>import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MutexEvenGenerator</span> <span class="title">extends</span> <span class="title">IntGenerator</span> {
+    <span class="keyword">private</span> <span class="keyword">int</span> currentValue = <span class="number">0</span>;
+    <span class="keyword">private</span> Lock <span class="keyword">lock</span> = <span class="keyword">new</span> ReentrantLock();
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">next</span><span class="params">()</span> </span>{
+        <span class="keyword">lock</span>.<span class="keyword">lock</span>();
+        <span class="keyword">try</span> {
+            ++currentValue;
+            Thread.<span class="keyword">yield</span>();
+            ++currentValue;
+            <span class="keyword">return</span> currentValue;
+        } <span class="keyword">finally</span> {
+            <span class="keyword">lock</span>.unlock();
+        }
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        EvenChecker.test(<span class="keyword">new</span> MutexEvenGenerator());
+    }
+}
+</code></pre><p>Notice:</p>
+<blockquote>
+<p>return 语句必须在 try 子句中出现，以确保 unlock()不会过早发生，从而将数据暴露给第二个任务。</p>
+</blockquote>
+<h5 id="3）_总结一下吧：）">3） 总结一下吧：）</h5><p>大体上，使用 synchronized 关键字时，需要写的代码量更少，并且用户错误出现的可能性也会降低，因此通常只有在解决特殊问题时，才使用显式的 Lock 对象。例如，用 synchronized 关键字不能尝试着获取锁且最终获取锁会失败，或者尝试着获取锁一段时间，然后放弃它，要实现这些，你必须使用 concurrent 类库：</p>
+<pre><code>import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttemptLocking</span> {
+    <span class="keyword">private</span> ReentrantLock <span class="keyword">lock</span> = <span class="keyword">new</span> ReentrantLock();
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">untimed</span><span class="params">()</span> </span>{
+        <span class="comment">//tryLock():如果锁是自由的并且被当前线程获取，或者当前线程已经保持该锁，则返回 true；否则返回 false</span>
+     boolean captured = <span class="keyword">lock</span>.tryLock();
+     <span class="keyword">try</span> {
+       System.<span class="keyword">out</span>.println(<span class="string">"tryLock(): "</span> + captured);
+     } <span class="keyword">finally</span> {
+       <span class="keyword">if</span>(captured)
+         <span class="keyword">lock</span>.unlock();
+     }
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">timed</span><span class="params">()</span> </span>{
+     boolean captured = <span class="keyword">false</span>;
+     <span class="keyword">try</span> {
+       captured = <span class="keyword">lock</span>.tryLock(<span class="number">2</span>, TimeUnit.SECONDS);
+     } <span class="keyword">catch</span>(InterruptedException e) {
+       <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);
+     }
+     <span class="keyword">try</span> {
+       System.<span class="keyword">out</span>.println(<span class="string">"tryLock(2, TimeUnit.SECONDS): "</span> +
+         captured);
+     } <span class="keyword">finally</span> {
+       <span class="keyword">if</span>(captured)
+         <span class="keyword">lock</span>.unlock();
+     }
+    }
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+     final AttemptLocking al = <span class="keyword">new</span> AttemptLocking();
+     al.untimed(); <span class="comment">// True -- lock is available</span>
+     al.timed();   <span class="comment">// True -- lock is available</span>
+     <span class="comment">// Now create a separate task to grab the lock:</span>
+     <span class="keyword">new</span> Thread() {
+       {   <span class="comment">//将该线程标记为守护线程或用户线程。当正在运行的线程都是守护线程时，Java 虚拟机退出</span>
+           setDaemon(<span class="keyword">true</span>); }
+       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+         al.<span class="keyword">lock</span>.<span class="keyword">lock</span>();
+         System.<span class="keyword">out</span>.println(<span class="string">"acquired"</span>);
+       }
+     }.start();
+     Thread.<span class="keyword">yield</span>(); <span class="comment">// Give the 2nd task a chance</span>
+     al.untimed(); <span class="comment">// False -- lock grabbed by task</span>
+     al.timed();   <span class="comment">// False -- lock grabbed by task</span>
+    }
+} <span class="comment">/* Output:
+tryLock(): true
+tryLock(2, TimeUnit.SECONDS): true
+acquired
+tryLock(): false
+tryLock(2, TimeUnit.SECONDS): false
+*/</span><span class="comment">//:~</span>
+</code></pre><p>结果很明显，没有被锁定的时候。tryLock1和2都可以获取锁，但是后面我们用一个后台线程去占有锁，这时如果使用 synchronized 就会一直阻塞，但是这里使用 Lock 的话，就可以尝试获取 N 秒，如果不能获取我就干别的事情。所以可以想到这个功能可以使用的场景：</p>
+<pre><code><span class="keyword">while</span>(<span class="keyword">true</span>) {
+    <span class="number">1.</span> 首先使用boolean captured = <span class="keyword">lock</span>.tryLock()，如果是 <span class="keyword">true</span> 的话就走正常的逻辑
+    <span class="number">2.</span> 如果 <span class="keyword">false</span> 的话，使用captured = <span class="keyword">lock</span>.tryLock(<span class="number">2</span>, TimeUnit.SECONDS)尝试获取锁，如果<span class="number">2</span>秒内不断轮询并且获得了锁，就走正常的逻辑
+    <span class="number">3.</span> 如果超过<span class="number">2</span>s还是不能获取，我就干点其他的事情。
+} 
+</code></pre><p>显式的 Lock 对象在加锁和释放锁方面，相对于内建的 synchronized 锁来说，还赋予了你更细粒度的控制力。这对于实现专有同步结构是很有用的，例如用于遍历链接列表中的节点的节节传递的加锁机制（也称为锁耦合），这种遍历代码必须在释放当前节点的锁之前捕获下一个节点的锁。如果使用 synchronized 是做不到的。</p>
+<h4 id="3-_原子性">3. 原子性</h4><p>这一节比较浅，大致的知识点如下所示，想要深入了解还是去看《深入理解 Java 虚拟机》，很好很强大：</p>
+<ul>
+<li>long 和 double 是2字节的，所以很多操作不具有原子性，会产生字撕裂</li>
+<li>volatile 的使用以及2种使用场景</li>
+<li>volatile 没有使用副本，而是直接作用于主内存。每个使用的线程都必须先从主内存刷新，所以不存在可视性问题</li>
+<li>Java SE5引入了 AtomicInteger、AtomicLong、AtomicReference 等原子类(应该强调的是，<strong>Atomic 类被设计用来构建 java.util.concurrent 中的类，因此只有在特殊情况下才在自己的代码中使用它们，即便使用了也不能认为万无一失。通常依赖于锁会更安全</strong>)。它们提供下面形式的跟新操作：<blockquote>
+<p><code>boolean compareAndSet(expectedValue, updateValue);</code></p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-_临界区">4. 临界区</h4><p>上面说过临界区的概念，简单举个例子：</p>
+<pre><code><span class="tag">synchronized</span>(syncObject) {
+    <span class="comment">//This code can be accessd</span>
+    <span class="comment">//by only one task at a time</span>
+}
+</code></pre><p>这也被称为<em>同步控制块</em>，在进入这段代码前，必须获得 syncObject 对象的锁，如果其他线程已经得到这个锁，那么就得等到锁释放以后，才能进入临界区。那么，问题来了：</p>
+<blockquote>
+<p>为什么不是对整个方法进行同步，而是选择部分代码呢？这样有什么好处呢？</p>
+</blockquote>
+<p>其实答案很简单，大概想一下就知道了。如果对方法使用 synchronized，那么这个对象只能被一个线程独占，而且这个方法可能只有1/10涉及到并发问题，在执行其他9/10的时候完全没有危险，但是其他线程就是没法并发执行，极大的限制了程序的性能。为了解决这点问题，就有了临界区。我们通过一个程序来看看临界区的优势：</p>
+<pre><code><span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.Collections;
+<span class="keyword">import</span> java.util.List;
+<span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+<span class="keyword">import</span> java.util.concurrent.TimeUnit;
+<span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;
+
+<span class="class"><span class="keyword">class</span> <span class="title">Pair</span> </span>{ <span class="comment">// Not thread-safe 非线程安全</span>
+  <span class="keyword">private</span> <span class="keyword">int</span> x, y;
+  <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>{
+    <span class="keyword">this</span>.x = x;
+    <span class="keyword">this</span>.y = y;
+  }
+  <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">()</span> </span>{ <span class="keyword">this</span>(<span class="number">0</span>, <span class="number">0</span>); }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getX</span><span class="params">()</span> </span>{ <span class="keyword">return</span> x; }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getY</span><span class="params">()</span> </span>{ <span class="keyword">return</span> y; }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">incrementX</span><span class="params">()</span> </span>{ x++; }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">incrementY</span><span class="params">()</span> </span>{ y++; }
+  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> <span class="string">"x: "</span> + x + <span class="string">", y: "</span> + y;
+  }
+  <span class="comment">//自定义运行时异常</span>
+  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PairValuesNotEqualException</span>
+  <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="title">PairValuesNotEqualException</span><span class="params">()</span> </span>{
+      <span class="keyword">super</span>(<span class="string">"Pair values not equal: "</span> + Pair.<span class="keyword">this</span>);
+    }
+  }
+  <span class="comment">// Arbitrary invariant -- both variables must be equal:</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">checkState</span><span class="params">()</span> </span>{
+    <span class="keyword">if</span>(x != y)
+      <span class="keyword">throw</span> <span class="keyword">new</span> PairValuesNotEqualException();
+  }
+}
+
+<span class="comment">// Protect a Pair inside a thread-safe class:</span>
+<span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">PairManager</span> </span>{
+  AtomicInteger checkCounter = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);
+  <span class="keyword">protected</span> Pair p = <span class="keyword">new</span> Pair();
+  <span class="keyword">private</span> List&lt;Pair&gt; storage =
+    Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;Pair&gt;());
+  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> Pair <span class="title">getPair</span><span class="params">()</span> </span>{
+    <span class="comment">// Make a copy to keep the original safe:</span>
+    <span class="keyword">return</span> <span class="keyword">new</span> Pair(p.getX(), p.getY());
+  }
+  <span class="comment">// Assume this is a time consuming operation</span>
+  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">store</span><span class="params">(Pair p)</span> </span>{
+    storage.add(p);
+    <span class="keyword">try</span> {
+      TimeUnit.MILLISECONDS.sleep(<span class="number">50</span>);
+    } <span class="keyword">catch</span>(InterruptedException ignore) {}
+  }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span></span>;
+}
+
+<span class="comment">// Synchronize the entire method:</span>
+<span class="class"><span class="keyword">class</span> <span class="title">PairManager1</span> <span class="keyword">extends</span> <span class="title">PairManager</span> </span>{
+  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>{
+    p.incrementX();
+    p.incrementY();
+    store(getPair());
+  }
+}
+
+<span class="comment">// Use a critical section:</span>
+<span class="class"><span class="keyword">class</span> <span class="title">PairManager2</span> <span class="keyword">extends</span> <span class="title">PairManager</span> </span>{
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">increment</span><span class="params">()</span> </span>{
+    Pair temp;
+    <span class="keyword">synchronized</span>(<span class="keyword">this</span>) {
+      p.incrementX();
+      p.incrementY();
+      temp = getPair();
+    }
+    store(temp);
+  }
+}
+
+<span class="class"><span class="keyword">class</span> <span class="title">PairManipulator</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+  <span class="keyword">private</span> PairManager pm;
+  <span class="function"><span class="keyword">public</span> <span class="title">PairManipulator</span><span class="params">(PairManager pm)</span> </span>{
+    <span class="keyword">this</span>.pm = pm;
+  }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+    <span class="keyword">while</span>(<span class="keyword">true</span>)
+      pm.increment();
+  }
+  <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> <span class="string">"Pair: "</span> + pm.getPair() +
+      <span class="string">" checkCounter = "</span> + pm.checkCounter.get();
+  }
+}
+
+<span class="class"><span class="keyword">class</span> <span class="title">PairChecker</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+  <span class="keyword">private</span> PairManager pm;
+  <span class="function"><span class="keyword">public</span> <span class="title">PairChecker</span><span class="params">(PairManager pm)</span> </span>{
+    <span class="keyword">this</span>.pm = pm;
+  }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+    <span class="keyword">while</span>(<span class="keyword">true</span>) {
+      pm.checkCounter.incrementAndGet();
+      pm.getPair().checkState();
+    }
+  }
+}
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CriticalSection</span> </span>{
+  <span class="comment">// Test the two different approaches:</span>
+  <span class="function"><span class="keyword">static</span> <span class="keyword">void</span>
+  <span class="title">testApproaches</span><span class="params">(PairManager pman1, PairManager pman2)</span> </span>{
+    ExecutorService exec = Executors.newCachedThreadPool();
+    PairManipulator
+      pm1 = <span class="keyword">new</span> PairManipulator(pman1),
+      pm2 = <span class="keyword">new</span> PairManipulator(pman2);
+    PairChecker
+      pcheck1 = <span class="keyword">new</span> PairChecker(pman1),
+      pcheck2 = <span class="keyword">new</span> PairChecker(pman2);
+    exec.execute(pm1);
+    exec.execute(pm2);
+    exec.execute(pcheck1);
+    exec.execute(pcheck2);
+    <span class="keyword">try</span> {
+      TimeUnit.MILLISECONDS.sleep(<span class="number">500</span>);
+    } <span class="keyword">catch</span>(InterruptedException e) {
+      System.out.println(<span class="string">"Sleep interrupted"</span>);
+    }
+    System.out.println(<span class="string">"pm1: "</span> + pm1 + <span class="string">"\npm2: "</span> + pm2);
+    System.exit(<span class="number">0</span>);
+  }
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    PairManager
+      pman1 = <span class="keyword">new</span> PairManager1(),
+      pman2 = <span class="keyword">new</span> PairManager2();
+    testApproaches(pman1, pman2);
+  }
+} <span class="comment">/* Output: (Sample)
+pm1: Pair: x: 15, y: 15 checkCounter = 272565
+pm2: Pair: x: 16, y: 16 checkCounter = 3956974
+*/</span><span class="comment">//:~</span>
+</code></pre><p>这段代码略长一点点，但是很简单。总结来说就是两个线程跑自增操作，区别是一个用的同步整个方法，一个是同步临界区，然后又又两个线程去检查x 和 y 是否相等。那么，区别在哪里呢？</p>
+<blockquote>
+<p>区别在于速度。如果同步整个方法，那么一个线程在该方法内部就独占这个方法的资源，无论这个方法中是否有线程安全的部分，而且实际上，非线程安全的代码往往远小于线程安全的代码。这样的话，这个线程在运行线程安全的代码时，其他代码也无法进入这个方法；而锁临界区就比较好一点（不是数量级的差别！），因为我只在非线程安全的地方加锁，那么在这个方法的其他地方就会有多个线程并发执行，这里的优点很容易想象，我就不多啰嗦了。</p>
+</blockquote>
+<h4 id="5-_更进一步">5. 更进一步</h4><p>上面把同步基本说完了，但是还有一个比较好玩的是：可以在其他对象上同步。什么意思呢？</p>
+<blockquote>
+<p>synchronized 块必须给定一个在其上进行同步的对象，并且最合理的方式是，使用其方法正在被调用的对象：<code>synchronized(this)</code>，这也是上面 PairManager2的做法，在这种方式中，如果获得了 synchronized 块上的锁，那么该对象其他的 synchronized 方法和临界区就不能被调用了。因此，如果在 this 上同步，临界区的效果就会直接缩小在同步的范围内部。而有时，<strong>必须在另一个对象上同步，</strong>但是这样做的话，就必须确保所有相关的任务都是在同一个对象上同步。下面有一个小例子：</p>
+</blockquote>
+<pre><code><span class="keyword">class</span> <span class="type">DualSynch</span> {
+    <span class="keyword">private</span> <span class="type">Object</span> syncObject = <span class="keyword">new</span> <span class="type">Object</span><span class="literal">()</span>;
+    public synchronized void f<span class="literal">()</span> {
+        <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+            <span class="type">System</span>.out.println(<span class="string">"f()"</span>);
+            <span class="type">Thread</span>.yield<span class="literal">()</span>;
+        }
+    }
+
+    public void g<span class="literal">()</span> {
+        synchronized(syncObject) {
+            <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+                <span class="type">System</span>.out.println(<span class="string">"g()"</span>);
+                <span class="type">Thread</span>.yield<span class="literal">()</span>;
+            }
+        }
+    }
+}
+
+public <span class="keyword">class</span> <span class="type">SyncObject</span> {
+    public static void main(<span class="type">String</span><span class="literal">[]</span> args) {
+        final <span class="type">DualSynch</span> ds = <span class="keyword">new</span> <span class="type">DualSynch</span><span class="literal">()</span>;
+        <span class="keyword">new</span> <span class="type">Thread</span><span class="literal">()</span> {
+            public void run<span class="literal">()</span> {
+                ds.f<span class="literal">()</span>;
+            }
+        }.start<span class="literal">()</span>;
+        ds.g<span class="literal">()</span>;
+    }
+}/*output:
+f<span class="literal">()</span>
+g<span class="literal">()</span>
+f<span class="literal">()</span>
+f<span class="literal">()</span>
+g<span class="literal">()</span>
+f<span class="literal">()</span>
+g<span class="literal">()</span>
+f<span class="literal">()</span>
+g<span class="literal">()</span>
+g<span class="literal">()</span>
+*/
+</code></pre><p>这个例子中，通过 Thread 创建了一个线程，这个线程会持续输出5次 f()才会停止，因为它是方法级别的，就是 this 级别的。那么其他 synchronized 方法或者 synchronized(this)临界区都无法同时运行。但是上面输出是同时的。因为我们用了另一个对象锁进行同步。这样就达到了同时运行的目的。但是也有一点需要注意：</p>
+<blockquote>
+<p>所有和某个对象锁有关的任务，都必须使用同一个对象锁。不要两个和 A 锁有关的任务，一个使用 A 加锁，一个使用 B 加锁，那么肯定会出问题。</p>
+</blockquote>
+<h4 id="6-_线程本地存储">6. 线程本地存储</h4><p>虽然在《Java 编程思想》中仅仅占用了1页的篇幅，但是感觉很有用处。果然挖出了不少东西，于是单独写一篇文章分析 ThreadLocal 吧，详情请见<a href="../threadlocal">理解 ThreadLocal</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java编程思想/">Java编程思想</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（三）/" data-title="Java编程思想-第二十一章、并发（三） | 威威小威的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/17/理解ThreadLocal/" title="理解ThreadLocal">
+  <strong>上一篇：</strong><br/>
+  <span>
+  理解ThreadLocal</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/16/Java编程思想-第二十一章、并发（二）/"  title="Java编程思想-第二十一章、并发（二）">
+ <strong>下一篇：</strong><br/> 
+ <span>Java编程思想-第二十一章、并发（二）
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/16/Java编程思想-第二十一章、并发（三）/" data-title="Java编程思想-第二十一章、并发（三）" data-url="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（三）/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-3小节：共享资源如何处理呢？"><span class="toc-number">1.</span> <span class="toc-text">21.3小节：共享资源如何处理呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_一个使用临界资源的例子"><span class="toc-number">1.1.</span> <span class="toc-text">1. 一个使用临界资源的例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_如何改进上面的例子？也就是如何使用锁机制？"><span class="toc-number">1.2.</span> <span class="toc-text">2. 如何改进上面的例子？也就是如何使用锁机制？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1）synchronized_的使用"><span class="toc-number">1.2.1.</span> <span class="toc-text">1）synchronized 的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2)_Lock_的使用"><span class="toc-number">1.2.2.</span> <span class="toc-text">2) Lock 的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3）_总结一下吧：）"><span class="toc-number">1.2.3.</span> <span class="toc-text">3） 总结一下吧：）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_原子性"><span class="toc-number">1.3.</span> <span class="toc-text">3. 原子性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_临界区"><span class="toc-number">1.4.</span> <span class="toc-text">4. 临界区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_更进一步"><span class="toc-number">1.5.</span> <span class="toc-text">5. 更进一步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_线程本地存储"><span class="toc-number">1.6.</span> <span class="toc-text">6. 线程本地存储</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C/" title="C">C<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/svn/" title="svn">svn<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/求职笔试面试/" title="求职笔试面试">求职笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Mao Weipeng in ZJU. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:maoweipeng@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="威威小威">威威小威</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"mwplll"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
