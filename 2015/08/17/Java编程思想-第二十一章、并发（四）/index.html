@@ -1,0 +1,1004 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java编程思想-第二十一章、并发（四） | 威威小威的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="威威小威">
+    
+
+    
+    <meta name="description" content="21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
+
+任务正常运行，正常关闭
+出现紧急情况，需要终止当前任务
+
+这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出错。所以本小节的重点会放在对第二种情况的讨论上，而第二种情况也可以概括一下要点：
+
+线程都有哪些状态呢？
+新建
+就绪
+阻">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想-第二十一章、并发（四）">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/17/Java编程思想-第二十一章、并发（四）/index.html">
+<meta property="og:site_name" content="威威小威的博客">
+<meta property="og:description" content="21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
+
+任务正常运行，正常关闭
+出现紧急情况，需要终止当前任务
+
+这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出错。所以本小节的重点会放在对第二种情况的讨论上，而第二种情况也可以概括一下要点：
+
+线程都有哪些状态呢？
+新建
+就绪
+阻">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编程思想-第二十一章、并发（四）">
+<meta name="twitter:description" content="21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
+
+任务正常运行，正常关闭
+出现紧急情况，需要终止当前任务
+
+这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出错。所以本小节的重点会放在对第二种情况的讨论上，而第二种情况也可以概括一下要点：
+
+线程都有哪些状态呢？
+新建
+就绪
+阻">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="威威小威的博客">威威小威的博客</a></h1>
+				<h2 class="blog-motto">keep going，多尝试，就不会害怕...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mwplll.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/17/Java编程思想-第二十一章、并发（四）/" title="Java编程思想-第二十一章、并发（四）" itemprop="url">Java编程思想-第二十一章、并发（四）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-16T17:08:45.000Z" itemprop="datePublished"> 发表于 2015-08-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-4_如何优雅的关闭任务？"><span class="toc-number">1.</span> <span class="toc-text">21.4 如何优雅的关闭任务？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、任务正常运行，正常关闭"><span class="toc-number">2.</span> <span class="toc-text">一、任务正常运行，正常关闭</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、出现紧急情况，需要终止当前任务"><span class="toc-number">3.</span> <span class="toc-text">二、出现紧急情况，需要终止当前任务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_线程都有哪些状态呢？"><span class="toc-number">3.1.</span> <span class="toc-text">1. 线程都有哪些状态呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_将任务从阻塞状态叫醒：中断机制"><span class="toc-number">3.2.</span> <span class="toc-text">2. 将任务从阻塞状态叫醒：中断机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_先来说_IO_阻塞吧"><span class="toc-number">3.3.</span> <span class="toc-text">3. 先来说 IO 阻塞吧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_再来说_synchronized_锁阻塞吧"><span class="toc-number">3.4.</span> <span class="toc-text">4. 再来说 synchronized 锁阻塞吧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_检查中断"><span class="toc-number">3.5.</span> <span class="toc-text">5. 检查中断</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="21-4_如何优雅的关闭任务？">21.4 如何优雅的关闭任务？</h3><p>在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：</p>
+<ol>
+<li>任务正常运行，正常关闭</li>
+<li>出现紧急情况，需要终止当前任务</li>
+</ol>
+<p>这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出错。所以本小节的重点会放在对第二种情况的讨论上，而第二种情况也可以概括一下要点：</p>
+<ol>
+<li>线程都有哪些状态呢？<ul>
+<li>新建</li>
+<li>就绪</li>
+<li>阻塞</li>
+<li>死亡</li>
+</ul>
+</li>
+<li>将任务从阻塞状态叫醒：中断机制</li>
+<li>先来说 IO 阻塞吧</li>
+<li>再来说 synchronized 锁阻塞吧</li>
+<li>检查中断</li>
+</ol>
+<p>下面我们就来学习一下吧：）</p>
+<h3 id="一、任务正常运行，正常关闭">一、任务正常运行，正常关闭</h3><p>我们先来看一个书中的例子：</p>
+<blockquote>
+<p>现在有一个公园，它有5个入口。我现在需要统计一段时间内进入公园的人流量。如果是“单线程”做法，我关闭其他4个门，只允许从1个门进入，这个是最简单的但是也是最不人性化的。升级版本是“多线程”，我在每个门做人流统计，然后最后将所有人数加和即可。</p>
+</blockquote>
+<p>下面用程序来模拟这个例子：</p>
+<pre><code><span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+<span class="keyword">import</span> java.util.Random;
+<span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+<span class="keyword">import</span> java.util.concurrent.TimeUnit;
+
+<span class="comment">//所有入口的总人数</span>
+<span class="keyword">class</span> <span class="keyword">Count</span> {
+    <span class="comment">//count 会并发访问，所以 get/set 需要 synchronized 锁起来</span>
+    <span class="keyword">private</span> <span class="keyword">int</span> <span class="keyword">count</span> = <span class="number">0</span>;
+    <span class="keyword">private</span> Random rand = <span class="keyword">new</span> Random(<span class="number">47</span>);
+
+    <span class="comment">//如果去掉 synchronized 那么其中的 temp 和 Thread.yield()会</span>
+    <span class="comment">//大大增加 increment 失败的几率（也就是并发修改）</span>
+    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> increment() {
+        <span class="keyword">int</span> temp = <span class="keyword">count</span>;
+        <span class="keyword">if</span> (rand.nextBoolean()) {
+            Thread.yield();
+        }
+        <span class="keyword">return</span> (<span class="keyword">count</span> = ++temp);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> value() {
+        <span class="keyword">return</span> <span class="keyword">count</span>;
+    }
+}
+
+<span class="comment">//每个入口通过 number 各自统计通过当前门的人数</span>
+<span class="keyword">class</span> Entrance <span class="keyword">implements</span> Runnable {
+
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">Count</span> <span class="keyword">count</span> = <span class="keyword">new</span> <span class="keyword">Count</span>();
+    <span class="keyword">private</span> <span class="keyword">static</span> List&lt;Entrance&gt; entrances = <span class="keyword">new</span> ArrayList&lt;Entrance&gt;();
+    <span class="keyword">private</span> <span class="keyword">int</span> number = <span class="number">0</span>;
+    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id;
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> canceled = <span class="keyword">false</span>;
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> cancel() {
+        canceled = <span class="keyword">true</span>;
+    }
+
+    <span class="keyword">public</span> Entrance(<span class="keyword">int</span> id) {
+        <span class="keyword">this</span>.id = id;
+        entrances.add(<span class="keyword">this</span>);
+    }
+
+    <span class="comment">// run()的任务就是递增入口人数和总人数，验证 count 的总数是正确的。然后休眠100ms</span>
+    @Override
+    <span class="keyword">public</span> <span class="keyword">void</span> run() {
+        <span class="keyword">while</span> (!canceled) {
+            <span class="keyword">synchronized</span> (<span class="keyword">this</span>) {
+                ++number;
+            }
+            System.out.<span class="keyword">println</span>(<span class="keyword">this</span> + <span class="string">" Total: "</span> + <span class="keyword">count</span>.increment());
+            <span class="keyword">try</span> {
+                TimeUnit.MILLISECONDS.sleep(<span class="number">100</span>);
+            } <span class="keyword">catch</span> (InterruptedException e) {
+                System.out.<span class="keyword">println</span>(<span class="string">"sleep interrupted"</span>);
+            }
+        }
+        System.out.<span class="keyword">println</span>(<span class="string">"stopping "</span> + <span class="keyword">this</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> getValue() {
+        <span class="keyword">return</span> number;
+    }
+
+    <span class="keyword">public</span> String toString() {
+        <span class="keyword">return</span> <span class="string">"Entrace "</span> + id + <span class="string">": "</span> + getValue();
+    }
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> getTotalCount() {
+        <span class="keyword">return</span> <span class="keyword">count</span>.value();
+    }
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> sumEntrances() {
+        <span class="keyword">int</span> sum = <span class="number">0</span>;
+        <span class="keyword">for</span> (Entrance entrance : entrances) {
+            sum += entrance.getValue();
+        }
+        <span class="keyword">return</span> sum;
+    }
+}
+
+<span class="comment">// 5个门，运行3s 后通过 exec.shutdown()发送 interrupt()中断</span>
+<span class="keyword">public</span> <span class="keyword">class</span> OrnametalGarden {
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) <span class="keyword">throws</span> InterruptedException {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+            exec.execute(<span class="keyword">new</span> Entrance(i));
+        }
+        TimeUnit.SECONDS.sleep(<span class="number">3</span>);
+        Entrance.cancel();
+        exec.shutdown();
+        <span class="comment">//等待超时时间250ms 后返回 boolean 是否任务终结</span>
+        <span class="keyword">if</span> (!exec.awaitTermination(<span class="number">250</span>, TimeUnit.MILLISECONDS)) {
+            System.out.<span class="keyword">println</span>(<span class="string">"some tasks were not terminated"</span>);
+        }
+        System.out.<span class="keyword">println</span>(<span class="string">"Total: "</span> + Entrance.getTotalCount());
+        System.out.<span class="keyword">println</span>(<span class="string">"Sum of Entrances: "</span> + Entrance.sumEntrances());
+    }
+}
+</code></pre><p>例子很简单，我们用一个 Count 来统计最终所有入口的总人数。每个 Entrance 代表一个入口，通过 number 来统计当前入口的人流量。然后我们运行3s 钟之后将整个程序结束，使用的是 volatile 的 canceled 标志。这种方法很正常，在 run()中，累加了 number 和 count，然后休眠100ms 后回到 while()条件中检测 canceled 标志。但是，有的时候，我们需要更紧急的终止任务。</p>
+<h3 id="二、出现紧急情况，需要终止当前任务">二、出现紧急情况，需要终止当前任务</h3><p>下面我们就来重点balabala 阻塞和中断机制吧。</p>
+<h4 id="1-_线程都有哪些状态呢？">1. 线程都有哪些状态呢？</h4><p>在刚才那个问题中，如果线程调用了 sleep()，那么它就处于阻塞状态。线程一共有如下几种状态：</p>
+<ul>
+<li>新建：当线程被创建时，它只会短暂的处于这种状态。此时它分配了必须的系统资源，并执行了初始化。此刻线程已经有资格获取 CPU 时间了。之后就靠调度器来调度</li>
+<li>就绪：调度器分配时间片了就可以运行，不分配时间片就<strong>等待(不是阻塞！)</strong>。</li>
+<li>阻塞：线程能够运行，但是缺少某个条件。当线程处于阻塞状态，<strong>调度器将忽略该线程，不会分配时间片，直到线程重新进入就绪状态</strong></li>
+<li>死亡：处于死亡状态的线程是不能再被调度的，并且再也不会得到时间片</li>
+</ul>
+<p>那么，通常情况下，线程都会经历新建 - 就绪 - 运行 - 结束的过程，如果有依赖或者外在因素，可能会经历新建 - loop(就绪 - 运行 - 阻塞) - 结束的过程。那么，值得思考的只有一个点：什么情况下线程才会进入阻塞状态呢？</p>
+<ul>
+<li>调用了 sleep()方法使任务进入休眠状态</li>
+<li>调用了 wait()使线程挂起，直到线程得到了 notify()或者 notifyAll()消息（或者在 Java SE5中的 java.lang.util.concurrent 类库中等价的 signal()或 signalAll()消息），线程才会进入就绪状态</li>
+<li>任务等待某个输入/输出</li>
+<li>任务视图在某个对象上调用其他同步控制方法，但是对象锁不可用，因为另一个任务已经获取了这个锁</li>
+</ul>
+<p>好了，通过上面的讲解。我们知道，有时希望能中终止处于阻塞状态的任务。什么意思呢？比如公园统计人流量的例子中，run()不是休眠100ms，而是100分钟，但是我现在想立即终止所有的统计任务。这怎么办？因为对处于阻塞状态的任务，你<strong>不能等待其到达代码中可以检查其状态值的某一点，进而决定让它主动终止，那么唯一的做法就是强制这个任务跳出阻塞状态。</strong></p>
+<h4 id="2-_将任务从阻塞状态叫醒：中断机制">2. 将任务从阻塞状态叫醒：中断机制</h4><p>这个概念大家都非常理解，同时对它的棘手性也都感同身受：</p>
+<blockquote>
+<p>早上10点上班，我8点就醒了，一看时间还早，就赖了一会床，8点半起来了，简单洗漱后享用了一顿美味的早餐。9点20出门上班，到公司9点50。啊，惬意的早餐。第二天早上，正在睡梦中的我被闹钟吵醒，拿起闹钟一看，卧槽！！！！9点半了！！！！！火速起床，脸也不洗了，饭也不吃了，提起裤子就跑。到公司门口才发现，工卡没带！！！oh，糟糕的一天啊~~</p>
+</blockquote>
+<p>很形象的例子，其实中断机制也同样麻烦。因为在 Runnable.run()方法的中间打断它，可能需要清理资源（工卡）。因为这一点，Java 的中断机制更像是抛出了异常，因此在 Java 线程中的这种类型的异常中断中用到了异常（这会滑向对异常的不恰当使用，因为这意味着你需要用异常来控制正常的代码逻辑）。为了在阻塞中终止任务，返回一个良好的状态，就必须仔细考虑 catch 子句以正确的清理所有事物。</p>
+<p>那么，用代码来完成就用到了 Thread 类的 interrupt 相关函数：</p>
+<ul>
+<li>interrupted() 测试当前线程是否已经中断。线程的<strong>中断状态 由该方法清除</strong>。换句话说，如果连续两次调用该方法，则第二次调用将返回 false</li>
+<li>interrupt()</li>
+<li>isInterrupted() 测试线程是否已经中断。线程的<strong>中断状态 不受该方法的影响</strong>。</li>
+</ul>
+<p>我们注意到，新的 concurrent 类库似乎在避免对 Thread 对象的直接操作，转而尽量通过 Executor 来执行所有操作。但是，本质来说，只是 concurrent 的 Executor 帮我们调用了这3个函数，所以还是要学习一下，直接去看文档即可。我简单总结一下这3个方法吧【自己看完文档、总结后再来看我的总结，不然直接看我的总结你还是立马就忘】：</p>
+<ul>
+<li>interrupt()——中断一个线程。如果当前线程处于阻塞中（比如调用了 wait()、sleep()、join()等）那么线程中断状态会被清除，并且抛出一个<code>InterruptedException</code>。对于可中断的 I/O 操作也会清除中断状态，抛出一个 ClosedByInterruptedException（还记得前面说过，I/O 是不能中断的吗？注意这里针对的是可中断的 I/O 操作，所以就是后来又提到的 NIO，NIO 可以被中断）。这个是为了替换 Thread.stop()，虽然 stop 已经废弃，但是我们也应该了解 stop 被废弃是因为它中断线程太暴力，like a assault rifle（像一把来福枪的袭击）.这就会导致非原子操作会被直接干掉，很容易出问题。</li>
+<li>interrupted()——是一个 static 方法。（被吐槽无数次了，因为命名不规范，导致有很多人用错。）检查线程的中断状态(Thread.status)，但是<strong>会清除线程的中断状态</strong>，如果你连续调用2次，就会返回 false（当然，是在第一次和第二次之间没有新的 interrupt 的情况下）</li>
+<li>isInterrupted()——仅仅检查线程的中断状态，不会清除线程的中断状态</li>
+<li>在文档中有个 <code>alive</code>的词让我很困惑：A thread interruption ignored because a thread was not alive at the time of the interrupt will be reflected by this method returning false.在 stackoverflow 上找到了答案：<a href="http://stackoverflow.com/questions/17293304/when-is-a-java-thread-alive" target="_blank" rel="external">When is a Java thread alive?</a>。意思是线程正在运行 run()方法 is still ongoing.</li>
+</ul>
+<p>那么，我们再来看 Executor 是如何帮助我们的：</p>
+<ul>
+<li>调用 shutdownNow()将发送一个 interrupt()调用给它启动的所有线程</li>
+<li>如果只想中断特定的任务，就要使用 submit()方法而不是 execute()来启动任务，前面说过 Runnable 的 run 是 void 的，而 Callable 的 run 会返回一个 Future&lt;?&gt;。也就是说通过 submit（）调用会持有任务的上下文。因为这里仅仅是为了调用 cancel()而不会调用 get()，所以可以用来中断任务。做法就是将 true 传递给 cancel()</li>
+</ul>
+<p>下面我们就通过使用 ExecutorService 来试试中断是如何工作的：</p>
+<pre><code><span class="keyword">package</span> concurrency;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.io.InputStream;
+<span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+<span class="keyword">import</span> java.util.concurrent.Future;
+<span class="keyword">import</span> java.util.concurrent.TimeUnit;
+
+<span class="comment">// Sleep()阻塞</span>
+<span class="class"><span class="keyword">class</span> <span class="title">SleepBlocked</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">try</span> {
+            TimeUnit.SECONDS.sleep(<span class="number">100</span>);
+        } <span class="keyword">catch</span>(InterruptedException e) {
+            System.out.println(<span class="string">"InterruptedException!"</span>);
+        }
+        System.out.println(<span class="string">"Exiting SleepBlocked.run()\n"</span>);
+    }
+}
+
+<span class="comment">// IO阻塞</span>
+<span class="class"><span class="keyword">class</span> <span class="title">IOBlocked</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="keyword">private</span> InputStream in;
+    <span class="function"><span class="keyword">public</span> <span class="title">IOBlocked</span><span class="params">(InputStream in)</span> </span>{
+        <span class="keyword">this</span>.in = in;
+    }
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">try</span> {
+            System.out.println(<span class="string">"Waiting for read():"</span>);
+            in.read();
+        } <span class="keyword">catch</span>(IOException e) {
+            <span class="keyword">if</span>(Thread.currentThread().isInterrupted()) {
+                System.out.println(<span class="string">"Interrupted from blocked I/O"</span>);
+            } <span class="keyword">else</span> {
+                <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e);
+            }
+        }
+        System.out.println(<span class="string">"Exiting IOBlocked.run()\n"</span>);
+    }
+}
+
+<span class="comment">// 同步锁阻塞</span>
+<span class="class"><span class="keyword">class</span> <span class="title">SynchronizedBlocked</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>{
+        <span class="keyword">while</span>(<span class="keyword">true</span>) {
+            Thread.yield();
+        }
+    }
+
+    <span class="comment">//启动的时候，new 一个线程去抢占锁。</span>
+    <span class="function"><span class="keyword">public</span> <span class="title">SynchronizedBlocked</span><span class="params">()</span> </span>{
+        <span class="keyword">new</span> Thread() {
+            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+                f();
+            }
+        }.start();
+    }
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"Trying to call f()"</span>);
+        f();
+        System.out.println(<span class="string">"Exiting SynchronizedBlocked.run()\n"</span>);
+    }
+}
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Interrupting</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">static</span> ExecutorService exec = Executors.newCachedThreadPool();
+
+    <span class="comment">//送出中断</span>
+    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(Runnable r)</span> <span class="keyword">throws</span> InterruptedException </span>{
+        Future&lt;?&gt; f = exec.submit(r);
+        TimeUnit.MILLISECONDS.sleep(<span class="number">100</span>);
+        System.out.println(<span class="string">"Interrupting "</span> + r.getClass().getName());
+        f.cancel(<span class="keyword">true</span>);
+        System.out.println(<span class="string">"Interrupt sent to "</span> + r.getClass().getName());
+    }
+
+    <span class="comment">//分别对三中阻塞送出一记漂亮的中断</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>{
+        test(<span class="keyword">new</span> SleepBlocked());
+        test(<span class="keyword">new</span> IOBlocked(System.in));
+        test(<span class="keyword">new</span> SynchronizedBlocked());
+        TimeUnit.SECONDS.sleep(<span class="number">3</span>);
+        System.out.println(<span class="string">"Abortin with System.exit(0)"</span>);
+        System.exit(<span class="number">0</span>);
+    }
+}<span class="comment">/*output:
+Interrupting concurrency.SleepBlocked
+Interrupt sent to concurrency.SleepBlocked
+InterruptedException!
+Exiting SleepBlocked.run()
+
+Waiting for read():
+Interrupting concurrency.IOBlocked
+Interrupt sent to concurrency.IOBlocked
+Trying to call f()
+Interrupting concurrency.SynchronizedBlocked
+Interrupt sent to concurrency.SynchronizedBlocked
+Abortin with System.exit(0)
+*/</span>
+</code></pre><p>从结果我们可以看到，sleep 是可以被中断的，但是 IO 和 Synchronized 却不能被中断。所以结论是：</p>
+<ul>
+<li>能够中断对 sleep()的调用（或者任何要求抛出 InterruptedException 的调用）</li>
+<li>不能中断正在试图获取 Synchronized 锁的线程</li>
+<li>不能中断正在试图执行 I/O 操作的线程</li>
+</ul>
+<h4 id="3-_先来说_IO_阻塞吧">3. 先来说 IO 阻塞吧</h4><p>后两点都比较让人不爽，特别是 I/O，本来硬盘 IO 就慢的要死，阻塞时候还不能中断。这意味着 I/O 具有锁住多线程程序的可能。如果你的程序需要 Low latency，就要特别小心 IO 操作。但幸运的是，各种 NIO（new IO）库提供了更人性化的 IO 中断。被阻塞的 NIO 通道会自动地响应中断，比如：</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> java.io.IOException;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.net.InetSocketAddress;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.net.ServerSocket;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.nio.ByteBuffer;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.nio.channels.AsynchronousCloseException;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.nio.channels.ClosedByInterruptException;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.nio.channels.SocketChannel;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.util.concurrent.Executors;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.util.concurrent.Future;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">NIOBlocked</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">final</span> SocketChannel sc;
+
+    <span class="keyword">public</span> NIOBlocked(SocketChannel sc) {
+        <span class="keyword">this</span>.sc = sc;
+    }
+
+    @Override
+    <span class="keyword">public</span> <span class="keyword">void</span> run() {
+        <span class="keyword">try</span> {
+            System.out.println(<span class="string">"Waiting for read() in "</span> + <span class="keyword">this</span>);
+            sc.read(ByteBuffer.allocate(<span class="number">1</span>));
+        } <span class="keyword">catch</span> (ClosedByInterruptException e) {
+            System.out.println(<span class="string">"ClosedByInterruptException"</span>);
+        } <span class="keyword">catch</span> (AsynchronousCloseException e) {
+            System.out.println(<span class="string">"AsynchronousCloseException"</span>);
+        } <span class="keyword">catch</span> (IOException e) {
+            System.out.println(<span class="string">"IOException"</span>);
+        }
+        System.out.println(<span class="string">"Exiting NIOBloked.run() "</span> + <span class="keyword">this</span>);
+    }
+}
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NIOinterruption</span> </span>{
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) throws IOException, InterruptedException {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        <span class="comment">//启动一个 Server</span>
+        ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">8080</span>);
+        InetSocketAddress isa = <span class="keyword">new</span> InetSocketAddress(<span class="string">"localhost"</span>, <span class="number">8080</span>);
+        SocketChannel sc1 = SocketChannel.open(isa);
+        SocketChannel sc2 = SocketChannel.open(isa);
+        Future&lt;?&gt; f = exec.submit(<span class="keyword">new</span> NIOBlocked(sc1));
+        exec.execute(<span class="keyword">new</span> NIOBlocked(sc2));
+        exec.shutdown();
+        TimeUnit.SECONDS.sleep(<span class="number">1</span>);
+        f.cancel(<span class="literal">true</span>);
+        TimeUnit.SECONDS.sleep(<span class="number">1</span>);
+        sc2.close();
+    }
+}<span class="comment">/*output:
+Waiting for read() in concurrency.NIOBlocked@352fd300
+Waiting for read() in concurrency.NIOBlocked@60fe2295
+ClosedByInterruptException
+Exiting NIOBloked.run() concurrency.NIOBlocked@352fd300
+AsynchronousCloseException
+Exiting NIOBloked.run() concurrency.NIOBlocked@60fe2295
+*/</span>
+</code></pre><p>我们可以看到，IO 阻塞竟然被关闭了！NIO 好屌……</p>
+<h4 id="4-_再来说_synchronized_锁阻塞吧">4. 再来说 synchronized 锁阻塞吧</h4><p>首先我们知道，如果获取了对象锁，那么就可以无限次的进入这个对象的其他 synchronized 方法，因为锁不是 boolean 而是整型的（前面说过了呦）。所以无论在任何时刻，只要任务以不可中断的方式被阻塞，那么都有潜在的会锁住程序的可能。但是，幸运的是，Java SE5的 concurrent 类库中添加了一个特性，即在 ReentrantLock上阻塞的任务具备可以被中断的能力，这与在 synchronized 方法或临界区上阻塞的任务完全不同：</p>
+<pre><code>import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+<span class="keyword">class</span> <span class="title">BlockedMutex</span> {
+    <span class="comment">//使用的是重入锁，前面可是说过哦。可以尝试获取锁(时间也可设置)</span>
+    <span class="keyword">private</span> Lock <span class="keyword">lock</span> = <span class="keyword">new</span> ReentrantLock();
+    <span class="function"><span class="keyword">public</span> <span class="title">BlockedMutex</span><span class="params">()</span> </span>{
+        <span class="keyword">lock</span>.<span class="keyword">lock</span>();
+    }
+
+    <span class="comment">// 但是调用 lock.lockInterruptilby()就可以被中断，抛出 InterruptedException</span>
+    <span class="comment">// 前面说过，凡是抛出 InterruptedException 的都可以从阻塞状态中断</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>{
+        <span class="keyword">try</span> {
+            <span class="keyword">lock</span>.lockInterruptibly();
+            System.<span class="keyword">out</span>.println(<span class="string">"lock acquired in f()"</span>);
+        } <span class="keyword">catch</span>(InterruptedException e) {
+            System.<span class="keyword">out</span>.println(<span class="string">"Interrupted from lock acquisition in f()"</span>);
+        }
+    }
+}
+
+<span class="comment">//首先new BlockedMutex()的时候就锁住了 blocked。而且永远不释放，那么 f()就会一直阻塞</span>
+<span class="keyword">class</span> <span class="title">Blocked2</span> <span class="title">implements</span> <span class="title">Runnable</span> {
+    BlockedMutex blocked = <span class="keyword">new</span> BlockedMutex();
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"Waiting for f() in BlockedMutex()"</span>);
+        blocked.f();
+        System.<span class="keyword">out</span>.println(<span class="string">"Broken out of blocked call"</span>);
+    }
+}
+
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Interrupting2</span> {
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws InterruptedException </span>{
+        Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Blocked2());
+        t.start();
+        TimeUnit.SECONDS.sleep(<span class="number">1</span>);
+        System.<span class="keyword">out</span>.println(<span class="string">"Issuing t.interrupt()"</span>);
+        t.interrupt();
+    }
+}<span class="comment">/*output:
+Waiting for f() in BlockedMutex()
+Issuing t.interrupt()
+Interrupted from lock acquisition in f()
+Broken out of blocked call
+*/</span>
+</code></pre><p>上面关于 IO 和 Synchronized 的例子只是最最简单的使用，其实这里我们只需要知道 IO 和 Synchronized 阻塞状态不可中断，但是通过使用新的技术，如 NIO 和 concurrent 提供的 ReentrantLock 就可以解决这个问题。所以，以后遇到阻塞和中断的问题，就可以知道大概的解决思路啦。</p>
+<h4 id="5-_检查中断">5. 检查中断</h4><p>这一小节看了3、4遍才算豁然开朗，真的是书读百遍，其义自现啊。下面就是书中很经典的例子：</p>
+<pre><code>package concurrency;
+
+import java.util.concurrent.TimeUnit;
+
+<span class="keyword">class</span> <span class="title">NeedsCleanup</span> {
+    <span class="keyword">private</span> final <span class="keyword">int</span> id;
+
+    <span class="function"><span class="keyword">public</span> <span class="title">NeedsCleanup</span><span class="params">(<span class="keyword">int</span> ident)</span> </span>{
+        id = ident;
+        System.<span class="keyword">out</span>.println(<span class="string">"NeedsCleanup "</span> + id);
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cleanup</span><span class="params">()</span> </span>{
+        System.<span class="keyword">out</span>.println(<span class="string">"Cleaning up "</span> + id);
+    }
+}
+
+<span class="comment">// 模拟一个计算密集型的任务</span>
+<span class="keyword">class</span> <span class="title">Blocked3</span> <span class="title">implements</span> <span class="title">Runnable</span> {
+    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">double</span> d = <span class="number">0.0</span>;
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+        <span class="keyword">try</span> {
+            <span class="keyword">while</span> (!Thread.interrupted()) {
+                <span class="comment">// Point1 在需要清理的资源后，需要立即跟上 try-catch-finally</span>
+                NeedsCleanup n1 = <span class="keyword">new</span> NeedsCleanup(<span class="number">1</span>);
+                <span class="keyword">try</span> {
+                    System.<span class="keyword">out</span>.println(<span class="string">"Sleeping"</span>);
+                    TimeUnit.SECONDS.sleep(<span class="number">1</span>);
+
+                    <span class="comment">// Point2 同上</span>
+                    NeedsCleanup n2 = <span class="keyword">new</span> NeedsCleanup(<span class="number">2</span>);
+                    <span class="keyword">try</span> {
+                        System.<span class="keyword">out</span>.println(<span class="string">"Calculating"</span>);
+                        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">2500000</span>; i++) {
+                            d = d + (Math.PI + Math.E) / d;
+                        }
+                        System.<span class="keyword">out</span>.println(<span class="string">"Finished time-consuming operation"</span>);
+                    } <span class="keyword">finally</span> {
+                        n2.cleanup();
+                    }
+                } <span class="keyword">finally</span> {
+                    n1.cleanup();
+                }
+            }
+            System.<span class="keyword">out</span>.println(<span class="string">"Exiting via while() test"</span>);
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            System.<span class="keyword">out</span>.println(<span class="string">"Exiting via InterruptedException"</span>);
+        }
+    }
+}
+
+<span class="comment">// 通过传入不同的时间，来让 interrupt 发生在 Point1和 Point2的前后</span>
+<span class="comment">// 当在 P1和 P2之间传入中断，会在 while 循环结束后达到 while 条件退出</span>
+<span class="comment">// 当在 P1前面调用，会在视图调用阻塞(sleep()操作)或者在阻塞中(正在 sleep())通过 InterruptedException 退出阻塞</span>
+<span class="comment">// 那么，紧接着 n1和n2的 try-catch-finally 就会正确的清理资源</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">IntererptingIdiom</span> {
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> throws NumberFormatException,
+            InterruptedException </span>{
+        <span class="keyword">if</span> (args.length != <span class="number">1</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"Usage: java InterruptingIdiom delay-in-mS"</span>);
+            System.exit(<span class="number">1</span>);
+        }
+        Thread t = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Blocked3());
+        t.start();
+        TimeUnit.MILLISECONDS.sleep(<span class="keyword">new</span> Integer(args[<span class="number">0</span>]));
+        t.interrupt();
+    }
+}
+</code></pre><p>这个例子设计很简单，一个是阻塞的sleep()操作，一个是非阻塞的运算操作。我们在两个阶段中传入中断状态时，sleep()会通过 InterruptedException 从阻塞中中断，而运算操作只能在 while()条件检测中断后才能中断。NeedCleanup 类强调在由异常离开循环时，正确清理资源的必要性。</p>
+<p>这个程序需要传入一个时间，然后在run()的不同运行点传入中断。多次试验后可以看到：</p>
+<ul>
+<li>如果 interrupt(）在 P2后面调用，那么首先循环肯定要运行完，然后所有的本地对象将被销毁，最后循环会经由 while语句的顶部退出；</li>
+<li>如果 interrupt()在 P1和 P2之间调用（while 之后，但是在阻塞操作 sleep()之前或者其过程中）被调用，那么这个任务就会在第一次视图调用阻塞操作之前，经由 InterruptedException退出。这种情况下，唯一创建出来的 n1会被紧跟其后的 try-catch-finally及时清理</li>
+</ul>
+<p>根据上面的思路，我们可以得出一个结论：</p>
+<blockquote>
+<p>被设计用来响应 interrput()的类必须建立一种策略，来确保它将保持一致的状态。这通常意味着所有需要清理的对象创建操作的后面，都必须紧跟 try-catch-finally子句，从而使得无论 run()循环如何退出，清理都会发生。【然后作者吐槽，要是 Java 有析构函数就好了。。。。析构操作直接在类中写，不用和业务代码耦合了】</p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java编程思想/">Java编程思想</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mwplll.github.io/2015/08/17/Java编程思想-第二十一章、并发（四）/" data-title="Java编程思想-第二十一章、并发（四） | 威威小威的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/17/理解ThreadLocal/"  title="理解ThreadLocal">
+ <strong>下一篇：</strong><br/> 
+ <span>理解ThreadLocal
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/17/Java编程思想-第二十一章、并发（四）/" data-title="Java编程思想-第二十一章、并发（四）" data-url="http://mwplll.github.io/2015/08/17/Java编程思想-第二十一章、并发（四）/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-4_如何优雅的关闭任务？"><span class="toc-number">1.</span> <span class="toc-text">21.4 如何优雅的关闭任务？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、任务正常运行，正常关闭"><span class="toc-number">2.</span> <span class="toc-text">一、任务正常运行，正常关闭</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、出现紧急情况，需要终止当前任务"><span class="toc-number">3.</span> <span class="toc-text">二、出现紧急情况，需要终止当前任务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_线程都有哪些状态呢？"><span class="toc-number">3.1.</span> <span class="toc-text">1. 线程都有哪些状态呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_将任务从阻塞状态叫醒：中断机制"><span class="toc-number">3.2.</span> <span class="toc-text">2. 将任务从阻塞状态叫醒：中断机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_先来说_IO_阻塞吧"><span class="toc-number">3.3.</span> <span class="toc-text">3. 先来说 IO 阻塞吧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_再来说_synchronized_锁阻塞吧"><span class="toc-number">3.4.</span> <span class="toc-text">4. 再来说 synchronized 锁阻塞吧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_检查中断"><span class="toc-number">3.5.</span> <span class="toc-text">5. 检查中断</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C/" title="C">C<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/svn/" title="svn">svn<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/求职笔试面试/" title="求职笔试面试">求职笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Mao Weipeng in ZJU. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:maoweipeng@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="威威小威">威威小威</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"mwplll"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
