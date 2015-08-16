@@ -527,7 +527,9 @@ g<span class="literal">()</span>
 <blockquote>
 <p>所有和某个对象锁有关的任务，都必须使用同一个对象锁。不要两个和 A 锁有关的任务，一个使用 A 加锁，一个使用 B 加锁，那么肯定会出问题。</p>
 </blockquote>
-<h4 id="6-_线程本地存储">6. 线程本地存储</h4><p>虽然在《Java 编程思想》中仅仅占用了1页的篇幅，但是感觉很有用处。果然挖出了不少东西，于是单独写一篇文章分析 ThreadLocal 吧，详情请见<a href="../threadlocal">理解 ThreadLocal</a></p>
+<h4 id="6-_线程本地存储">6. 线程本地存储</h4><p>ThreadLocal类提供了线程局部 (thread-local) 变量。这些变量不同于它们的普通对应物，因为访问<strong>某个变量（通过其 get 或 set 方法）的每个线程都有自己的局部变量</strong>，它独立于变量的初始化副本。ThreadLocal 实例通常是类中的 private static 字段，它们希望将状态与某一个线程（例如，用户 ID 或事务 ID）相关联。</p>
+<p><strong>每个线程都保持对其线程局部变量副本的隐式引用</strong>，只要线程是活动的并且 ThreadLocal 实例是可访问的；在线程消失之后，其线程局部实例的所有副本都会被垃圾回收（除非存在对这些副本的其他引用）。</p>
+<p>对ThreadLocal的详细分析见<a href="https://mwplll.github.io/2015/08/17/%E7%90%86%E8%A7%A3ThreadLocal/" target="_blank" rel="external">理解 ThreadLocal</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
