@@ -71,6 +71,27 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/16/Java编程思想-第二十一章、并发（二）/" title="Java编程思想-第二十一章、并发（二）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（二）</h1>
+    
+     
+           <p itemprop="description" >21.2小节：并发的最基本使用第21.2小节其实就是讲解如何使用并发的。show time…
+1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务。这可以由实现 Runnable 接口中的 run()方法来实</p>
+        
+    
+    <time datetime="2015-08-15T17:08:34.000Z" itemprop="datePublished">2015-08-16</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/08/14/操作系统-进程/" title="操作系统-进程" itemprop="url">
   
     <h1 itemprop="name">操作系统-进程</h1>
@@ -102,9 +123,7 @@
 速度
 设计可管理性
 
-速度非常容易理解，我举个例子就可以说明问题：
-
-现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构</p>
+1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CP</p>
         
     
     <time datetime="2015-08-11T17:37:09.000Z" itemprop="datePublished">2015-08-12</time>
@@ -265,33 +284,6 @@ java中的异常类全部继承于throwable类。
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/05/数据结构（C语言版）学习总结2--线性表/" title="数据结构（C语言版）学习总结2--线性表" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结2--线性表</h1>
-    
-     
-           <p itemprop="description" >线性结构的基本特征
-集合中必存在唯一的一个“第一元素”；
-集合中必存在唯一的一个“最后元素”；
-除最后一个元素，均有唯一的后继
-除第一个元素之外，均有唯一的前驱
-
-2.1 线性表的类型定义
-对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后</p>
-        
-    
-    <time datetime="2015-05-05T08:15:30.000Z" itemprop="datePublished">2015-05-05</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -314,7 +306,7 @@ java中的异常类全部继承于throwable类。
 		  
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
 		  
 		
 		  
@@ -379,6 +371,10 @@ java中的异常类全部继承于throwable类。
 			
 		
 			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
 			
 		
@@ -400,10 +396,6 @@ java中的异常类全部继承于throwable类。
 		
 			
 				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>1</sup></a></li>
 			
 		
 		</ul>

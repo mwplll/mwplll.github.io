@@ -1,0 +1,736 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java编程思想-第二十一章、并发（二） | 威威小威的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="威威小威">
+    
+
+    
+    <meta name="description" content="21.2小节：并发的最基本使用第21.2小节其实就是讲解如何使用并发的。show time…
+1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务。这可以由实现 Runnable 接口中的 run()方法来实现。下面是例子：
+public class LiftOff implements Runnable { // 实现 Ru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java编程思想-第二十一章、并发（二）">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（二）/index.html">
+<meta property="og:site_name" content="威威小威的博客">
+<meta property="og:description" content="21.2小节：并发的最基本使用第21.2小节其实就是讲解如何使用并发的。show time…
+1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务。这可以由实现 Runnable 接口中的 run()方法来实现。下面是例子：
+public class LiftOff implements Runnable { // 实现 Ru">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java编程思想-第二十一章、并发（二）">
+<meta name="twitter:description" content="21.2小节：并发的最基本使用第21.2小节其实就是讲解如何使用并发的。show time…
+1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务。这可以由实现 Runnable 接口中的 run()方法来实现。下面是例子：
+public class LiftOff implements Runnable { // 实现 Ru">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="威威小威的博客">威威小威的博客</a></h1>
+				<h2 class="blog-motto">keep going，多尝试，就不会害怕...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mwplll.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/16/Java编程思想-第二十一章、并发（二）/" title="Java编程思想-第二十一章、并发（二）" itemprop="url">Java编程思想-第二十一章、并发（二）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-15T17:08:34.000Z" itemprop="datePublished"> 发表于 2015-08-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-2小节：并发的最基本使用"><span class="toc-number">1.</span> <span class="toc-text">21.2小节：并发的最基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_定义任务"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_Thread_类"><span class="toc-number">1.2.</span> <span class="toc-text">2. Thread 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_使用_Executor_管理_Thread"><span class="toc-number">1.3.</span> <span class="toc-text">3. 使用 Executor 管理 Thread</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_任务有返回值？Callable_接口来帮忙！"><span class="toc-number">1.4.</span> <span class="toc-text">4. 任务有返回值？Callable 接口来帮忙！</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_线程干活累了，想睡会"><span class="toc-number">1.5.</span> <span class="toc-text">5. 线程干活累了，想睡会</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_让步"><span class="toc-number">1.6.</span> <span class="toc-text">6. 让步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-_后台线程"><span class="toc-number">1.7.</span> <span class="toc-text">7. 后台线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-_加入一个线程"><span class="toc-number">1.8.</span> <span class="toc-text">8. 加入一个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-_呀，抛出异常肿么办？"><span class="toc-number">1.9.</span> <span class="toc-text">9. 呀，抛出异常肿么办？</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="21-2小节：并发的最基本使用">21.2小节：并发的最基本使用</h3><p>第21.2小节其实就是讲解如何使用并发的。show time…</p>
+<h4 id="1-_定义任务">1. 定义任务</h4><p>线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务。<strong>这可以由实现 Runnable 接口中的 run()方法</strong>来实现。下面是例子：</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LiftOff</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{ <span class="comment">// 实现 Runnable 接口</span>
+
+  <span class="keyword">protected</span> <span class="keyword">int</span> countDown = <span class="number">10</span>; <span class="comment">//Default</span>
+  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> taskCount = <span class="number">0</span>;
+  <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> id = taskCount++;
+  <span class="function"><span class="keyword">public</span> <span class="title">LiftOff</span><span class="params">()</span> </span>{}
+  <span class="function"><span class="keyword">public</span> <span class="title">LiftOff</span><span class="params">(<span class="keyword">int</span> countDown)</span> </span>{
+    <span class="keyword">this</span>.countDown = countDown;
+  }
+
+  <span class="function"><span class="keyword">public</span> String <span class="title">status</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> <span class="string">"#Thread id: "</span> + id + <span class="string">", time: "</span> + (countDown &gt; <span class="number">0</span> ? countDown : <span class="string">"Liftoff!"</span>);
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{ <span class="comment">// 定义需要做的任务</span>
+    <span class="keyword">while</span>(countDown-- &gt; <span class="number">0</span>) {
+      System.out.println(status());
+      Thread.yield();
+    }
+  }
+}
+</code></pre><p>Tips：</p>
+<blockquote>
+<p><code>Thread.yield()</code>需要解释一下，它是对<em>线程调度器</em>（Java 线程机制的一部分，可以将 CPU 从一个线程转移到另一个线程）的一种建议，它在声明：”我已经执行完生命周期中最重要的部分了，此刻可以切换给别的任务，让它们执行吧（我不知道它们重要的部分有没有执行）。”但是<strong>这这是一种建议，线程调度器不一定会执行（还记得吗，finalize() 方法也不保证一定执行，原因忘了的可以再去翻翻）</strong></p>
+</blockquote>
+<p>这里有必要说明一下<strong>任务和线程的概念</strong>：</p>
+<p><strong>任务和线程是各自独立的。</strong>在刚才的 demo 中，我们实现了 Runnable 接口，并重写了 run（）方法，但这只是定义任务，和线程没有任何关系。<strong>要实现线程行为，必须显式地将一个任务附着到线程上。</strong>具体的区别请学习21.2.10小节，P669页。下面是我对21.2.10小节的总结：</p>
+<blockquote>
+<p>任务就是描述这个工作怎样做才能完成，而线程相当于一个工人，它只负责机械地执行交给他的任务。从宏观上看，任务是我们占主导的，而线程则是一个黑盒，我们只能把任务提交，至于他怎么干活我们是不知道的。所以，在描述如何执行工作时，我们使用术语——任务；在引用到驱动任务的具体机制时，才使用术语——线程。在99.9%的情况下，我们根本就不需要提到线程，因为 Executor 就可以帮我们管理一切线程工作。我们只需要关注如何描述任务即可。</p>
+</blockquote>
+<p>Tips:</p>
+<ul>
+<li>因为 Java 的线程机制是基于来自 C 语言的低级 p 线程方式（pthread 和 fork），所以最好去学习一下 pthread 的相关知识。</li>
+</ul>
+<h4 id="2-_Thread_类">2. Thread 类</h4><p>将 Runnable 定义的任务依附到线程的一半做法是把它提交给一个 Thread 构造器。下面是例子：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BasicThreads</span> {
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    Thread thread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> LiftOff());
+    thread.start();
+    System.<span class="keyword">out</span>.println(<span class="string">"Waiting for LiftOff"</span>);
+  }
+}
+</code></pre><p>Thread 构造器只需要一个 Runnable 对象。调用 start()方法为该线程执行必需的初始化操作，然后调用 Runnable 接口的 run()方法，以便在这个新线程中启动该任务。注意执行结果，在 start()方法执行时，虽然调用了 run()方法，但是 start()迅速返回了（先输出了 Waiting for LiftOff），这是因为：main()方法是一个线程，LiftOff.run()是新建的另外一个线程，所以两个线程可以同时执行。</p>
+<h4 id="3-_使用_Executor_管理_Thread">3. 使用 Executor 管理 Thread</h4><p>java.util.concurrent 中的执行器（Executor）将为你管理 Thread 对象，从而简化了并发编程。什么意思呢？</p>
+<blockquote>
+<p>本来任务需要提交给 Thread 才能执行，但是任务比较多的情况下，Thread 也相应的有很多，不容易进行统一的管理。基于这种情况，Java 提供了 concurrent 包中的 Executor。它其实就是任务和运行线程的客户端的一个中介。因为它管理了 Thread 对象，所以即使有多个任务，都可以统一由 Executor 来管理相应的 Thread 对象。<strong>非常常见的情况是，单个的 Executor 被用来创建和管理系统中所有的任务。</strong></p>
+</blockquote>
+<p>下面举个例子来说明吧。在完全使用 Thread 的时候：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MoreBasicThreads</span> {
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+      <span class="keyword">new</span> Thread(<span class="keyword">new</span> LiftOff()).start();
+    }
+    System.<span class="keyword">out</span>.println(<span class="string">"Waiting for LiftOff"</span>);
+  }
+}
+</code></pre><p>如果现在出现意外状况，需要把线程全部关闭。那么你必须对5个Thread 对象进行操作。推而广之，越多的任务会带来更高的后续代价。但是我们尝试用 Executor 来完成同样的工作：</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CachedThreadPool</span> {
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    ExecutorService exec = Executors.newCachedThreadPool();
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+      exec.execute(<span class="keyword">new</span> LiftOff());
+    }
+    exec.shutdown();
+  }
+}
+</code></pre><p>我们可以看到，我们拿到一个 ExecutorService 来管理所有的 Thread 对象，在执行完所有的任务后，只需要调用一个 shutdown()即可关闭所有管理的 Thread 对象，非常优雅。</p>
+<p>总结一下，Executor 管理的 Thread 中，常见的类型有：</p>
+<ul>
+<li>CachedThreadPool：创建与所需数量相同的线程，然后在它回收旧线程时停止创建新线程</li>
+<li>FixedThreadPool：固定数量的线程池，创建时需要一定时间去初始化。后续不需要付出创建线程的代价</li>
+<li>SingleThreadPool：FixedThreadPool 的特例，但是也有特殊之处（它提供了一种重要的并发保证，其他线程不会被并发调用，这会改变任务的加锁需求）</li>
+</ul>
+<h4 id="4-_任务有返回值？Callable_接口来帮忙！">4. 任务有返回值？Callable 接口来帮忙！</h4><p>从标题我们就掌握了这一个小节，因为 Runnable 需要重写的 run()方法返回值是 void，所以有返回值的情况，使用 Callable 接口的 call()即可。有2点需要注意：</p>
+<ul>
+<li>call()返回值的类型参数是泛型</li>
+<li>使用 ExecutorService 管理的话，需要通过 submit()方法调用（而 run()是 使用 ExecutorService.execute()方法）</li>
+</ul>
+<p>一个例子：</p>
+<pre><code><span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+<span class="keyword">import</span> java.util.concurrent.<span class="type">Callable</span>;
+<span class="keyword">import</span> java.util.concurrent.<span class="type">ExecutionException</span>;
+<span class="keyword">import</span> java.util.concurrent.<span class="type">ExecutorService</span>;
+<span class="keyword">import</span> java.util.concurrent.<span class="type">Executors</span>;
+<span class="keyword">import</span> java.util.concurrent.<span class="type">Future</span>;
+
+class <span class="type">TaskWithResult</span> implements <span class="type">Callable</span>&lt;<span class="type">String</span>&gt; {
+
+  private <span class="type">int</span> id;
+
+  public <span class="type">TaskWithResult</span>(<span class="type">int</span> id) {
+    this.id = id;
+  }
+
+  @<span class="type">Override</span>
+  public <span class="type">String</span> call() {
+    <span class="keyword">return</span> <span class="string">"result of TaskWithResult: "</span> + id;
+  }
+}
+
+public class <span class="type">CallableDemo</span> {
+  public <span class="keyword">static</span> <span class="type">void</span> main(<span class="type">String</span>[] args) {
+    <span class="type">ExecutorService</span> exec = <span class="type">Executors</span>.newCachedThreadPool();
+    <span class="type">ArrayList</span>&lt;<span class="type">Future</span>&lt;<span class="type">String</span>&gt;&gt; <span class="literal">result</span> = new <span class="type">ArrayList</span>&lt;<span class="type">Future</span>&lt;<span class="type">String</span>&gt;&gt;();
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+      <span class="literal">result</span>.add(exec.submit(new <span class="type">TaskWithResult</span>(i)));
+    }
+
+    <span class="keyword">for</span>(<span class="type">Future</span>&lt;<span class="type">String</span>&gt; fs : <span class="literal">result</span>) {
+      <span class="keyword">try</span> {
+        <span class="type">System</span>.<span class="keyword">out</span>.println(fs.get());
+      } catch (<span class="type">InterruptedException</span> | <span class="type">ExecutionException</span> e) {
+        // <span class="type">TODO</span> <span class="type">Auto</span>-generated catch <span class="keyword">block</span>
+        e.printStackTrace();
+      } <span class="keyword">finally</span> {
+        exec.shutdown();
+      }
+    }
+  }
+}/*output:
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">0</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">1</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">2</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">3</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">4</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">5</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">6</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">7</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">8</span>
+<span class="literal">result</span> <span class="keyword">of</span> <span class="type">TaskWithResult</span>: <span class="number">9</span>
+*/
+</code></pre><p>这段代码非常好懂，但是可能多了个 Future 对象，我来解释一下。</p>
+<blockquote>
+<p>ExecutorService.submit()方法会返回 Future 对象，它用 Callable 返回结果的特定类型进行了参数化。可以用 isDone()来查询 Future 是否完成——当任务完成时，它具有一个结果，可以调用 get()方法来获取该结果;如果不适用 isDone()而是直接用 get()去拿结果，那么在结果没有返回的这段时间内，get()将阻塞，直至结果返回。通常情况下，可以使用 isDone()或者具有超时时间的 get()来查询该任务是否完成。</p>
+</blockquote>
+<h4 id="5-_线程干活累了，想睡会">5. 线程干活累了，想睡会</h4><p>这个直接上例子：</p>
+<pre><code><span class="keyword">import</span> java.util.concurrent.ExecutorService;
+<span class="keyword">import</span> java.util.concurrent.Executors;
+<span class="keyword">import</span> java.util.concurrent.TimeUnit;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SleepingTask</span> <span class="keyword">extends</span> <span class="title">LiftOff</span> </span>{
+  <span class="annotation">@Override</span>
+  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
+    <span class="keyword">try</span> {
+      <span class="keyword">while</span>(countDown-- &gt; <span class="number">0</span>) {
+        System.out.println(status());
+        <span class="comment">// Old-style:</span>
+        <span class="comment">// Thread.sleep(100);</span>
+        <span class="comment">// Java SE5/6-style:</span>
+        TimeUnit.MILLISECONDS.sleep(<span class="number">100</span>);
+      }
+    } <span class="keyword">catch</span>(InterruptedException e) {
+      System.err.println(<span class="string">"Interrupted"</span>);
+    }
+  }
+
+  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+    ExecutorService exec = Executors.newCachedThreadPool();
+    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) {
+      exec.execute(<span class="keyword">new</span> SleepingTask());
+    }
+    System.out.println(<span class="string">"Waiting For LiftOff"</span>);
+    exec.shutdown();
+  }
+}
+</code></pre><p>这里需要注意的有两点：</p>
+<ul>
+<li>对 sleep()的调用可能抛出 InterruptedException 异常（很容易想象，你在睡觉的时候也会被闹钟打断。这是是调用 Thread的 interrupt()方法），并且你可以看到，它在 run()中被捕获。<strong>因为异常不能跨线程传播回 main(因为线程之间除了共享资源，其他都是线程私有的)，所以你必须在本地处理所有在任务内部产生的异常，谨记。</strong></li>
+<li>sleep() VS TimeUnit.MILLISECONDS.sleep()。具体可以参照文档，但是更推荐直接看源码。源码其实也非常简单，但是为什么这样做？值得我们去思考，尤其推荐结合枚举那一章来学习 TimeUnit 源码，味道极佳：）</li>
+</ul>
+<h4 id="6-_让步">6. 让步</h4><p>前面有个地方提到了<code>Thread.yield()</code>，这里具体说明一下这个方法的使用场景和需要注意的地方。</p>
+<blockquote>
+<p>如果知道已经完成了在 run()方法的循环中的一次迭代过程中所需的工作，就可以给线程调度机制一个暗示：我的工作已经差不多了，可以让别的线程使用 CPU 了。这个暗示将通过调用 yield()方法来作出（不过这只是一个提示，没有任何机制保证它将会被采纳）。当调用 yield()时，其实是在建议线程调度器去调度具有相同优先级的其他线程工作。</p>
+<p>但是大体上，对于任何重要的控制或在调整应用时，都<strong>不能依赖 yield()</strong>。实际上，yied()经常被误用。所以使用的时候一定要非常谨慎！</p>
+</blockquote>
+<h4 id="7-_后台线程">7. 后台线程</h4><p>这个作者在总结中明确指出“后台线程几乎不是一种好的思想，非后台的 Executor 通常是一种更好的方式，因为 Executor 控制的所有任务可以同时被管理”。顾名思义，后台线程就是在后台运行的。类似 shell 的 <code>&amp;</code>，更严谨的定义是这样的：</p>
+<blockquote>
+<p>后台线程是指在程序运行的时候在后台提供一种通用服务的线程，<strong>并且这种线程并不属于程序中不可或缺的部分（意思是非必要）</strong>。因此，当所有的非后台线程结束时，程序也就终止了，同时会杀死进程中的所有后台线程。所以，只要有任何非后台线程还在运行，程序就不会终止。<strong>main()就是一个非后台线程</strong></p>
+</blockquote>
+<p>import java.util.concurrent.TimeUnit;</p>
+<p>public class SimpleDaemons implements Runnable {<br>  @Override<br>  public void run() {<br>    try {<br>      while (true) {<br>        TimeUnit.MILLISECONDS.sleep(100);<br>        System.out.println(Thread.currentThread() + “ “ + this);<br>      }<br>    } catch (InterruptedException e) {<br>      System.out.println(“sleep() interrupted”);<br>      e.printStackTrace();<br>    }<br>  }</p>
+<p>  public static void main(String[] args) throws InterruptedException {<br>    for(int i = 0; i &lt; 10; i++) {<br>      Thread daemon = new Thread(new SimpleDaemons());<br>      daemon.setDaemon(true); // Must call before start();<br>      daemon.start();<br>    }<br>    System.out.println(“All daemons started”);<br>    TimeUnit.MILLISECONDS.sleep(275); //不断调整这个时间，就能理解上面那段话了。<br>  }<br>}</p>
+<p>设置后台线程有一个注意点：必须在 start()之前设定。</p>
+<h4 id="8-_加入一个线程">8. 加入一个线程</h4><p>这个小节看的很恶心，主要是翻译的太晦涩了，根本看不懂。很简单的意思愣是翻译的看不懂，也是醉了。。我总结一下这个小节吧。</p>
+<p>现在有2个线程A 和 B，现在想在执行 B 的过程中加入 A，那么就可以在 B 中调用 A.join()，那么在 B 中就会等待 A 执行完毕才继续运行。下面是例子：</p>
+<p>class Sleeper extends Thread {<br>  private int duration;<br>  public Sleeper(String name, int sleepTime) {<br>    super(name);<br>    duration = sleepTime;<br>    start();<br>  }</p>
+<p>  public void run() {<br>    try {<br>      sleep(duration);<br>    } catch(InterruptedException e) {<br>      System.out.println(getName() + “ was interrupted. “ + “isInterrupted(): “ + isInterrupted());<br>      return ;<br>    }<br>    System.out.println(getName() + “ has awakened”);<br>  }<br>}</p>
+<p>class Joiner extends Thread {<br>  private Sleeper sleeper;<br>  public Joiner(String name, Sleeper sleeper) {<br>    super(name);<br>    this.sleeper = sleeper;<br>    start();<br>  }</p>
+<p>  public void run() {<br>    try {<br>      sleeper.join();<br>    } catch(InterruptedException e) {<br>      System.out.println(“Interrpted”);<br>    }<br>    System.out.println(getName() + “ join completed”);<br>  }<br>}</p>
+<p>public class Joining {<br>  public static void main(String[] args) {<br>    Sleeper sleepy = new Sleeper(“Sleepy”, 1500);<br>    Sleeper grumpy = new Sleeper(“grumpy”, 1500);</p>
+<pre><code><span class="type">Joiner</span> dopey = <span class="keyword">new</span> <span class="type">Joiner</span>(<span class="string">"Dopey"</span>, sleepy);
+<span class="type">Joiner</span> doc = <span class="keyword">new</span> <span class="type">Joiner</span>(<span class="string">"Doc"</span>, grumpy);
+
+grumpy.interrupt<span class="literal">()</span>;
+</code></pre><p>  }<br>}/<em>output:<br>grumpy was interrupted. isInterrupted(): false<br>Doc join completed<br>Sleepy has awakened<br>Dopey join completed
+</em>/</p>
+<p>认真看下，其实就是这个意思。我是按宏替换来理解的，把 join()的那个线程的代码给替换进来。。。。</p>
+<p>Tips:</p>
+<ul>
+<li>代码中有一个需要注意的是interrput()的调用结果：<code>isInterrupted(): false</code>，明明这个线程被我们 interrupt()了呀，为什么状态是 false？原来是因为当调用 interrupt()的时候，将给这个线程设定一个标志，表明该线程已经被中断。然而，<strong>异常被捕获的时候将清理这个标志</strong>，所以在 catch 子句中，这个标志被识别为 false。</li>
+</ul>
+<h4 id="9-_呀，抛出异常肿么办？">9. 呀，抛出异常肿么办？</h4><p>先来个小测试，看看下面的代码输出如何？</p>
+<p>import java.util.concurrent.ExecutorService;<br>import java.util.concurrent.Executors;</p>
+<p>public class ExceptionThread implements Runnable {<br>  @Override<br>  public void run() {<br>    throw new RuntimeException();<br>  }</p>
+<p>  public static void main(String[] args) {<br>    try {<br>      ExecutorService exec = Executors.newCachedThreadPool();<br>      exec.execute(new ExceptionThread());<br>    } catch (Exception e) {<br>      System.out.println(“catch run() exception…”);<br>    }<br>  }<br>}</p>
+<p>想好的话，实际运行一下这个程序。答案竟然是没有捕获到，直接抛到 console 中！！！为什么呢？</p>
+<blockquote>
+<p>前面我们说过，线程之间是无法传播异常（上面线程干活累了，想睡会小节中提到过），所以抛出的异常直接抛给 JVM 并打印到 console 中。当然，在 Java SE5以后，可以用 Executor 来解决这个问题。如下所示：</p>
+</blockquote>
+<p>import java.util.concurrent.ExecutorService;<br>import java.util.concurrent.Executors;<br>import java.util.concurrent.ThreadFactory;</p>
+<p>class ExceptionThread2 implements Runnable {<br>  @Override<br>  public void run() {<br>    Thread t = Thread.currentThread();<br>    System.out.println(“run() by “ + t);<br>    System.out.println(“eh = “ + t.getUncaughtExceptionHandler());<br>    throw new RuntimeException();<br>  }<br>}</p>
+<p>class MyUncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {<br>  @Override<br>  public void uncaughtException(Thread t, Throwable e) {<br>    System.out.println(“caught “ + e);<br>  }<br>}</p>
+<p>class HandlerThreadFactory implements ThreadFactory {<br>  @Override<br>  public Thread newThread(Runnable r) {<br>    System.out.println(this + “ creating new Thread”);<br>    Thread t = new Thread(r);<br>    System.out.println(“created “ + t);<br>    t.setUncaughtExceptionHandler(new MyUncaughtExceptionHandler());<br>    System.out.println(“eh = “ + t.getUncaughtExceptionHandler());<br>    return t;<br>  }<br>}</p>
+<p>public class CaptureUncaughtException {<br>  public static void main(String[] args) {<br>    ExecutorService exec = Executors.newCachedThreadPool(new HandlerThreadFactory());<br>    exec.execute(new ExceptionThread2());<br>  }<br>}/<em>output:<br>concurrency.HandlerThreadFactory@5c647e05 creating new Thread<br>created Thread[Thread-0,5,main]<br>eh = concurrency.MyUncaughtExceptionHandler@33909752<br>run() by Thread[Thread-0,5,main]<br>eh = concurrency.MyUncaughtExceptionHandler@33909752<br>concurrency.HandlerThreadFactory@5c647e05 creating new Thread<br>created Thread[Thread-1,5,main]<br>eh = concurrency.MyUncaughtExceptionHandler@359d9ad4<br>caught java.lang.RuntimeException
+</em>/</p>
+<p>不知道为何我的输出多了一个线程Thread-1,5,main的创建。。。留待明天解决。。。。。。</p>
+<p>在实际使用时，可以按照具体情况重写 uncaughtException()来逐个处理不同的异常，如果在代码中都只使用相同的异常处理器，就可以设置 Thread 的静态域：</p>
+<p>public class SettingDefaultHandler {<br>  public static void main(String[] args) {<br>    Thread.setDefaultUncaughtExceptionHandler(new MyUncaughtExceptionHandler());<br>    ExecutorService exec = Executors.newCachedThreadPool();<br>    exec.execute(new ExceptionThread());<br>  }<br>}</p>
+<p>这个处理器只在<strong>不存在线程专有的未捕获异常处理器的情况下才会被调用。</strong>具体的步骤是：</p>
+<ol>
+<li>系统会检查线程专有版本</li>
+<li>如果没有发现，则检查线程组是否有其专有的 uncaughtException()方法（Java SE5以后完全可以认为没有线程组的概念，因为被 Executor 完全取代），</li>
+<li>如果也没有，再调用 defaultUncaughtExceptionHandler。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Java编程思想/">Java编程思想</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（二）/" data-title="Java编程思想-第二十一章、并发（二） | 威威小威的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/14/操作系统-进程/"  title="操作系统-进程">
+ <strong>下一篇：</strong><br/> 
+ <span>操作系统-进程
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/16/Java编程思想-第二十一章、并发（二）/" data-title="Java编程思想-第二十一章、并发（二）" data-url="http://mwplll.github.io/2015/08/16/Java编程思想-第二十一章、并发（二）/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-2小节：并发的最基本使用"><span class="toc-number">1.</span> <span class="toc-text">21.2小节：并发的最基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_定义任务"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_Thread_类"><span class="toc-number">1.2.</span> <span class="toc-text">2. Thread 类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_使用_Executor_管理_Thread"><span class="toc-number">1.3.</span> <span class="toc-text">3. 使用 Executor 管理 Thread</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_任务有返回值？Callable_接口来帮忙！"><span class="toc-number">1.4.</span> <span class="toc-text">4. 任务有返回值？Callable 接口来帮忙！</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_线程干活累了，想睡会"><span class="toc-number">1.5.</span> <span class="toc-text">5. 线程干活累了，想睡会</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-_让步"><span class="toc-number">1.6.</span> <span class="toc-text">6. 让步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-_后台线程"><span class="toc-number">1.7.</span> <span class="toc-text">7. 后台线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-_加入一个线程"><span class="toc-number">1.8.</span> <span class="toc-text">8. 加入一个线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-_呀，抛出异常肿么办？"><span class="toc-number">1.9.</span> <span class="toc-text">9. 呀，抛出异常肿么办？</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C/" title="C">C<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/java/" title="java">java<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/svn/" title="svn">svn<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/求职笔试面试/" title="求职笔试面试">求职笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>2</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Mao Weipeng in ZJU. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:maoweipeng@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="威威小威">威威小威</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"mwplll"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

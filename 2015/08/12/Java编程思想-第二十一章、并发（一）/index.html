@@ -16,9 +16,7 @@
 速度
 设计可管理性
 
-速度非常容易理解，我举个例子就可以说明问题：
-
-现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
+1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CPU的速度比IO设备的速度快得多，导致这个等待的过程对CPU来说太过漫长，造成CPU资源的浪费；如果能利用一个任务在等待响">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java编程思想 - 第二十一章、并发（一）">
 <meta property="og:url" content="http://mwplll.github.io/2015/08/12/Java编程思想-第二十一章、并发（一）/index.html">
@@ -28,9 +26,7 @@
 速度
 设计可管理性
 
-速度非常容易理解，我举个例子就可以说明问题：
-
-现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
+1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CPU的速度比IO设备的速度快得多，导致这个等待的过程对CPU来说太过漫长，造成CPU资源的浪费；如果能利用一个任务在等待响">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java编程思想 - 第二十一章、并发（一）">
 <meta name="twitter:description" content="21.1小节：为什么要学习并发？总结起来就是两点：
@@ -38,9 +34,7 @@
 速度
 设计可管理性
 
-速度非常容易理解，我举个例子就可以说明问题：
-
-现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空">
+1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CPU的速度比IO设备的速度快得多，导致这个等待的过程对CPU来说太过漫长，造成CPU资源的浪费；如果能利用一个任务在等待响">
 
     
     
@@ -109,7 +103,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1_速度"><span class="toc-number">1.1.</span> <span class="toc-text">1 速度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2_设计可管理性"><span class="toc-number">1.2.</span> <span class="toc-text">2 设计可管理性</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -118,14 +112,8 @@
 <li>速度</li>
 <li>设计可管理性</li>
 </ul>
-<p>速度非常容易理解，我举个例子就可以说明问题：</p>
-<blockquote>
-<p>现在你是《仙剑奇侠传》的主程，需要在用户开大游戏时，渲染一副非常美丽的场景。如下图所示：有花、有草、天空、人物等等，这些物体在程序中就是一个个独立的数据结构（本质就是不同的像素点集合）。你需要按照一定的顺序将它们渲染出来（比如先渲染人物、然后是大地、然后是花花草草、然后是天空、然后是光线等等）。你会如何初始化？先自己思考1分钟。</p>
-</blockquote>
-<p>如果让一个初学者回答，一般而言会按照这个物体在游戏中的重要程度一个一个按顺序渲染，而这个想法就是<strong>顺序编程</strong>的思维。那么，问题来了：挖掘机……噗，不对，假如每个物体的渲染速度都为10ms，刚才那些元素总和为1000个。那么，等用户可以看到完整的效果就需要10s，10s 是什么概念？想想平时打开网页，如果超过5s 还没有内容，你是不是立即就关闭了？那么这里的10s 简直就是不可理喻。</p>
-<p><strong>而这就是并发要解决的第一个问题：速度，或者成为性能</strong></p>
-<p>现在一个高手来了，它将这1000个元素按照重要程度做一个排序（当然，这都是离线搞好的），然后“同时”去完成 N（假如为10） 个元素的渲染。那么，看到完整的效果就需要1s。为什么可以这样做呢？因为现在机器无论是 Server 端还是 Client 端，都有2-8核的处理器，只要我们充分压榨它们的性能，就能让程序跑的更快。<strong>当然，这个例子是最最最最简单的，而且它有个重要特征就是每个元素都是独立的。如果它们之间有关联，情况就会更复杂，后面我们再讨论</strong></p>
-<p>速度问题说过了，再说下设计可管理性。那么，什么是设计可管理性呢？</p>
+<h4 id="1_速度">1 速度</h4><p>为什么采用并发能获得更快的程序运行速度呢？其本质在于<strong>cpu和外部设备（IO等）处理速度的不一致</strong>，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为<strong>阻塞</strong>，而由于CPU的速度比IO设备的速度快得多，导致这个等待的过程对CPU来说太过漫长，造成CPU资源的浪费；如果能利用一个任务在等待响应的时间，去执行另外其他的任务，这样就能充分“压榨”CPU的性能，达到程序运行速度的提升。这就是并发。</p>
+<h4 id="2_设计可管理性">2 设计可管理性</h4><p>速度问题说过了，再说下设计可管理性。那么，什么是设计可管理性呢？</p>
 <p>仔细看了21.1.2小节，但是讲的很晦涩。我尝试着说下自己的看法吧。设计可管理性可以认为是程序的结构。比如广泛使用的消息系统，一个 server，多个 client。如果你不使用并发，先给 client1发送消息，然后 client2……但是如果在这个期间clientN 对刚才那个消息的内容做了改变怎么办？还是举个例子：</p>
 <blockquote>
 <p>最典型的是扣费系统，现在 server 总余额是1000.10个 client，当前余额都是100.然后 server 计算后决定给每个 client分100.但是 client6没分到钱之前余额花光了，它现在要花费180，你分给100肯定不够。那么，server 如何办？？是重新收回前面 client 分到的钱还是忽略 client6的请求，继续给100？</p>
@@ -198,7 +186,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-1小节：为什么要学习并发？"><span class="toc-number">1.</span> <span class="toc-text">21.1小节：为什么要学习并发？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1_速度"><span class="toc-number">1.1.</span> <span class="toc-text">1 速度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2_设计可管理性"><span class="toc-number">1.2.</span> <span class="toc-text">2 设计可管理性</span></a></li></ol></li></ol>
  
   </div>
 
@@ -216,7 +204,7 @@
 		  
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
 		  
 		
 		  
@@ -281,6 +269,10 @@
 			
 		
 			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/算法/" title="算法">算法<sup>2</sup></a></li>
 			
 		
@@ -302,10 +294,6 @@
 		
 			
 				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>1</sup></a></li>
 			
 		
 		</ul>
