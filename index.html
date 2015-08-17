@@ -71,6 +71,93 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（九）/" title="Java编程思想-第二十一章、并发（九）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（九）</h1>
+    
+     
+           <p itemprop="description" >21.9 性能调优这个小节主要讲的是优化，但是高德纳不是说过嘛——Premature optimization is the root of all evil.所以等到真正发现有问题再仔细研究，现在看看估计就忘了。所以我先大概了解一下关于锁的问题，其他等遇到具体场景再说：）
+1.</p>
+        
+    
+    <time datetime="2015-08-17T13:11:21.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（八）/" title="Java编程思想-第二十一章、并发（八）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（八）</h1>
+    
+     
+           <p itemprop="description" >21.8 仿真这个小节是综合运用前面7个小节的知识来完成一个小的需求。虽然很简单，但是也有地方值得自己学习，所以我直接上代码了。
+1. 银行出纳问题模拟一个银行，有顾客会来银行办理业务，而处理业务的是出纳员，出纳员很多，又需要管理人员。所以抽象了三个 Entity，分别是顾客，出</p>
+        
+    
+    <time datetime="2015-08-17T13:11:11.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（七）/" title="Java编程思想-第二十一章、并发（七）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（七）</h1>
+    
+     
+           <p itemprop="description" >21.7 新类库中的构件Java SE5的 java.util.concurrent 包中引入了大量设计用来解决并发问题的新类。学习这些“工具类”就可以专注于自己想要实现的功能而不是线程的同步、死锁等一堆令人头疼的细节。这一小节内容非常多，建议的学习方法是：
+
+首先看目录，了解这</p>
+        
+    
+    <time datetime="2015-08-17T08:24:31.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（六）/" title="Java编程思想-第二十一章、并发（六）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（六）</h1>
+    
+     
+           <p itemprop="description" >21.6 线程死锁关于死锁的问题，是非常麻烦的。对一般程序而言，如果马上出问题，你就可以立即跟踪下去。但是线程死锁不会马上出问题，看起来工作良好的程序却具有潜在的死锁风险。因此，在编写并发程序的时候，进行仔细的程序设计以防止死锁是关键部分。
+先解释一下线程死锁吧：
+
+某个任务在等</p>
+        
+    
+    <time datetime="2015-08-17T08:06:31.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/08/17/Java编程思想-第二十一章、并发（五）/" title="Java编程思想-第二十一章、并发（五）" itemprop="url">
   
     <h1 itemprop="name">Java编程思想-第二十一章、并发（五）</h1>
@@ -203,100 +290,6 @@ v</p>
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/" title="Java编程思想 - 第二十一章、并发（一）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想 - 第二十一章、并发（一）</h1>
-    
-     
-           <p itemprop="description" >21.1小节：为什么要学习并发？总结起来就是两点：
-
-速度
-设计可管理性
-
-1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CP</p>
-        
-    
-    <time datetime="2015-08-11T17:37:09.000Z" itemprop="datePublished">2015-08-12</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/28/java基础——通过异常处理错误/" title="java基础——通过异常处理错误" itemprop="url">
-  
-    <h1 itemprop="name">java基础——通过异常处理错误</h1>
-    
-     
-           <p itemprop="description" >异常简介
-java中的异常类全部继承于throwable类。
-
-处理异常try-catch以及try-catch-finally
-异常抛出throw,throws
-自定义异常自定义异常要继承于 Exception 类或者其子类。
-异常链</p>
-        
-    
-    <time datetime="2015-05-28T01:46:59.000Z" itemprop="datePublished">2015-05-28</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/15/java基础——mac下配置JDK环境变量/" title="java基础——mac下配置JDK环境变量" itemprop="url">
-  
-    <h1 itemprop="name">java基础——mac下配置JDK环境变量</h1>
-    
-     
-           <p itemprop="description" >以下是针对单独用户配置JDK变量的方法，亲测有效。
-#下载jdk7的mac版
-#官网下载地址http://www.oracle.com/technetwork/java/javase/downloads/
-#下载类似jdk-7u67-macosx-x64.dmg，版本号可能会更新</p>
-        
-    
-    <time datetime="2015-05-15T10:37:54.000Z" itemprop="datePublished">2015-05-15</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/11/数据结构（C语言版）学习总结5-数组和广义表/" title="数据结构（C语言版）学习总结5--数组和广义表" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结5--数组和广义表</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2015-05-11T13:36:46.000Z" itemprop="datePublished">2015-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -319,7 +312,7 @@ java中的异常类全部继承于throwable类。
 		  
 		
 		  
-			<li><a href="/categories/Java/" title="Java">Java<sup>9</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>13</sup></a></li>
 		  
 		
 		  
@@ -360,7 +353,7 @@ java中的异常类全部继承于throwable类。
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>8</sup></a></li>
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>12</sup></a></li>
 			
 		
 			
