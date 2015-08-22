@@ -4,22 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>hexo简介 | 特喜欢秋天的人</title>
+    <title>树（一）-基本概念和性质 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
+    <meta name="description" content="最近在做一些笔试题时，经常会碰到考察树这种数据结构，有关树的术语和性质有必要理一理。
+1. 树的基本概念
+树的结点：树的结点包含一个数据元素及若干指向子树的分支。
+结点的度：结点所拥有的子树的个数称为结点的度。
+叶子结点：度为0的结点称为叶子，或者终端结点。
+分支节点：度不为0的结点称为分支结点，或者称为非终端结点。
+左孩子、右孩子、双亲：结点的子树称为该结点的孩子，该结点称为孩子的双亲。
+祖先、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo简介">
-<meta property="og:url" content="http://mwplll.github.io/2015/04/07/hexo简介/index.html">
+<meta property="og:title" content="树（一）-基本概念和性质">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/22/树（一）-基本概念和性质/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
+<meta property="og:description" content="最近在做一些笔试题时，经常会碰到考察树这种数据结构，有关树的术语和性质有必要理一理。
+1. 树的基本概念
+树的结点：树的结点包含一个数据元素及若干指向子树的分支。
+结点的度：结点所拥有的子树的个数称为结点的度。
+叶子结点：度为0的结点称为叶子，或者终端结点。
+分支节点：度不为0的结点称为分支结点，或者称为非终端结点。
+左孩子、右孩子、双亲：结点的子树称为该结点的孩子，该结点称为孩子的双亲。
+祖先、">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo简介">
-<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
+<meta name="twitter:title" content="树（一）-基本概念和性质">
+<meta name="twitter:description" content="最近在做一些笔试题时，经常会碰到考察树这种数据结构，有关树的术语和性质有必要理一理。
+1. 树的基本概念
+树的结点：树的结点包含一个数据元素及若干指向子树的分支。
+结点的度：结点所拥有的子树的个数称为结点的度。
+叶子结点：度为0的结点称为叶子，或者终端结点。
+分支节点：度不为0的结点称为分支结点，或者称为非终端结点。
+左孩子、右孩子、双亲：结点的子树称为该结点的孩子，该结点称为孩子的双亲。
+祖先、">
 
     
     
@@ -72,14 +93,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/07/hexo简介/" title="hexo简介" itemprop="url">hexo简介</a>
+      <a href="/2015/08/22/树（一）-基本概念和性质/" title="树（一）-基本概念和性质" itemprop="url">树（一）-基本概念和性质</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-07T11:58:50.000Z" itemprop="datePublished"> 发表于 2015-04-07</time>
+    <time datetime="2015-08-22T08:37:09.000Z" itemprop="datePublished"> 发表于 2015-08-22</time>
     
   </p>
 </header>
@@ -88,20 +109,40 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_树的基本概念"><span class="toc-number">1.</span> <span class="toc-text">1. 树的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_二叉树的性质"><span class="toc-number">2.</span> <span class="toc-text">2. 二叉树的性质</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>最近在做一些笔试题时，经常会碰到考察树这种数据结构，有关树的术语和性质有必要理一理。</p>
+<h4 id="1-_树的基本概念">1. 树的基本概念</h4><ul>
+<li>树的<strong>结点</strong>：树的结点包含一个数据元素及若干指向子树的分支。</li>
+<li><strong>结点的度</strong>：结点所拥有的子树的个数称为结点的度。</li>
+<li><strong>叶子结点</strong>：度为0的结点称为叶子，或者终端结点。</li>
+<li><strong>分支节点</strong>：度不为0的结点称为分支结点，或者称为非终端结点。</li>
+<li><strong>左孩子、右孩子、双亲</strong>：结点的子树称为该结点的孩子，该结点称为孩子的双亲。</li>
+<li><strong>祖先、子孙</strong>：结点的祖先是从根到该结点所经分支上的所有结点，反之，以某结点为根的子树中的任一结点都称为该结点的子孙。</li>
+<li><strong>结点的层数</strong>：规定树的<strong>根结点的层数为1</strong>，其余结点的层数等于它的双亲的结点的层数加1；</li>
+<li><strong>树的深度</strong>：树中所有结点的最大的层数称为树的深度。</li>
+<li><strong>树的度</strong>：树中各结点的度的最大值称为该树的度。</li>
+<li><strong>二叉树</strong>：每个结点<strong>至多</strong>有两个子树的树称为二叉树，并且，二叉树的子树有左右之分，其次序不能任意颠倒。</li>
+<li><strong>满二叉树</strong>：在一棵二叉树中，如果所有分支结点都存在左子树和右子树，并且，所有叶子结点都在同一层上，这样的一棵二叉树称为满二叉树。</li>
+<li><strong>完全二叉树</strong>：一棵深度为k的有n个结点的二叉树，对树中的结点按照从上至下、从左至右的顺序进行编号，如果编号为i(1&lt;=i&lt;=n)的结点与满二叉树中编号为i的结点在二叉树中的位置相同，那么称为完全二叉树。简单点说：<strong>完全二叉树就是满二叉树的一部分，靠上，靠左</strong></li>
+</ul>
+<h4 id="2-_二叉树的性质">2. 二叉树的性质</h4>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/hexo/">hexo</a>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/树/">树</a><a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -109,7 +150,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/04/07/hexo简介/" data-title="hexo简介 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/22/树（一）-基本概念和性质/" data-title="树（一）-基本概念和性质 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -122,20 +163,20 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/07/markdown常用标记/" title="markdown常用标记">
-  <strong>上一篇：</strong><br/>
-  <span>
-  markdown常用标记</span>
+
+<div class="next">
+<a href="/2015/08/21/排序（一）-插入排序/"  title="排序（一）-插入排序">
+ <strong>下一篇：</strong><br/> 
+ <span>排序（一）-插入排序
+</span>
 </a>
 </div>
-
 
 </nav>
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/07/hexo简介/" data-title="hexo简介" data-url="http://mwplll.github.io/2015/04/07/hexo简介/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/22/树（一）-基本概念和性质/" data-title="树（一）-基本概念和性质" data-url="http://mwplll.github.io/2015/08/22/树（一）-基本概念和性质/"></div>
 </section>
 
 
@@ -145,7 +186,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_树的基本概念"><span class="toc-number">1.</span> <span class="toc-text">1. 树的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_二叉树的性质"><span class="toc-number">2.</span> <span class="toc-text">2. 二叉树的性质</span></a></li></ol>
  
   </div>
 
