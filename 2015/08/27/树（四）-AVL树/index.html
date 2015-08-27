@@ -4,34 +4,42 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>C基础2——指针、链表、文件 | 特喜欢秋天的人</title>
+    <title>树（四）-AVL树 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+    <meta name="description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
+AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
+2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+
+对α的左儿子的左子树进行一次插入
+对α的左儿子的右子树进行一次插入
+对α">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C基础2——指针、链表、文件">
-<meta property="og:url" content="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/index.html">
+<meta property="og:title" content="树（四）-AVL树">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/27/树（四）-AVL树/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+<meta property="og:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
+AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
+2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+
+对α的左儿子的左子树进行一次插入
+对α的左儿子的右子树进行一次插入
+对α">
+<meta property="og:image" content="/img/rorate_with_left_child.png">
+<meta property="og:image" content="/img/double_with_left_child.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C基础2——指针、链表、文件">
-<meta name="twitter:description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+<meta name="twitter:title" content="树（四）-AVL树">
+<meta name="twitter:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
+AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
+2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+
+对α的左儿子的左子树进行一次插入
+对α的左儿子的右子树进行一次插入
+对α">
 
     
     
@@ -84,14 +92,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/27/C基础2——指针、链表、文件/" title="C基础2——指针、链表、文件" itemprop="url">C基础2——指针、链表、文件</a>
+      <a href="/2015/08/27/树（四）-AVL树/" title="树（四）-AVL树" itemprop="url">树（四）-AVL树</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-27T13:23:33.000Z" itemprop="datePublished"> 发表于 2015-04-27</time>
+    <time datetime="2015-08-27T02:12:09.000Z" itemprop="datePublished"> 发表于 2015-08-27</time>
     
   </p>
 </header>
@@ -100,36 +108,56 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针"><span class="toc-number">1.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构"><span class="toc-number">2.</span> <span class="toc-text">结构</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="指针">指针</h3><ol>
-<li>*p的区别<pre><code>int <span class="keyword">*</span>p;
-<span class="keyword">*</span>p = 10;
-</code></pre>这里的两个<em>p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，</em>表示其后的变量是指针；后者*p代表指针p所指向的变量。</li>
-<li>指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它<strong>指向一个不确定的单元</strong>，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*p=NULL;</li>
-<li>指针每一次加1或者减1，并非指针的值加1或者减1，而是加上或者减去该指针所指向的那个变量数据类型的长度，即它指向的存储单元所占用的字节数。</li>
-<li>在函数定义时，被声明为数组的形参<strong>实际上是一个指针</strong>。当传递数组时，按值调用传递它的基地址，数组元素本身不被复制。</li>
-<li><p>scanf()和gets()函数的区别：scanf()只能输入不能带有空格的字符串，gets()可输入空格，遇回车符输入结束；</p>
-<p>printf()和puts()的区别：后者输出字符串会自动换行。</p>
-</li>
-<li>calloc与malloc动态内存分配函数。其中calloc在动态分配内存后，自动初始化该内存空间为0，而malloc不会。</li>
+		<h4 id="1-_AVL树的定义和性质">1. AVL树的定义和性质</h4><p>定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。</p>
+<p>AVL树是<strong>带有平衡条件</strong>的二叉查找树，保证树的深度必须是O(log N)</p>
+<h4 id="2-_AVL树的操作">2. AVL树的操作</h4><p>插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为<strong>旋转</strong>。<br>我们把必须重新平衡的节点称为α，则α具有以下4种情况：</p>
+<ol>
+<li>对α的左儿子的左子树进行一次插入</li>
+<li>对α的左儿子的右子树进行一次插入</li>
+<li>对α的右儿子的右子树进行一次插入</li>
+<li>对α的右儿子的左子树进行一次插入</li>
 </ol>
-<h3 id="结构">结构</h3>  
+<p>1、3采用单旋转调整，2、4采用双旋转调整。</p>
+<p>单旋转示例图：<img src="/img/rorate_with_left_child.png" alt=""></p>
+<p>java代码：</p>
+<pre><code>/**
+* 左旋转实现
+*/
+private AvlNode&lt;AnyType&gt; rorateWithLeftChild(AvlNode&lt;AnyType&gt; <span class="literal">k2</span>){
+    AvlNode&lt;AnyType&gt; <span class="literal">k1</span> = <span class="literal">k2</span>.left<span class="comment">;</span>
+    <span class="literal">k2</span>.left = <span class="literal">k1</span>.right<span class="comment">;</span>
+    <span class="literal">k1</span>.right = <span class="literal">k2</span><span class="comment">;</span>
+    <span class="literal">k2</span>.height = Math.max(height(<span class="literal">k2</span>.left),height(<span class="literal">k2</span>.right))+<span class="number">1</span><span class="comment">;</span>
+    <span class="literal">k1</span>.height = Math.amx(height(<span class="literal">k1</span>.left),<span class="literal">k2</span>.height)+<span class="number">1</span><span class="comment">;</span>
+    return <span class="literal">k1</span><span class="comment">;</span>
+}
+</code></pre><p>双旋转示例图：<img src="/img/double_with_left_child.png" alt=""></p>
+<p>java代码：</p>
+<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
+<span class="keyword">*</span> 双旋转实现
+<span class="keyword">*</span>/
+private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild(AvlNode<span class="variable">&lt;AnyType&gt;</span> k3){
+    k3.left = rorateWithRightChild(k3.left);
+    return rorateWithLeftChild(k3);
+}
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C/">C</a>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/c/">c</a><a href="/tags/基础/">基础</a>
+  <span></span> <a href="/tags/树/">树</a><a href="/tags/算法/">算法</a>
   </div>
 
 </div>
@@ -138,7 +166,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/" data-title="C基础2——指针、链表、文件 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -152,18 +180,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/04/27/leetcode-1-Two-Sum/" title="leetcode(1)-Two Sum">
+ <a href="/2015/08/27/树（五）-伸展树/" title="树（五）-伸展树">
   <strong>上一篇：</strong><br/>
   <span>
-  leetcode(1)-Two Sum</span>
+  树（五）-伸展树</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/"  title="C基础1——数据类型、运算符、结构、函数、数组">
+<a href="/2015/08/26/树（三）-二叉查找树/"  title="树（三）-二叉查找树">
  <strong>下一篇：</strong><br/> 
- <span>C基础1——数据类型、运算符、结构、函数、数组
+ <span>树（三）-二叉查找树
 </span>
 </a>
 </div>
@@ -172,7 +200,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/27/C基础2——指针、链表、文件/" data-title="C基础2——指针、链表、文件" data-url="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树" data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/"></div>
 </section>
 
 
@@ -182,7 +210,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针"><span class="toc-number">1.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构"><span class="toc-number">2.</span> <span class="toc-text">结构</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
  
   </div>
 

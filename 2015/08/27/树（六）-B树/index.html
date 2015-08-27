@@ -4,34 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>C基础2——指针、链表、文件 | 特喜欢秋天的人</title>
+    <title>树（六）-B树 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+    <meta name="description" content="当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，这大概要5秒！！！
+解决办法，变二叉树为M叉树。
+性质：一棵完全二叉树的高度大约为log2 N,而一棵完全M叉树的高度大">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C基础2——指针、链表、文件">
-<meta property="og:url" content="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/index.html">
+<meta property="og:title" content="树（六）-B树">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/27/树（六）-B树/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+<meta property="og:description" content="当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，这大概要5秒！！！
+解决办法，变二叉树为M叉树。
+性质：一棵完全二叉树的高度大约为log2 N,而一棵完全M叉树的高度大">
+<meta property="og:image" content="/img/btree.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C基础2——指针、链表、文件">
-<meta name="twitter:description" content="指针
-*p的区别int *p;
-*p = 10;
-这里的两个p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，表示其后的变量是指针；后者*p代表指针p所指向的变量。
-指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它指向一个不确定的单元，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*">
+<meta name="twitter:title" content="树（六）-B树">
+<meta name="twitter:description" content="当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，这大概要5秒！！！
+解决办法，变二叉树为M叉树。
+性质：一棵完全二叉树的高度大约为log2 N,而一棵完全M叉树的高度大">
 
     
     
@@ -84,14 +79,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/27/C基础2——指针、链表、文件/" title="C基础2——指针、链表、文件" itemprop="url">C基础2——指针、链表、文件</a>
+      <a href="/2015/08/27/树（六）-B树/" title="树（六）-B树" itemprop="url">树（六）-B树</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-27T13:23:33.000Z" itemprop="datePublished"> 发表于 2015-04-27</time>
+    <time datetime="2015-08-27T07:03:49.000Z" itemprop="datePublished"> 发表于 2015-08-27</time>
     
   </p>
 </header>
@@ -100,36 +95,38 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针"><span class="toc-number">1.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构"><span class="toc-number">2.</span> <span class="toc-text">结构</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_B树的性质"><span class="toc-number">1.</span> <span class="toc-text">1. B树的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_B树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. B树的操作</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="指针">指针</h3><ol>
-<li>*p的区别<pre><code>int <span class="keyword">*</span>p;
-<span class="keyword">*</span>p = 10;
-</code></pre>这里的两个<em>p，尽管形式相同，但含义是完全不同的。前者定义了指针变量，p是变量名，</em>表示其后的变量是指针；后者*p代表指针p所指向的变量。</li>
-<li>指针只有被赋值后才能正确被使用。指针如果没有被赋值，他的值是不确定的，即它<strong>指向一个不确定的单元</strong>，使用这样的指针，可能会出现难以预料的错误。为了避免引用未赋值的指针造成危害，在定义指针时，可先将它的初始值置为空，如*p=NULL;</li>
-<li>指针每一次加1或者减1，并非指针的值加1或者减1，而是加上或者减去该指针所指向的那个变量数据类型的长度，即它指向的存储单元所占用的字节数。</li>
-<li>在函数定义时，被声明为数组的形参<strong>实际上是一个指针</strong>。当传递数组时，按值调用传递它的基地址，数组元素本身不被复制。</li>
-<li><p>scanf()和gets()函数的区别：scanf()只能输入不能带有空格的字符串，gets()可输入空格，遇回车符输入结束；</p>
-<p>printf()和puts()的区别：后者输出字符串会自动换行。</p>
-</li>
-<li>calloc与malloc动态内存分配函数。其中calloc在动态分配内存后，自动初始化该内存空间为0，而malloc不会。</li>
+		<p>当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，这大概要5秒！！！</p>
+<p>解决办法，变二叉树为M叉树。</p>
+<p>性质：一棵完全二叉树的高度大约为log2 N,而一棵完全M叉树的高度大约为 logM N。</p>
+<h4 id="1-_B树的性质">1. B树的性质</h4><p>阶为M的B树是具有以下性质：</p>
+<ol>
+<li>数据项存储在树叶上。</li>
+<li>非叶子节点存储M-1个关键字，起索引作用。关键字i代表子树i+1中的<strong>最小</strong>的值。</li>
+<li>树的根儿子数在2到M之间；或者，根为树叶。</li>
+<li>除根外，所有非树叶节点的儿子数在M/2+1到M之间。如M=5，则为3，4，5。</li>
+<li>所有的树叶在相同深度上，并且有L/2+1到L之间的数据项。</li>
 </ol>
-<h3 id="结构">结构</h3>  
+<p>如下图，为M=5,L=5的B树，<img src="/img/btree.png" alt=""></p>
+<h4 id="2-_B树的操作">2. B树的操作</h4><p>插入：考虑3种情况：（1）插入的数据项未满，直接插入；（2）插入的数据项已满，则分裂一个儿子出来（即多一个数据项） （3）如果儿子数也满了，则沿树向上分裂节点，直到找到一个不需要分裂的父节点。如果分裂树根，则可以建立一个新的树根，将分裂的两个树根作为它的节点</p>
+<p>删除：与插入类似，考虑删除造成可以合并数据项和儿子数减到最小值以下。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/C/">C</a>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/c/">c</a><a href="/tags/基础/">基础</a>
+  <span></span> <a href="/tags/树/">树</a><a href="/tags/算法/">算法</a>
   </div>
 
 </div>
@@ -138,7 +135,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/" data-title="C基础2——指针、链表、文件 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/27/树（六）-B树/" data-title="树（六）-B树 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -151,19 +148,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/04/27/leetcode-1-Two-Sum/" title="leetcode(1)-Two Sum">
-  <strong>上一篇：</strong><br/>
-  <span>
-  leetcode(1)-Two Sum</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/11/C基础1——数据类型、运算符、结构、函数、数组/"  title="C基础1——数据类型、运算符、结构、函数、数组">
+<a href="/2015/08/27/树（五）-伸展树/"  title="树（五）-伸展树">
  <strong>下一篇：</strong><br/> 
- <span>C基础1——数据类型、运算符、结构、函数、数组
+ <span>树（五）-伸展树
 </span>
 </a>
 </div>
@@ -172,7 +161,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/27/C基础2——指针、链表、文件/" data-title="C基础2——指针、链表、文件" data-url="http://mwplll.github.io/2015/04/27/C基础2——指针、链表、文件/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/27/树（六）-B树/" data-title="树（六）-B树" data-url="http://mwplll.github.io/2015/08/27/树（六）-B树/"></div>
 </section>
 
 
@@ -182,7 +171,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针"><span class="toc-number">1.</span> <span class="toc-text">指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构"><span class="toc-number">2.</span> <span class="toc-text">结构</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_B树的性质"><span class="toc-number">1.</span> <span class="toc-text">1. B树的性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_B树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. B树的操作</span></a></li></ol>
  
   </div>
 

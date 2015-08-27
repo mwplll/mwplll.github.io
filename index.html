@@ -71,6 +71,127 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/27/树（六）-B树/" title="树（六）-B树" itemprop="url">
+  
+    <h1 itemprop="name">树（六）-B树</h1>
+    
+     
+           <p itemprop="description" >当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，</p>
+        
+    
+    <time datetime="2015-08-27T07:03:49.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/27/树（五）-伸展树/" title="树（五）-伸展树" itemprop="url">
+  
+    <h1 itemprop="name">树（五）-伸展树</h1>
+    
+     
+           <p itemprop="description" >伸展树：保证从空树开始连续M次对树的操作最多花费O(M log N)时间，每次操作的摊还代价是O(log N).
+
+摊还运行时间：当M次操作序列总的最坏情形运行时间为O(M*f(N)）时，则它的摊还运行时间为O(f(N)）.
+
+伸展树的基本思想：当一个节点被访问后，它经过一系列A</p>
+        
+    
+    <time datetime="2015-08-27T05:02:51.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/27/树（四）-AVL树/" title="树（四）-AVL树" itemprop="url">
+  
+    <h1 itemprop="name">树（四）-AVL树</h1>
+    
+     
+           <p itemprop="description" >1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
+AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
+2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须</p>
+        
+    
+    <time datetime="2015-08-27T02:12:09.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/26/树（三）-二叉查找树/" title="树（三）-二叉查找树" itemprop="url">
+  
+    <h1 itemprop="name">树（三）-二叉查找树</h1>
+    
+     
+           <p itemprop="description" >1. 什么是二叉查找树，有什么特点
+对于树中的每一个结点X,它的左子树中的所有项的值都小于X中的项，它的右子树中的所有项的值都大于X中的项。这样的树称为二叉查找树
+
+二叉查找树的性质：
+
+其深度的平均值是O（logN）。
+查找、插入、删除平均时间O(logN)。
+对二叉查找树执行</p>
+        
+    
+    <time datetime="2015-08-26T06:52:44.000Z" itemprop="datePublished">2015-08-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/22/树（二）-遍历二叉树/" title="树（二）-遍历二叉树" itemprop="url">
+  
+    <h1 itemprop="name">树（二）-遍历二叉树</h1>
+    
+     
+           <p itemprop="description" >树的遍历是树操作的基础，在这里整理下各种二叉树的遍历方法，然后将最常考的已知先序遍历和中序遍历求后序遍历的题目用编程实现下。
+1. 二叉树遍历算法
+先序遍历
+中序遍历
+后序遍历
+层序遍历
+
+(1). 先序遍历
+若二叉树为空，遍历结束。否则：1）访问根结点；2）先序遍历左子树；3）</p>
+        
+    
+    <time datetime="2015-08-22T14:45:37.000Z" itemprop="datePublished">2015-08-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/08/22/树（一）-基本概念和性质/" title="树（一）-基本概念和性质" itemprop="url">
   
     <h1 itemprop="name">树（一）-基本概念和性质</h1>
@@ -180,124 +301,9 @@
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（六）/" title="Java编程思想-第二十一章、并发（六）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（六）</h1>
-    
-     
-           <p itemprop="description" >21.6 线程死锁关于死锁的问题，是非常麻烦的。对一般程序而言，如果马上出问题，你就可以立即跟踪下去。但是线程死锁不会马上出问题，看起来工作良好的程序却具有潜在的死锁风险。因此，在编写并发程序的时候，进行仔细的程序设计以防止死锁是关键部分。
-先解释一下线程死锁吧：
-
-某个任务在等</p>
-        
-    
-    <time datetime="2015-08-17T08:06:31.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（五）/" title="Java编程思想-第二十一章、并发（五）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（五）</h1>
-    
-     
-           <p itemprop="description" >21.5 多个线程之间如何协作？前面对线程进行了讨论，但是比较简单，要么是每个线程独享自己线程内部的资源，要么是用锁机制串行访问共享资源。而本小节做了一点点升级：使用共享资源不再是盲目的阻塞了，而是使用新的握手机制，其实握手类似事件驱动。不过我对事件驱动也只是了解个皮毛，知道大概</p>
-        
-    
-    <time datetime="2015-08-16T18:27:17.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（四）/" title="Java编程思想-第二十一章、并发（四）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（四）</h1>
-    
-     
-           <p itemprop="description" >21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
-
-任务正常运行，正常关闭
-出现紧急情况，需要终止当前任务
-
-这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出</p>
-        
-    
-    <time datetime="2015-08-16T17:08:45.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/理解ThreadLocal/" title="理解ThreadLocal" itemprop="url">
-  
-    <h1 itemprop="name">理解ThreadLocal</h1>
-    
-     
-           <p itemprop="description" >前言看到《Java 编程思想》的21.3小节，只用了一个小节介绍 ThreadLocal 的使用，但是不是很懂，于是找了点资料学习一下，下面是这篇文章的主线：
-
-什么是 ThreadLocal，为什么要提出这个概念？——共享资源的访问问题
-synchronized——串行访问
-v</p>
-        
-    
-    <time datetime="2015-08-16T16:32:59.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/16/Java编程思想-第二十一章、并发（三）/" title="Java编程思想-第二十一章、并发（三）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（三）</h1>
-    
-     
-           <p itemprop="description" >21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
-关于临界区的概念，可参考《操作系统概念》p168的临界区问题
-
-临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访</p>
-        
-    
-    <time datetime="2015-08-16T13:56:14.000Z" itemprop="datePublished">2015-08-16</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -345,7 +351,7 @@ v</p>
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>4</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>9</sup></a></li>
 		  
 		
 		</ul>
@@ -362,11 +368,15 @@ v</p>
 			
 		
 			
-				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>9</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>4</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
 			
 		
 			
@@ -387,10 +397,6 @@ v</p>
 		
 			
 				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/树/" title="树">树<sup>1</sup></a></li>
 			
 		
 			
