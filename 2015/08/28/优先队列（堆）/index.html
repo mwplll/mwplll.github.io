@@ -37,6 +37,9 @@
 <meta property="og:image" content="/img/two_tree.png">
 <meta property="og:image" content="/img/heap1.png">
 <meta property="og:image" content="/img/heap2.png">
+<meta property="og:image" content="/img/delete_min.png">
+<meta property="og:image" content="/img/npl.png">
+<meta property="og:image" content="/img/binomial_queue.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优先队列（堆）">
 <meta name="twitter:description" content="书上说:优先队列是计算机科学中最精致的一种数据结构。让我们来逐步领略它吧。
@@ -115,7 +118,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2_deleteMin"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 deleteMin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3_buildHeap"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 buildHeap</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_d-堆"><span class="toc-number">4.</span> <span class="toc-text">4. d-堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_左式堆"><span class="toc-number">5.</span> <span class="toc-text">5. 左式堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_斜堆"><span class="toc-number">6.</span> <span class="toc-text">5. 斜堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-二项队列"><span class="toc-number">7.</span> <span class="toc-text">6.二项队列</span></a></li></ol>
 		
 		</div>
 		
@@ -137,6 +140,81 @@
 </blockquote>
 <p>图例：<br><img src="/img/heap1.png" alt=""><br><img src="/img/heap2.png" alt=""></p>
 <p>java代码：</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(AnyType x)</span></span>{
+    <span class="comment">//存二叉堆的数组已满时，需要给数组扩容</span>
+    <span class="keyword">if</span>(currentSize == <span class="built_in">array</span>.length-<span class="number">1</span>)
+        enlargeArray(<span class="built_in">array</span>.length*<span class="number">2</span>+<span class="number">1</span>);
+
+    <span class="comment">//上滤</span>
+    <span class="keyword">int</span> hole = ++currentSize;
+    <span class="keyword">for</span>(;hole&gt;<span class="number">1</span> &amp;&amp; x.compareTo(<span class="built_in">array</span>[hole/<span class="number">2</span>])&lt;<span class="number">0</span>;hole /=<span class="number">2</span>)
+        <span class="built_in">array</span>[hole] = <span class="built_in">array</span>[hole/<span class="number">2</span>];
+    <span class="built_in">array</span>[hole] = x;
+}
+</code></pre><p>插入的运行时间最大为O(log N)。</p>
+<h5 id="3-2_deleteMin">3.2 deleteMin</h5><blockquote>
+<p>思路：deleteMin的处理方式类似于insert。找出最小元是容易的，困难之处在删除它。<br>      （1）当删除一个最小元时，需要在根节点建立一个空穴。<br>      （2）由于现在堆少了一个元素，因此堆中最后一个元素X必须移到该堆的某个地方。如果X可以放到空穴中，则deleteMin完成；<br>      （3）否则，<strong>将空穴的两个儿子中较小者放到空穴中</strong>，这样就把空穴向下推了一层。重复该操作，直到X可以放入空穴中。这种策略称为<strong>下滤</strong></p>
+</blockquote>
+<p>图例：<br><img src="/img/delete_min.png" alt=""></p>
+<p>java代码：</p>
+<pre><code><span class="function"><span class="keyword">public</span> AnyType <span class="title">deleteMin</span><span class="params">()</span></span>{
+    <span class="keyword">if</span>(isEmpty())
+        throe <span class="keyword">new</span> UnderflowException;
+
+    AnyType minItem = findMin();
+    <span class="built_in">array</span>[<span class="number">1</span>] = <span class="built_in">array</span>[currentSize--];
+    percolateDown(<span class="number">1</span>);
+
+    <span class="keyword">return</span> minItem;
+}
+
+<span class="comment">//下滤操作的具体实现</span>
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">percolateDown</span><span class="params">(<span class="keyword">int</span> hole)</span></span>{
+    <span class="keyword">int</span> child;
+    <span class="comment">//tmp存放最后一个节点的关键字X</span>
+    AnyType tmp = <span class="built_in">array</span>[hole];
+
+    <span class="comment">//找到可以存放X的空穴</span>
+    <span class="keyword">for</span>(;hole*<span class="number">2</span>&lt;=currentSize;hole=child){
+        child = hole*<span class="number">2</span>;
+        <span class="keyword">if</span>(child != currentSize &amp;&amp; <span class="built_in">array</span>[child+<span class="number">1</span>].compareTo(<span class="built_in">array</span>[child])&lt;<span class="number">0</span>) <span class="comment">//如果右儿子的值小于左儿子的值</span>
+            child++;
+        <span class="keyword">if</span>(<span class="built_in">array</span>[child].compareTo(tmp)&lt;<span class="number">0</span>)
+            <span class="built_in">array</span>[hole] = <span class="built_in">array</span>[child]; <span class="comment">//用儿子中较小者来填充空穴</span>
+        <span class="keyword">else</span>
+            <span class="keyword">break</span>;
+    }
+
+    <span class="built_in">array</span>[hole] = tmp;
+
+}
+</code></pre><p>deleteMi的运行时间最大为O(log N)。</p>
+<h5 id="3-3_buildHeap">3.3 buildHeap</h5><p>构建堆采用先构建一棵无序树，然后对非叶节点做下滤操作，平均运行时间为O(N)；</p>
+<h4 id="4-_d-堆">4. d-堆</h4><p>我们一般所说的堆是二叉堆，即2-堆，这就不难理解d-堆了。<br>d-堆insert操作的运行时间为O(log d N)；deleteMin操作的运行时间O(d*log d N)。<br>d-堆类似于B树，当堆太大而不能完全装入内存的时候，d-堆也很有用。</p>
+<h4 id="5-_左式堆">5. 左式堆</h4><p>在理解左式堆前，需要理解一个概念：<strong>零路径长</strong>。</p>
+<blockquote>
+<p>我们把任一节点的零路径长（null path length）npl(x)定义为<strong>从X到一个不具有两个儿子的节点的最短路径的长</strong>，具有0个或者1个儿子的节点的npl为0，而npl(null)=-1.</p>
+</blockquote>
+<p>零节点图例：<br><img src="/img/npl.png" alt=""></p>
+<p>下面来定义左式堆：</p>
+<blockquote>
+<p>对于堆中的每一个节点X,左儿子的零路径长<strong>大于等于</strong>右儿子的零路径长，这样的堆称为左式堆。</p>
+</blockquote>
+<p>那么，为什么需要左式堆呢？答案是合并操作（merge），二叉堆难以将两个堆合并，左式堆的特殊性便于进行合并。</p>
+<p>merge操作</p>
+<blockquote>
+<p>思路：（1）如果两个堆中有一个为空的，那么返回另一个堆；<br>      （2）否则，合并两个堆。首先<strong>将具有大的根值的堆与具有小的根植的堆的右子树进行合并</strong>，得到一个新的左式堆。<br>      （3）接着，将剩下的左子树接到新的左式堆上。<br>      （4）判断最后得到的堆的左子树和右子树的零路径长，如果不符合左式堆的定义，则交换左右子树。</p>
+</blockquote>
+<h4 id="5-_斜堆">5. 斜堆</h4><p>斜堆跟左式堆的关系就相当于伸展树跟AVL树的关系，对斜堆进行M次连续操作，总的最坏情形运行时间为O(M log N),摊还开销为O(log N).</p>
+<h4 id="6-二项队列">6.二项队列</h4><p>二项队列不同于左式堆和二叉堆等优先队列的实现之处在于，<strong>一个二项队列不是一棵堆序的树，而是堆序树的集合，即森林</strong>。堆序树中的每棵树都是由约束形式的，叫做二项树。每一个高度上至多存在一棵二项树。高度为0的二项树是一颗单节点树，高度为k的二项树Bk通过将一棵二项树Bk-1附接到另一颗二项树Bk-1的根上而构成。</p>
+<p>图例：<br><img src="/img/binomial_queue.png" alt=""></p>
+<p>二项队列的性质：</p>
+<ul>
+<li>高度为k的二项树恰好有2^k个节点；</li>
+<li>深度为d处（这里的深度是以根的深度为0计算的）的节点数为（k d）。</li>
+</ul>
+<p>二项队列的操作：</p>
+<p>无论是insert、deleteMin、merge操作，最坏情形下花费时间为O(log N).</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -195,7 +273,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2_deleteMin"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 deleteMin</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3_buildHeap"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 buildHeap</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_d-堆"><span class="toc-number">4.</span> <span class="toc-text">4. d-堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_左式堆"><span class="toc-number">5.</span> <span class="toc-text">5. 左式堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_斜堆"><span class="toc-number">6.</span> <span class="toc-text">5. 斜堆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-二项队列"><span class="toc-number">7.</span> <span class="toc-text">6.二项队列</span></a></li></ol>
  
   </div>
 
