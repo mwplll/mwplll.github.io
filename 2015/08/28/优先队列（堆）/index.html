@@ -35,6 +35,8 @@
 <meta property="og:image" content="/img/tree_binary_heap.png">
 <meta property="og:image" content="/img/array_binary_heap.png">
 <meta property="og:image" content="/img/two_tree.png">
+<meta property="og:image" content="/img/heap1.png">
+<meta property="og:image" content="/img/heap2.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="优先队列（堆）">
 <meta name="twitter:description" content="书上说:优先队列是计算机科学中最精致的一种数据结构。让我们来逐步领略它吧。
@@ -113,7 +115,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -129,7 +131,13 @@
 <p>在一个堆中，对于每一个节点X,X的父节点中的关键字都小于（或等于）X中的关键字，根节点除外（它没有父节点）。</p>
 </blockquote>
 <p><img src="/img/two_tree.png" alt=""></p>
-<h4 id="3-_堆操作">3. 堆操作</h4>  
+<h4 id="3-_堆操作">3. 堆操作</h4><p>对堆操作的关键在于保持堆序性</p>
+<h5 id="3-1_insert">3.1 insert</h5><blockquote>
+<p>思路：（1）为将一个元素X插入到堆中，我们在<strong>下一个可用位置</strong>创建一个<strong>空穴</strong>,否则该堆将不是完全树。<br>       （2）如果X可以放在空穴而不破坏堆序性，那么插入完成；<br>       （3）否则，我们把空穴的父节点上的元素移入空穴中，这样，空穴就朝着根的方向上冒一步。继续该操作直到X能放入空穴为止。这样的策略称为<strong>上滤</strong></p>
+</blockquote>
+<p>图例：<br><img src="/img/heap1.png" alt=""><br><img src="/img/heap2.png" alt=""></p>
+<p>java代码：</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -187,7 +195,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_优先队列模型"><span class="toc-number">1.</span> <span class="toc-text">1. 优先队列模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_优先队列的典型实现——堆"><span class="toc-number">2.</span> <span class="toc-text">2. 优先队列的典型实现——堆</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1_结构性"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 结构性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2_堆序性"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 堆序性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_堆操作"><span class="toc-number">3.</span> <span class="toc-text">3. 堆操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1_insert"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 insert</span></a></li></ol></li></ol>
  
   </div>
 
