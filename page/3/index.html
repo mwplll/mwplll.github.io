@@ -71,6 +71,211 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（七）/" title="Java编程思想-第二十一章、并发（七）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（七）</h1>
+    
+     
+           <p itemprop="description" >21.7 新类库中的构件Java SE5的 java.util.concurrent 包中引入了大量设计用来解决并发问题的新类。学习这些“工具类”就可以专注于自己想要实现的功能而不是线程的同步、死锁等一堆令人头疼的细节。这一小节内容非常多，建议的学习方法是：
+
+首先看目录，了解这</p>
+        
+    
+    <time datetime="2015-08-17T08:24:31.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（六）/" title="Java编程思想-第二十一章、并发（六）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（六）</h1>
+    
+     
+           <p itemprop="description" >21.6 线程死锁关于死锁的问题，是非常麻烦的。对一般程序而言，如果马上出问题，你就可以立即跟踪下去。但是线程死锁不会马上出问题，看起来工作良好的程序却具有潜在的死锁风险。因此，在编写并发程序的时候，进行仔细的程序设计以防止死锁是关键部分。
+先解释一下线程死锁吧：
+
+某个任务在等</p>
+        
+    
+    <time datetime="2015-08-17T08:06:31.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（五）/" title="Java编程思想-第二十一章、并发（五）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（五）</h1>
+    
+     
+           <p itemprop="description" >21.5 多个线程之间如何协作？前面对线程进行了讨论，但是比较简单，要么是每个线程独享自己线程内部的资源，要么是用锁机制串行访问共享资源。而本小节做了一点点升级：使用共享资源不再是盲目的阻塞了，而是使用新的握手机制，其实握手类似事件驱动。不过我对事件驱动也只是了解个皮毛，知道大概</p>
+        
+    
+    <time datetime="2015-08-16T18:27:17.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（四）/" title="Java编程思想-第二十一章、并发（四）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（四）</h1>
+    
+     
+           <p itemprop="description" >21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
+
+任务正常运行，正常关闭
+出现紧急情况，需要终止当前任务
+
+这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出</p>
+        
+    
+    <time datetime="2015-08-16T17:08:45.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/理解ThreadLocal/" title="理解ThreadLocal" itemprop="url">
+  
+    <h1 itemprop="name">理解ThreadLocal</h1>
+    
+     
+           <p itemprop="description" >前言看到《Java 编程思想》的21.3小节，只用了一个小节介绍 ThreadLocal 的使用，但是不是很懂，于是找了点资料学习一下，下面是这篇文章的主线：
+
+什么是 ThreadLocal，为什么要提出这个概念？——共享资源的访问问题
+synchronized——串行访问
+v</p>
+        
+    
+    <time datetime="2015-08-16T16:32:59.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/16/Java编程思想-第二十一章、并发（三）/" title="Java编程思想-第二十一章、并发（三）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（三）</h1>
+    
+     
+           <p itemprop="description" >21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
+关于临界区的概念，可参考《操作系统概念》p168的临界区问题
+
+临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访</p>
+        
+    
+    <time datetime="2015-08-16T13:56:14.000Z" itemprop="datePublished">2015-08-16</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/16/Java编程思想-第二十一章、并发（二）/" title="Java编程思想-第二十一章、并发（二）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（二）</h1>
+    
+     
+           <p itemprop="description" >21.2小节：并发的最基本使用（并发）线程机制的底层是切分CPU时间。
+第21.2小节其实就是讲解如何使用并发的。show time…
+1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务，即线程驱动任务。这</p>
+        
+    
+    <time datetime="2015-08-15T17:08:34.000Z" itemprop="datePublished">2015-08-16</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/14/操作系统-进程/" title="操作系统-进程" itemprop="url">
+  
+    <h1 itemprop="name">操作系统-进程</h1>
+    
+     
+           <p itemprop="description" >1、进程的基本概念
+什么是进程，包括哪些部分进程是执行中的程序，进程不等同于程序代码，程序代码只是进程的一部分。进程包括：(1)程序代码块 （2）当前活动，这个（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运</p>
+        
+    
+    <time datetime="2015-08-14T08:24:42.000Z" itemprop="datePublished">2015-08-14</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/" title="Java编程思想 - 第二十一章、并发（一）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想 - 第二十一章、并发（一）</h1>
+    
+     
+           <p itemprop="description" >21.1小节：为什么要学习并发？总结起来就是两点：
+
+速度
+设计可管理性
+
+1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CP</p>
+        
+    
+    <time datetime="2015-08-11T17:37:09.000Z" itemprop="datePublished">2015-08-12</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/05/28/java基础——通过异常处理错误/" title="java基础——通过异常处理错误" itemprop="url">
   
     <h1 itemprop="name">java基础——通过异常处理错误</h1>
@@ -94,204 +299,9 @@ java中的异常类全部继承于throwable类。
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/15/java基础——mac下配置JDK环境变量/" title="java基础——mac下配置JDK环境变量" itemprop="url">
-  
-    <h1 itemprop="name">java基础——mac下配置JDK环境变量</h1>
-    
-     
-           <p itemprop="description" >以下是针对单独用户配置JDK变量的方法，亲测有效。
-#下载jdk7的mac版
-#官网下载地址http://www.oracle.com/technetwork/java/javase/downloads/
-#下载类似jdk-7u67-macosx-x64.dmg，版本号可能会更新</p>
-        
-    
-    <time datetime="2015-05-15T10:37:54.000Z" itemprop="datePublished">2015-05-15</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/11/数据结构（C语言版）学习总结5-数组和广义表/" title="数据结构（C语言版）学习总结5--数组和广义表" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结5--数组和广义表</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2015-05-11T13:36:46.000Z" itemprop="datePublished">2015-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/11/数据结构（C语言版）学习总结4-串/" title="数据结构（C语言版）学习总结4--串" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结4--串</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2015-05-11T13:36:33.000Z" itemprop="datePublished">2015-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/11/数据结构（C语言版）学习总结3-栈和队列/" title="数据结构（C语言版）学习总结3--栈和队列" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结3--栈和队列</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2015-05-11T13:19:03.000Z" itemprop="datePublished">2015-05-11</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/07/leetcode-2-Add-Two-Number/" title="leetcode(2)_Add Two Number" itemprop="url">
-  
-    <h1 itemprop="name">leetcode(2)_Add Two Number</h1>
-    
-     
-           <p itemprop="description" >题目You are given two linked lists representing two non-negative numbers. The digits are stored in reverse order and each of their nodes conta</p>
-        
-    
-    <time datetime="2015-05-07T07:23:27.000Z" itemprop="datePublished">2015-05-07</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/06/面试经历-蘑菇街/" title="面试经历--蘑菇街" itemprop="url">
-  
-    <h1 itemprop="name">面试经历--蘑菇街</h1>
-    
-     
-           <p itemprop="description" >今天上午9点去参加了蘑菇街的面试，去面试前，已向同学了解到，蘑菇街校招实习生面试一般会三面一次性进行，两次技术面，一次HR面，如果某一面没过，就会直接让你回来了。我在技术一面后就让回来等通知，应该是被刷了，就当是一次经验积累吧。  刚到蘑菇街公司，在前台会让你填一张个人简要信息的</p>
-        
-    
-    <time datetime="2015-05-06T09:15:50.000Z" itemprop="datePublished">2015-05-06</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/05/数据结构（C语言版）学习总结2--线性表/" title="数据结构（C语言版）学习总结2--线性表" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结2--线性表</h1>
-    
-     
-           <p itemprop="description" >线性结构的基本特征
-集合中必存在唯一的一个“第一元素”；
-集合中必存在唯一的一个“最后元素”；
-除最后一个元素，均有唯一的后继
-除第一个元素之外，均有唯一的前驱
-
-2.1 线性表的类型定义
-对线性表操作前，一般需要对线性表先进行一个排序操作，排序的时间复杂度最低为nlogn。然后</p>
-        
-    
-    <time datetime="2015-05-05T08:15:30.000Z" itemprop="datePublished">2015-05-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/05/05/数据结构（C语言版）学习总结1--绪论/" title="数据结构（C语言版）学习总结1--绪论" itemprop="url">
-  
-    <h1 itemprop="name">数据结构（C语言版）学习总结1--绪论</h1>
-    
-     
-           <p itemprop="description" >1.1 什么是数据结构   数据结构描述现实世界实体的数学模型（非数值计算）及其上的操作在计算机中的表示和实现。
-1.2 基本概念和术语
-数据：所有能被输入到计算中，且被计算机处理的符号的集合。计算机操作的对象的总称。
-数据元素：数据的基本单位。
-数据项：数据结构中讨论的最小单位</p>
-        
-    
-    <time datetime="2015-05-05T06:25:46.000Z" itemprop="datePublished">2015-05-05</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/04/27/leetcode-1-Two-Sum/" title="leetcode(1)-Two Sum" itemprop="url">
-  
-    <h1 itemprop="name">leetcode(1)-Two Sum</h1>
-    
-     
-           <p itemprop="description" >题目Given an array of integers, find two numbers such that they add up to a specific target number.
-The function twoSum should return indices </p>
-        
-    
-    <time datetime="2015-04-27T13:29:03.000Z" itemprop="datePublished">2015-04-27</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><span></span>Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next<span></span></a>
   </nav>
 
 </div>
@@ -339,7 +349,7 @@ The function twoSum should return indices </p>
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>11</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>13</sup></a></li>
 		  
 		
 		</ul>
@@ -352,11 +362,11 @@ The function twoSum should return indices </p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>12</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>13</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>11</sup></a></li>
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>12</sup></a></li>
 			
 		
 			
@@ -365,6 +375,10 @@ The function twoSum should return indices </p>
 		
 			
 				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>3</sup></a></li>
 			
 		
 			
@@ -380,6 +394,18 @@ The function twoSum should return indices </p>
 			
 		
 			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
 			
 		
@@ -388,27 +414,11 @@ The function twoSum should return indices </p>
 			
 		
 			
-				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/排序/" title="排序">排序<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/堆/" title="堆">堆<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
 			
 		
 			

@@ -71,6 +71,218 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/28/散列/" title="散列" itemprop="url">
+  
+    <h1 itemprop="name">散列</h1>
+    
+     
+           <p itemprop="description" >一开始看到散列两个字，就觉得特别扭，不就是hashing，怎么就另外取个名字要叫散列。废话少说，开始进入正题。
+散列表的好处：能以常数时间进行插入、删除、查找散列表的坏处：排序、findMax、findMin操作不行
+散列表有常数时间进行访问的好处，那么怎么实现散列表呢？实现散列</p>
+        
+    
+    <time datetime="2015-08-28T02:43:11.000Z" itemprop="datePublished">2015-08-28</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/27/树（六）-B树/" title="树（六）-B树" itemprop="url">
+  
+    <h1 itemprop="name">树（六）-B树</h1>
+    
+     
+           <p itemprop="description" >当整个数据结构太大，无法全部导入内存，这个时候就需要访问磁盘，而访问磁盘的效率是非常低的，自然就需要减少对磁盘的访问操作。于是乎，当用二叉树存储非常大的数据，而数据在磁盘中，一次成功的查找大约需要1.38log N次磁盘访问，当N=10000000,一次查找就需要32次磁盘访问，</p>
+        
+    
+    <time datetime="2015-08-27T07:03:49.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/27/树（五）-伸展树/" title="树（五）-伸展树" itemprop="url">
+  
+    <h1 itemprop="name">树（五）-伸展树</h1>
+    
+     
+           <p itemprop="description" >伸展树：保证从空树开始连续M次对树的操作最多花费O(M log N)时间，每次操作的摊还代价是O(log N).
+
+摊还运行时间：当M次操作序列总的最坏情形运行时间为O(M*f(N)）时，则它的摊还运行时间为O(f(N)）.
+
+伸展树的基本思想：当一个节点被访问后，它经过一系列A</p>
+        
+    
+    <time datetime="2015-08-27T05:02:51.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/27/树（四）-AVL树/" title="树（四）-AVL树" itemprop="url">
+  
+    <h1 itemprop="name">树（四）-AVL树</h1>
+    
+     
+           <p itemprop="description" >1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
+AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
+2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须</p>
+        
+    
+    <time datetime="2015-08-27T02:12:09.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/26/树（三）-二叉查找树/" title="树（三）-二叉查找树" itemprop="url">
+  
+    <h1 itemprop="name">树（三）-二叉查找树</h1>
+    
+     
+           <p itemprop="description" >1. 什么是二叉查找树，有什么特点
+对于树中的每一个结点X,它的左子树中的所有项的值都小于X中的项，它的右子树中的所有项的值都大于X中的项。这样的树称为二叉查找树
+
+二叉查找树的性质：
+
+其深度的平均值是O（logN）。
+查找、插入、删除平均时间O(logN)。
+对二叉查找树执行</p>
+        
+    
+    <time datetime="2015-08-26T06:52:44.000Z" itemprop="datePublished">2015-08-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/22/树（二）-遍历二叉树/" title="树（二）-遍历二叉树" itemprop="url">
+  
+    <h1 itemprop="name">树（二）-遍历二叉树</h1>
+    
+     
+           <p itemprop="description" >树的遍历是树操作的基础，在这里整理下各种二叉树的遍历方法，然后将最常考的已知先序遍历和中序遍历求后序遍历的题目用编程实现下。
+1. 二叉树遍历算法
+先序遍历
+中序遍历
+后序遍历
+层序遍历
+
+(1). 先序遍历
+若二叉树为空，遍历结束。否则：1）访问根结点；2）先序遍历左子树；3）</p>
+        
+    
+    <time datetime="2015-08-22T14:45:37.000Z" itemprop="datePublished">2015-08-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/22/树（一）-基本概念和性质/" title="树（一）-基本概念和性质" itemprop="url">
+  
+    <h1 itemprop="name">树（一）-基本概念和性质</h1>
+    
+     
+           <p itemprop="description" >最近在做一些笔试题时，经常会碰到考察树这种数据结构，有关树的术语和性质有必要理一理。
+1. 树的基本概念
+树的结点：树的结点包含一个数据元素及若干指向子树的分支。
+结点的度：结点所拥有的子树的个数称为结点的度。
+叶子结点：度为0的结点称为叶子，或者终端结点。
+分支节点：度不为0的</p>
+        
+    
+    <time datetime="2015-08-22T08:37:09.000Z" itemprop="datePublished">2015-08-22</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/21/排序（一）-插入排序/" title="排序（一）-插入排序" itemprop="url">
+  
+    <h1 itemprop="name">排序（一）-插入排序</h1>
+    
+     
+           <p itemprop="description" >排序问题：输入：n个数的一个序列[a1,a2,…,an]。输出：输入的序列的一个排列[a1’,a2’,…,an’],使a1’&amp;lt;=a2’&amp;lt;=…&amp;lt;=an’。
+
+从最简单的插入排序开始学习。
+1. 算法思路对于给定的数组，初始时假设第一个记录自成一个有序序列，其余为无</p>
+        
+    
+    <time datetime="2015-08-21T11:16:46.000Z" itemprop="datePublished">2015-08-21</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/08/17/Java编程思想-第二十一章、并发（九）/" title="Java编程思想-第二十一章、并发（九）" itemprop="url">
+  
+    <h1 itemprop="name">Java编程思想-第二十一章、并发（九）</h1>
+    
+     
+           <p itemprop="description" >21.9 性能调优这个小节主要讲的是优化，但是高德纳不是说过嘛——Premature optimization is the root of all evil.所以等到真正发现有问题再仔细研究，现在看看估计就忘了。所以我先大概了解一下关于锁的问题，其他等遇到具体场景再说：）
+1.</p>
+        
+    
+    <time datetime="2015-08-17T13:11:21.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/08/17/Java编程思想-第二十一章、并发（八）/" title="Java编程思想-第二十一章、并发（八）" itemprop="url">
   
     <h1 itemprop="name">Java编程思想-第二十一章、并发（八）</h1>
@@ -89,214 +301,9 @@
 
 
 
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（七）/" title="Java编程思想-第二十一章、并发（七）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（七）</h1>
-    
-     
-           <p itemprop="description" >21.7 新类库中的构件Java SE5的 java.util.concurrent 包中引入了大量设计用来解决并发问题的新类。学习这些“工具类”就可以专注于自己想要实现的功能而不是线程的同步、死锁等一堆令人头疼的细节。这一小节内容非常多，建议的学习方法是：
-
-首先看目录，了解这</p>
-        
-    
-    <time datetime="2015-08-17T08:24:31.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（六）/" title="Java编程思想-第二十一章、并发（六）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（六）</h1>
-    
-     
-           <p itemprop="description" >21.6 线程死锁关于死锁的问题，是非常麻烦的。对一般程序而言，如果马上出问题，你就可以立即跟踪下去。但是线程死锁不会马上出问题，看起来工作良好的程序却具有潜在的死锁风险。因此，在编写并发程序的时候，进行仔细的程序设计以防止死锁是关键部分。
-先解释一下线程死锁吧：
-
-某个任务在等</p>
-        
-    
-    <time datetime="2015-08-17T08:06:31.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（五）/" title="Java编程思想-第二十一章、并发（五）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（五）</h1>
-    
-     
-           <p itemprop="description" >21.5 多个线程之间如何协作？前面对线程进行了讨论，但是比较简单，要么是每个线程独享自己线程内部的资源，要么是用锁机制串行访问共享资源。而本小节做了一点点升级：使用共享资源不再是盲目的阻塞了，而是使用新的握手机制，其实握手类似事件驱动。不过我对事件驱动也只是了解个皮毛，知道大概</p>
-        
-    
-    <time datetime="2015-08-16T18:27:17.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/Java编程思想-第二十一章、并发（四）/" title="Java编程思想-第二十一章、并发（四）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（四）</h1>
-    
-     
-           <p itemprop="description" >21.4 如何优雅的关闭任务？在任务运行中，不可避免会出现各种情况。那么，对应于任务的关闭，一般有两种方式：
-
-任务正常运行，正常关闭
-出现紧急情况，需要终止当前任务
-
-这两种涵盖了所有的情况，正常关闭很简单，它完全是由程序员自己的代码逻辑控制；但是突然中断就比较麻烦，非常容易出</p>
-        
-    
-    <time datetime="2015-08-16T17:08:45.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/17/理解ThreadLocal/" title="理解ThreadLocal" itemprop="url">
-  
-    <h1 itemprop="name">理解ThreadLocal</h1>
-    
-     
-           <p itemprop="description" >前言看到《Java 编程思想》的21.3小节，只用了一个小节介绍 ThreadLocal 的使用，但是不是很懂，于是找了点资料学习一下，下面是这篇文章的主线：
-
-什么是 ThreadLocal，为什么要提出这个概念？——共享资源的访问问题
-synchronized——串行访问
-v</p>
-        
-    
-    <time datetime="2015-08-16T16:32:59.000Z" itemprop="datePublished">2015-08-17</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/16/Java编程思想-第二十一章、并发（三）/" title="Java编程思想-第二十一章、并发（三）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（三）</h1>
-    
-     
-           <p itemprop="description" >21.3小节：共享资源如何处理呢？这一小节其实也是基础知识，核心是处理临界资源、临界区，方法就是加锁。下面我们就简单说说。
-关于临界区的概念，可参考《操作系统概念》p168的临界区问题
-
-临界区指在该区中，进程（/线程）可能改变共同变量、更新一个表、写一个文件，这种对共同资源的访</p>
-        
-    
-    <time datetime="2015-08-16T13:56:14.000Z" itemprop="datePublished">2015-08-16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/16/Java编程思想-第二十一章、并发（二）/" title="Java编程思想-第二十一章、并发（二）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想-第二十一章、并发（二）</h1>
-    
-     
-           <p itemprop="description" >21.2小节：并发的最基本使用（并发）线程机制的底层是切分CPU时间。
-第21.2小节其实就是讲解如何使用并发的。show time…
-1. 定义任务线程是用来干活的，那么你需要跟线程说“线程，你把这些活做一下。”——描述线程需要做什么东西的过程，就是定义任务，即线程驱动任务。这</p>
-        
-    
-    <time datetime="2015-08-15T17:08:34.000Z" itemprop="datePublished">2015-08-16</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/14/操作系统-进程/" title="操作系统-进程" itemprop="url">
-  
-    <h1 itemprop="name">操作系统-进程</h1>
-    
-     
-           <p itemprop="description" >1、进程的基本概念
-什么是进程，包括哪些部分进程是执行中的程序，进程不等同于程序代码，程序代码只是进程的一部分。进程包括：(1)程序代码块 （2）当前活动，这个（3）进程堆栈段，指临时变量，如函数参数、返回地址、局部变量 （4）数据段，指全局变量等 （5）堆（可能包含），指进程运</p>
-        
-    
-    <time datetime="2015-08-14T08:24:42.000Z" itemprop="datePublished">2015-08-14</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/12/Java编程思想-第二十一章、并发（一）/" title="Java编程思想 - 第二十一章、并发（一）" itemprop="url">
-  
-    <h1 itemprop="name">Java编程思想 - 第二十一章、并发（一）</h1>
-    
-     
-           <p itemprop="description" >21.1小节：为什么要学习并发？总结起来就是两点：
-
-速度
-设计可管理性
-
-1 速度为什么采用并发能获得更快的程序运行速度呢？其本质在于cpu和外部设备（IO等）处理速度的不一致，在任务顺序执行时，由于CPU的处理速度快，就需要等待IO设备响应，这个等待的过程称为阻塞，而由于CP</p>
-        
-    
-    <time datetime="2015-08-11T17:37:09.000Z" itemprop="datePublished">2015-08-12</time>
-  </a>
-</section>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix unexpand">
-    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/"><span></span>Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next<span></span></a>
   </nav>
 
 </div>
@@ -344,7 +351,7 @@ v</p>
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>11</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>13</sup></a></li>
 		  
 		
 		</ul>
@@ -357,11 +364,11 @@ v</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>12</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>13</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>11</sup></a></li>
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>12</sup></a></li>
 			
 		
 			
@@ -370,6 +377,10 @@ v</p>
 		
 			
 				<li><a href="/tags/基础/" title="基础">基础<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>3</sup></a></li>
 			
 		
 			
@@ -385,6 +396,18 @@ v</p>
 			
 		
 			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
 			
 		
@@ -393,27 +416,11 @@ v</p>
 			
 		
 			
-				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/排序/" title="排序">排序<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/堆/" title="堆">堆<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/svn/" title="svn">svn<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
 			
 		
 			
