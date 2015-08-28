@@ -4,32 +4,43 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>排序（一）-插入排序 | 特喜欢秋天的人</title>
+    <title>散列 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="排序问题：输入：n个数的一个序列[a1,a2,…,an]。输出：输入的序列的一个排列[a1’,a2’,…,an’],使a1’&amp;lt;=a2’&amp;lt;=…&amp;lt;=an’。
+    <meta name="description" content="一开始看到散列两个字，就觉得特别扭，不就是hashing，怎么就另外取个名字要叫散列。废话少说，开始进入正题。
+散列表的好处：能以常数时间进行插入、删除、查找散列表的坏处：排序、findMax、findMin操作不行
+散列表有常数时间进行访问的好处，那么怎么实现散列表呢？实现散列表需要考虑两个主要的问题：
 
-从最简单的插入排序开始学习。
-1. 算法思路对于给定的数组，初始时假设第一个记录自成一个有序序列，其余为无须序列；接着从第二个记录开始，按照记录的大小依次将当前处理的记录a[j]插入到A[1..j-1]的有序序列中，直到最后一">
+如何将元素进行hash后产生的关键字平均地分配到散列表中
+冲突如何解决
+
+1.0 如何将元">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序（一）-插入排序">
-<meta property="og:url" content="http://mwplll.github.io/2015/08/21/排序（一）-插入排序/index.html">
+<meta property="og:title" content="散列">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/28/散列/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="排序问题：输入：n个数的一个序列[a1,a2,…,an]。输出：输入的序列的一个排列[a1’,a2’,…,an’],使a1’&amp;lt;=a2’&amp;lt;=…&amp;lt;=an’。
+<meta property="og:description" content="一开始看到散列两个字，就觉得特别扭，不就是hashing，怎么就另外取个名字要叫散列。废话少说，开始进入正题。
+散列表的好处：能以常数时间进行插入、删除、查找散列表的坏处：排序、findMax、findMin操作不行
+散列表有常数时间进行访问的好处，那么怎么实现散列表呢？实现散列表需要考虑两个主要的问题：
 
-从最简单的插入排序开始学习。
-1. 算法思路对于给定的数组，初始时假设第一个记录自成一个有序序列，其余为无须序列；接着从第二个记录开始，按照记录的大小依次将当前处理的记录a[j]插入到A[1..j-1]的有序序列中，直到最后一">
-<meta property="og:image" content="/img/insertion_sort.png">
+如何将元素进行hash后产生的关键字平均地分配到散列表中
+冲突如何解决
+
+1.0 如何将元">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序（一）-插入排序">
-<meta name="twitter:description" content="排序问题：输入：n个数的一个序列[a1,a2,…,an]。输出：输入的序列的一个排列[a1’,a2’,…,an’],使a1’&amp;lt;=a2’&amp;lt;=…&amp;lt;=an’。
+<meta name="twitter:title" content="散列">
+<meta name="twitter:description" content="一开始看到散列两个字，就觉得特别扭，不就是hashing，怎么就另外取个名字要叫散列。废话少说，开始进入正题。
+散列表的好处：能以常数时间进行插入、删除、查找散列表的坏处：排序、findMax、findMin操作不行
+散列表有常数时间进行访问的好处，那么怎么实现散列表呢？实现散列表需要考虑两个主要的问题：
 
-从最简单的插入排序开始学习。
-1. 算法思路对于给定的数组，初始时假设第一个记录自成一个有序序列，其余为无须序列；接着从第二个记录开始，按照记录的大小依次将当前处理的记录a[j]插入到A[1..j-1]的有序序列中，直到最后一">
+如何将元素进行hash后产生的关键字平均地分配到散列表中
+冲突如何解决
+
+1.0 如何将元">
 
     
     
@@ -82,14 +93,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/21/排序（一）-插入排序/" title="排序（一）-插入排序" itemprop="url">排序（一）-插入排序</a>
+      <a href="/2015/08/28/散列/" title="散列" itemprop="url">散列</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-21T11:16:46.000Z" itemprop="datePublished"> 发表于 2015-08-21</time>
+    <time datetime="2015-08-28T02:43:11.000Z" itemprop="datePublished"> 发表于 2015-08-28</time>
     
   </p>
 </header>
@@ -98,48 +109,33 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码实现"><span class="toc-number">2.</span> <span class="toc-text">2. java代码实现</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-0_如何将元素进行hash后产生的关键字平均地分配到散列表中"><span class="toc-number">1.</span> <span class="toc-text">1.0 如何将元素进行hash后产生的关键字平均地分配到散列表中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-0_冲突的解决办法"><span class="toc-number">2.</span> <span class="toc-text">2.0 冲突的解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-0_可扩散列"><span class="toc-number">3.</span> <span class="toc-text">3.0 可扩散列</span></a></li></ol>
 		
 		</div>
 		
-		<blockquote>
-<p>排序问题：<br><strong>输入</strong>：n个数的一个序列[a1,a2,…,an]。<br><strong>输出</strong>：输入的序列的一个排列[a1’,a2’,…,an’],使a1’&lt;=a2’&lt;=…&lt;=an’。</p>
-</blockquote>
-<p>从最简单的插入排序开始学习。</p>
-<h4 id="1-_算法思路">1. 算法思路</h4><p>对于给定的数组，初始时假设第一个记录自成一个有序序列，其余为无须序列；接着从第二个记录开始，按照记录的大小依次<strong>将当前处理的记录a[j]插入到A[1..j-1]的有序序列中</strong>，直到最后一个记录插入到有序序列中为止。<br>对数组A=[5,2,4,6,1,3],该算法的工作如下：<br><img src="/img/insertion_sort.png" alt="插入排序示例"></p>
-<h4 id="2-_java代码实现">2. java代码实现</h4><p>源码：<a href="https://github.com/mwplll/algorithms" target="_blank" rel="external">https://github.com/mwplll/algorithms</a></p>
-<pre><code>package sort;
-
-<span class="keyword">public</span> <span class="keyword">class</span> <span class="title">InsertSort</span> {
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>{
-        <span class="keyword">if</span>(a!=<span class="keyword">null</span>){
-            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;a.length;i++){
-                <span class="keyword">int</span> temp = a[i];
-                <span class="keyword">int</span> j = i;
-                <span class="comment">//将a[i]插入到有序排列a[0..i-1]中</span>
-                <span class="keyword">while</span>(j&gt;=<span class="number">1</span>&amp;&amp;a[j-<span class="number">1</span>]&gt;temp){
-                    a[j]=a[j-<span class="number">1</span>];
-                    j--;
-                }
-                a[j] = temp;
-            }
-        }
-
-    }
-
-    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-        <span class="keyword">int</span>[] a = {<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">3</span>};
-        insertSort(a);
-        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++){
-            System.<span class="keyword">out</span>.print(a[i]+<span class="string">" "</span>);
-        }
-
-    }
-
-}
-
-<span class="comment">//运行结果：1 2 3 4 5 6</span>
-</code></pre>  
+		<p>一开始看到散列两个字，就觉得特别扭，不就是hashing，怎么就另外取个名字要叫散列。<br>废话少说，开始进入正题。</p>
+<p>散列表的好处：能以常数时间进行插入、删除、查找<br>散列表的坏处：排序、findMax、findMin操作不行</p>
+<p>散列表有常数时间进行访问的好处，那么怎么实现散列表呢？实现散列表需要考虑两个主要的问题：</p>
+<ul>
+<li>如何将元素进行hash后产生的关键字<strong>平均</strong>地分配到散列表中</li>
+<li>冲突如何解决</li>
+</ul>
+<h4 id="1-0_如何将元素进行hash后产生的关键字平均地分配到散列表中">1.0 如何将元素进行hash后产生的关键字<strong>平均</strong>地分配到散列表中</h4><p>这个问题其实跟第二个问题相关，尽可能平均分配的散列表中，也是为了减少冲突。要尽可能平均分配，<strong>首先需要保证表的大小为素数</strong>（但java 标准库了hash表的大小为2的n次方）。<strong>其次在于选择好的hash函数</strong>，这需要具体分析，就不展开讲了。</p>
+<h4 id="2-0_冲突的解决办法">2.0 冲突的解决办法</h4><p>有如下几种办法：</p>
+<ul>
+<li>分离链接法（在冲突槽位可以用链表或者二叉查找树等）</li>
+<li>开放定址法<ol>
+<li>线性探测法（需要λ&lt;0.5,有一次聚集问题）</li>
+<li>伪随机探测法</li>
+<li>平方探测法（有二次聚集问题）</li>
+</ol>
+</li>
+<li>双散列法（就是用另一个hash函数进行探测，因此这个hash函数的选择很重要）</li>
+<li>再散列法（rehashing开销非常大，运行时间为O(N)）</li>
+</ul>
+<p>java标准库中hashMap解决冲突的方法是分离连接法和再散列相结合</p>
+<h4 id="3-0_可扩散列">3.0 可扩散列</h4><p>在数据量太大无法存入内存时，采用可扩散列，减少对磁盘的访问</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -152,7 +148,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/算法/">算法</a>
+  <span></span> <a href="/tags/散列/">散列</a><a href="/tags/算法/">算法</a>
   </div>
 
 </div>
@@ -161,7 +157,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/08/21/排序（一）-插入排序/" data-title="排序（一）-插入排序 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/28/散列/" data-title="散列 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -174,19 +170,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/22/树（一）-基本概念和性质/" title="树（一）-基本概念和性质">
-  <strong>上一篇：</strong><br/>
-  <span>
-  树（一）-基本概念和性质</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/17/Java编程思想-第二十一章、并发（九）/"  title="Java编程思想-第二十一章、并发（九）">
+<a href="/2015/08/27/树（六）-B树/"  title="树（六）-B树">
  <strong>下一篇：</strong><br/> 
- <span>Java编程思想-第二十一章、并发（九）
+ <span>树（六）-B树
 </span>
 </a>
 </div>
@@ -195,7 +183,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/21/排序（一）-插入排序/" data-title="排序（一）-插入排序" data-url="http://mwplll.github.io/2015/08/21/排序（一）-插入排序/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/28/散列/" data-title="散列" data-url="http://mwplll.github.io/2015/08/28/散列/"></div>
 </section>
 
 
@@ -205,7 +193,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码实现"><span class="toc-number">2.</span> <span class="toc-text">2. java代码实现</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-0_如何将元素进行hash后产生的关键字平均地分配到散列表中"><span class="toc-number">1.</span> <span class="toc-text">1.0 如何将元素进行hash后产生的关键字平均地分配到散列表中</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-0_冲突的解决办法"><span class="toc-number">2.</span> <span class="toc-text">2.0 冲突的解决办法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-0_可扩散列"><span class="toc-number">3.</span> <span class="toc-text">3.0 可扩散列</span></a></li></ol>
  
   </div>
 
