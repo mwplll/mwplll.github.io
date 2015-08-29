@@ -118,6 +118,8 @@
 </li>
 <li><p>该算法的主要问题在于它使用了一个附加的数组，因此，存储空间增加了一倍。回避使用第二个数组的办法：考虑在每次deleteMin之后，堆缩小1，因此，位于堆中最后的单元可以用来存放刚刚删去的元素。</p>
 </li>
+<li><p>从堆顶取出最大元素与最后一个堆元素交互后，堆的大小减1。所以堆在排序过程中是逐渐缩小的，但根总是第一个元素，所以可以利用之前也构建好的堆，只需要调整一棵子树。</p>
+</li>
 </ul>
 <h4 id="2-_java代码">2. java代码</h4><pre><code><span class="keyword">package</span> sort;
 
@@ -288,7 +290,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>16</sup></a></li>
 		  
 		
 		</ul>
@@ -301,7 +303,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>15</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>16</sup></a></li>
 			
 		
 			
@@ -309,11 +311,11 @@
 			
 		
 			
-				<li><a href="/tags/树/" title="树">树<sup>6</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>5</sup></a></li>
+				<li><a href="/tags/树/" title="树">树<sup>6</sup></a></li>
 			
 		
 			
