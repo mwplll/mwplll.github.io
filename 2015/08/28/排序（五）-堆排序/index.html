@@ -11,15 +11,30 @@
     
 
     
-    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
+    <meta name="description" content="1. 算法思路构建N个元素的二叉堆，然后进行N次deleteMin操作，得到一个有序序列。
+注意点：
+
+堆有大顶堆和小顶堆之分。大顶堆是指分支节点大于它的所有子节点，堆里最大元素是根节点；小顶堆是指分支节点小于它的所有子节点，堆里最小元素是根节点。
+
+大多数算法介绍都是以1为数组的起始下标的，左右叶子节点的计算分别为：lchild=2parent; rchild =2parent+1；而实际编程语">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序（五）-堆排序">
 <meta property="og:url" content="http://mwplll.github.io/2015/08/28/排序（五）-堆排序/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
+<meta property="og:description" content="1. 算法思路构建N个元素的二叉堆，然后进行N次deleteMin操作，得到一个有序序列。
+注意点：
+
+堆有大顶堆和小顶堆之分。大顶堆是指分支节点大于它的所有子节点，堆里最大元素是根节点；小顶堆是指分支节点小于它的所有子节点，堆里最小元素是根节点。
+
+大多数算法介绍都是以1为数组的起始下标的，左右叶子节点的计算分别为：lchild=2parent; rchild =2parent+1；而实际编程语">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序（五）-堆排序">
-<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
+<meta name="twitter:description" content="1. 算法思路构建N个元素的二叉堆，然后进行N次deleteMin操作，得到一个有序序列。
+注意点：
+
+堆有大顶堆和小顶堆之分。大顶堆是指分支节点大于它的所有子节点，堆里最大元素是根节点；小顶堆是指分支节点小于它的所有子节点，堆里最小元素是根节点。
+
+大多数算法介绍都是以1为数组的起始下标的，左右叶子节点的计算分别为：lchild=2parent; rchild =2parent+1；而实际编程语">
 
     
     
@@ -88,15 +103,102 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码"><span class="toc-number">2.</span> <span class="toc-text">2. java代码</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h4 id="1-_算法思路">1. 算法思路</h4><p>构建N个元素的二叉堆，然后进行N次deleteMin操作，得到一个有序序列。</p>
+<p>注意点：</p>
+<ul>
+<li><p>堆有大顶堆和小顶堆之分。大顶堆是指分支节点大于它的所有子节点，堆里最大元素是根节点；小顶堆是指分支节点小于它的所有子节点，堆里最小元素是根节点。</p>
+</li>
+<li><p>大多数算法介绍都是以1为数组的起始下标的，左右叶子节点的计算分别为：lchild=2<em>parent; rchild =2</em>parent+1；而实际编程语言大多数都是以0为起始下标的，所以子节点计算需要调整为：lchild=2<em>parent+1; rchild=2</em>parent+2。</p>
+</li>
+<li><p>算法总的运行时间为O(N log N)。</p>
+</li>
+<li><p>该算法的主要问题在于它使用了一个附加的数组，因此，存储空间增加了一倍。回避使用第二个数组的办法：考虑在每次deleteMin之后，堆缩小1，因此，位于堆中最后的单元可以用来存放刚刚删去的元素。</p>
+</li>
+</ul>
+<h4 id="2-_java代码">2. java代码</h4><pre><code><span class="keyword">package</span> sort;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HeapSort</span> </span>{
+    <span class="keyword">private</span> <span class="keyword">static</span> <span class="function"><span class="keyword">int</span> <span class="title">leftChild</span><span class="params">(<span class="keyword">int</span> i)</span></span>{
+        <span class="keyword">return</span> <span class="number">2</span>*i+<span class="number">1</span>;
+    }
+
+    <span class="javadoc">/**
+     * 下滤
+     *<span class="javadoctag"> @param</span> a 数组
+     *<span class="javadoctag"> @param</span> i 进行下滤的节点的位置，其中以根节点为0
+     *<span class="javadoctag"> @param</span> n 二叉堆的长度
+     */</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> &lt;AnyType <span class="keyword">extends</span> Comparable&lt;? <span class="keyword">super</span> AnyType&gt;&gt;
+    <span class="function"><span class="keyword">void</span> <span class="title">percDown</span><span class="params">(AnyType [] a,<span class="keyword">int</span> i,<span class="keyword">int</span> n)</span></span>{
+        <span class="keyword">int</span> child;
+        AnyType tmp;
+
+        <span class="keyword">for</span>(tmp=a[i];leftChild(i)&lt;n;i=child){
+            child = leftChild(i);
+            <span class="keyword">if</span>(child!=n-<span class="number">1</span> &amp;&amp; a[child].compareTo(a[child+<span class="number">1</span>])&lt;<span class="number">0</span>)
+                child++;
+            <span class="keyword">if</span>(tmp.compareTo(a[child])&lt;<span class="number">0</span>)
+                a[i] = a[child];
+            <span class="keyword">else</span>
+                <span class="keyword">break</span>;
+        }
+        a[i] = tmp;
+    }
+
+    <span class="javadoc">/**
+     * 将两个节点的值交换
+     *<span class="javadoctag"> @param</span> a
+     *<span class="javadoctag"> @param</span> i
+     *<span class="javadoctag"> @param</span> j
+     */</span>
+    <span class="keyword">private</span> <span class="keyword">static</span> &lt;AnyType <span class="keyword">extends</span> Comparable&lt;? <span class="keyword">super</span> AnyType&gt;&gt;
+    <span class="function"><span class="keyword">void</span> <span class="title">swapReferences</span><span class="params">(AnyType [] a,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span></span>{
+        AnyType tmp;
+        tmp = a[j];
+        a[j] = a[i];
+        a[i] = tmp;
+
+    }
+
+    <span class="keyword">public</span> <span class="keyword">static</span> &lt;AnyType <span class="keyword">extends</span> Comparable&lt;? <span class="keyword">super</span> AnyType&gt;&gt;
+    <span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(AnyType[] a)</span></span>{
+        <span class="comment">//构建堆</span>
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = a.length/<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)
+            percDown(a, i, a.length);
+        <span class="keyword">for</span>(<span class="keyword">int</span> i = a.length-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--){
+            swapReferences(a,<span class="number">0</span>,i); <span class="comment">//将删除的最大值放到最后一个节点，将原来的最后一个节点放到根节点</span>
+            percDown(a, <span class="number">0</span>, i);
+        }
+    }
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        Integer[] a = {<span class="number">38</span>,<span class="number">65</span>,<span class="number">97</span>,<span class="number">76</span>,<span class="number">13</span>,<span class="number">27</span>,<span class="number">49</span>};
+        heapSort(a);
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++){
+            System.out.print(a[i]+<span class="string">" "</span>);
+        }
+    }
+
+}
+</code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -148,7 +250,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码"><span class="toc-number">2.</span> <span class="toc-text">2. java代码</span></a></li></ol>
  
   </div>
 
@@ -186,7 +288,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>14</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
 		  
 		
 		</ul>
@@ -199,7 +301,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>14</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>15</sup></a></li>
 			
 		
 			
@@ -211,7 +313,7 @@
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>4</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>5</sup></a></li>
 			
 		
 			
