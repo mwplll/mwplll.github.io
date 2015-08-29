@@ -11,15 +11,18 @@
     
 
     
-    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
+    <meta name="description" content="希尔排序的名称来源它的发明者Donald Shell,该算法是冲破二次时间屏障的第一批算法之一。
+1. 算法思路希尔排序的基本原理：（1）首先构造一个增量序列：h1,h2,…,hk,其中h1=1;（2）使用hk进行一趟排序，排序的目标是保证相隔hk的元素被排序，即a[i]&amp;lt;=a[i+k]。实质是对hk个子数组进行一次插入排序（3）接着依次使用h(k-1),…,h2,h1进行排序，当进行到增量">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序（四）-希尔排序">
 <meta property="og:url" content="http://mwplll.github.io/2015/08/28/排序（四）-希尔排序/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
+<meta property="og:description" content="希尔排序的名称来源它的发明者Donald Shell,该算法是冲破二次时间屏障的第一批算法之一。
+1. 算法思路希尔排序的基本原理：（1）首先构造一个增量序列：h1,h2,…,hk,其中h1=1;（2）使用hk进行一趟排序，排序的目标是保证相隔hk的元素被排序，即a[i]&amp;lt;=a[i+k]。实质是对hk个子数组进行一次插入排序（3）接着依次使用h(k-1),…,h2,h1进行排序，当进行到增量">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序（四）-希尔排序">
-<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
+<meta name="twitter:description" content="希尔排序的名称来源它的发明者Donald Shell,该算法是冲破二次时间屏障的第一批算法之一。
+1. 算法思路希尔排序的基本原理：（1）首先构造一个增量序列：h1,h2,…,hk,其中h1=1;（2）使用hk进行一趟排序，排序的目标是保证相隔hk的元素被排序，即a[i]&amp;lt;=a[i+k]。实质是对hk个子数组进行一次插入排序（3）接着依次使用h(k-1),…,h2,h1进行排序，当进行到增量">
 
     
     
@@ -88,15 +91,64 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码"><span class="toc-number">2.</span> <span class="toc-text">2. java代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_算法分析"><span class="toc-number">3.</span> <span class="toc-text">3. 算法分析</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>希尔排序的名称来源它的发明者Donald Shell,该算法是冲破二次时间屏障的第一批算法之一。</p>
+<h4 id="1-_算法思路">1. 算法思路</h4><p>希尔排序的基本原理：<br>（1）首先构造一个增量序列：h1,h2,…,hk,其中<strong>h1=1</strong>;<br>（2）使用hk进行一趟排序，排序的目标是保证相隔hk的元素被排序，即a[i]&lt;=a[i+k]。<strong>实质是对hk个子数组进行一次插入排序</strong><br>（3）接着依次使用h(k-1),…,h2,h1进行排序，当进行到增量为h1=1时，得到的即为有序序列。</p>
+<p>希尔排序的正确性首先依赖于一个性质：<strong>一个hk排序的文件（然后将是h(k-1)排序的）保持它的hk排序性</strong></p>
+<h4 id="2-_java代码">2. java代码</h4><p>源码：<a href="https://github.com/mwplll/algorithms" target="_blank" rel="external">https://github.com/mwplll/algorithms</a></p>
+<pre><code><span class="keyword">package</span> <span class="keyword">sort</span>;
+
+<span class="keyword">public</span> <span class="keyword">class</span> ShellSort {
+    <span class="comment">/**
+     * 希尔排序
+     * 增量序列采用希尔建议的序列：ht=N/2;hk=h(k+1)/2
+     * @param a
+     */</span>
+    <span class="keyword">public</span> <span class="keyword">static</span> &lt;AnyType <span class="keyword">extends</span> Comparable&lt;? <span class="keyword">super</span> AnyType&gt;&gt;
+    <span class="keyword">void</span> shellSort(AnyType[] a){
+        <span class="keyword">int</span> j;
+
+        <span class="keyword">for</span>(<span class="keyword">int</span> gap = a.length<span class="regexp">/2;gap&gt;0;gap /</span>= <span class="number">2</span>){
+            <span class="keyword">for</span>(<span class="keyword">int</span> i = gap;i&lt;a.length;i++){
+                AnyType tmp = a[i];
+                <span class="keyword">for</span>(j = i;j &gt;= gap &amp;&amp; tmp.<span class="keyword">compareTo</span>(a[j-gap])&lt;<span class="number">0</span>;j -= gap)
+                    a[j] = a[j-gap];
+                a[j] = tmp;
+            }
+        }
+    }
+
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) {
+        Integer[] a = {<span class="number">38</span>,<span class="number">65</span>,<span class="number">97</span>,<span class="number">76</span>,<span class="number">13</span>,<span class="number">27</span>,<span class="number">49</span>};
+        shellSort(a);
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;a.length;i++){
+            System.out.<span class="keyword">print</span>(a[i]+<span class="string">" "</span>);
+        }
+    }
+}
+</code></pre><h4 id="3-_算法分析">3. 算法分析</h4><p>两个定理记住：</p>
+<ul>
+<li>使用希尔增量时希尔排序的最坏情形运行时间为O(n^2);</li>
+<li>使用Hibbard增量的希尔排序的最坏情形运行时间为O(n^(3/2))</li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -148,7 +200,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法思路"><span class="toc-number">1.</span> <span class="toc-text">1. 算法思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java代码"><span class="toc-number">2.</span> <span class="toc-text">2. java代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_算法分析"><span class="toc-number">3.</span> <span class="toc-text">3. 算法分析</span></a></li></ol>
  
   </div>
 
@@ -186,7 +238,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>13</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>14</sup></a></li>
 		  
 		
 		</ul>
@@ -199,7 +251,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>13</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>14</sup></a></li>
 			
 		
 			
@@ -211,11 +263,11 @@
 			
 		
 			
-				<li><a href="/tags/基础/" title="基础">基础<sup>4</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>4</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>3</sup></a></li>
+				<li><a href="/tags/基础/" title="基础">基础<sup>4</sup></a></li>
 			
 		
 			
