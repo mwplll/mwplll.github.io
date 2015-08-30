@@ -71,6 +71,26 @@
   
 <section class="post" itemscope itemprop="blogitem">
   
+    <a href="/2015/08/30/排序（八）-桶排序与基数排序/" title="排序（八）-桶排序与基数排序" itemprop="url">
+  
+    <h1 itemprop="name">排序（八）-桶排序与基数排序</h1>
+    
+     
+           <p itemprop="description" >1. 桶排序桶排序适合于输入为小整数的情况。算法思路：（1）输入数据A1,A2,…An必须只由小于M的正整数组成，使用一个大小为M的称为count的数组，它被初始化为全0；         （2）当读Ai时，count[Ai]增1；         （3）当所有的输入数据读入后，</p>
+        
+    
+    <time datetime="2015-08-30T06:05:00.000Z" itemprop="datePublished">2015-08-30</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
     <a href="/2015/08/29/排序（十一）-排序算法的稳定性分析/" title="排序（十一）-排序算法的稳定性分析" itemprop="url">
   
     <h1 itemprop="name">排序（十一）-排序算法的稳定性分析</h1>
@@ -97,7 +117,10 @@
     <h1 itemprop="name">排序（十）-各种排序算法比较</h1>
     
      
-           <p itemprop="description" ></p>
+           <p itemprop="description" >讲完了所有的经典的排序算法，在具体应用时，还是需要根据输入数据的情况，选择最为恰当的排序算法。
+1. java中的排序在java标准库中，泛型排序采用的是归并排序，基本类型排序采用的是快速排序
+2. 总结下面这张图基本就能应付所有排序算法的选择问题了
+博客上对各种排序算法的总结很</p>
         
     
     <time datetime="2015-08-28T15:22:55.000Z" itemprop="datePublished">2015-08-28</time>
@@ -117,30 +140,12 @@
     <h1 itemprop="name">排序（九）-外部排序</h1>
     
      
-           <p itemprop="description" ></p>
+           <p itemprop="description" >大部分内部排序都用到了内存可直接寻址的事实，当输入数据太大装不进内存，就需要外部排序了。这里介绍下常用的四种外部排序方法.
+1. 简单算法基本的外部排序算法使用归并排序的合并算法需要log(N/M)趟合并工作
+2. 多路合并前面提到的合并算法，实际是2-路合并，可以将它扩充k-路</p>
         
     
     <time datetime="2015-08-28T15:22:32.000Z" itemprop="datePublished">2015-08-28</time>
-  </a>
-</section>
-
-
-
-
-
-
-  
-<section class="post" itemscope itemprop="blogitem">
-  
-    <a href="/2015/08/28/排序（八）-桶式排序/" title="排序（八）-桶式排序" itemprop="url">
-  
-    <h1 itemprop="name">排序（八）-桶式排序</h1>
-    
-     
-           <p itemprop="description" ></p>
-        
-    
-    <time datetime="2015-08-28T15:21:23.000Z" itemprop="datePublished">2015-08-28</time>
   </a>
 </section>
 
@@ -157,7 +162,7 @@
     <h1 itemprop="name">排序（七）-快速排序</h1>
     
      
-           <p itemprop="description" ></p>
+           <p itemprop="description" >1. 算法思路快速排序也是一种分治递归算法，对数组S排序的基本算法由以下四步组成：（1）如果S中元素个数为0或1，则返回；（2）取S中任一元素v，称之为枢纽元；（3）将S中除v外的元素划分成两个不想交的集合：S1中的元素都小于等于v,S2中的元素都大于等于v（4）组成新的数组{S</p>
         
     
     <time datetime="2015-08-28T15:21:01.000Z" itemprop="datePublished">2015-08-28</time>
@@ -318,7 +323,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>17</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>21</sup></a></li>
 		  
 		
 		</ul>
@@ -331,7 +336,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>17</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>21</sup></a></li>
 			
 		
 			
@@ -339,7 +344,7 @@
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>7</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>11</sup></a></li>
 			
 		
 			

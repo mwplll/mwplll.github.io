@@ -4,22 +4,28 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>排序（八）-桶式排序 | 特喜欢秋天的人</title>
+    <title>排序（八）-桶排序与基数排序 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
+    <meta name="description" content="1. 桶排序桶排序适合于输入为小整数的情况。算法思路：（1）输入数据A1,A2,…An必须只由小于M的正整数组成，使用一个大小为M的称为count的数组，它被初始化为全0；         （2）当读Ai时，count[Ai]增1；         （3）当所有的输入数据读入后，扫描数组count，打印出排序后的表。
+该算法用时：O(M+N);
+2. 基数排序基数排序是桶排序的一种扩展，是一种稳定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序（八）-桶式排序">
-<meta property="og:url" content="http://mwplll.github.io/2015/08/28/排序（八）-桶式排序/index.html">
+<meta property="og:title" content="排序（八）-桶排序与基数排序">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/30/排序（八）-桶排序与基数排序/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
+<meta property="og:description" content="1. 桶排序桶排序适合于输入为小整数的情况。算法思路：（1）输入数据A1,A2,…An必须只由小于M的正整数组成，使用一个大小为M的称为count的数组，它被初始化为全0；         （2）当读Ai时，count[Ai]增1；         （3）当所有的输入数据读入后，扫描数组count，打印出排序后的表。
+该算法用时：O(M+N);
+2. 基数排序基数排序是桶排序的一种扩展，是一种稳定">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="排序（八）-桶式排序">
-<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
+<meta name="twitter:title" content="排序（八）-桶排序与基数排序">
+<meta name="twitter:description" content="1. 桶排序桶排序适合于输入为小整数的情况。算法思路：（1）输入数据A1,A2,…An必须只由小于M的正整数组成，使用一个大小为M的称为count的数组，它被初始化为全0；         （2）当读Ai时，count[Ai]增1；         （3）当所有的输入数据读入后，扫描数组count，打印出排序后的表。
+该算法用时：O(M+N);
+2. 基数排序基数排序是桶排序的一种扩展，是一种稳定">
 
     
     
@@ -72,14 +78,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/28/排序（八）-桶式排序/" title="排序（八）-桶式排序" itemprop="url">排序（八）-桶式排序</a>
+      <a href="/2015/08/30/排序（八）-桶排序与基数排序/" title="排序（八）-桶排序与基数排序" itemprop="url">排序（八）-桶排序与基数排序</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-28T15:21:23.000Z" itemprop="datePublished"> 发表于 2015-08-28</time>
+    <time datetime="2015-08-30T06:05:00.000Z" itemprop="datePublished"> 发表于 2015-08-30</time>
     
   </p>
 </header>
@@ -88,15 +94,28 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_桶排序"><span class="toc-number">1.</span> <span class="toc-text">1. 桶排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_基数排序"><span class="toc-number">2.</span> <span class="toc-text">2. 基数排序</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<h4 id="1-_桶排序">1. 桶排序</h4><p>桶排序适合于输入为小整数的情况。<br>算法思路：（1）输入数据A1,A2,…An必须只由小于M的正整数组成，使用一个大小为M的称为count的数组，它被初始化为全0；<br>         （2）当读Ai时，count[Ai]增1；<br>         （3）当所有的输入数据读入后，扫描数组count，打印出排序后的表。</p>
+<p>该算法用时：O(M+N);</p>
+<h4 id="2-_基数排序">2. 基数排序</h4><p>基数排序是桶排序的一种扩展，是一种稳定的排序。<br>下面两篇博文对基数排序有详细的介绍：<br><a href="http://www.cnblogs.com/Braveliu/archive/2013/01/21/2870201.html" target="_blank" rel="external">http://www.cnblogs.com/Braveliu/archive/2013/01/21/2870201.html</a><br><a href="http://www.cnblogs.com/jingmoxukong/p/4311237.html" target="_blank" rel="external">http://www.cnblogs.com/jingmoxukong/p/4311237.html</a></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -104,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/08/28/排序（八）-桶式排序/" data-title="排序（八）-桶式排序 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/08/30/排序（八）-桶排序与基数排序/" data-title="排序（八）-桶排序与基数排序 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -117,19 +136,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/28/排序（九）-外部排序/" title="排序（九）-外部排序">
-  <strong>上一篇：</strong><br/>
-  <span>
-  排序（九）-外部排序</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/28/排序（七）-快速排序/"  title="排序（七）-快速排序">
+<a href="/2015/08/29/排序（十一）-排序算法的稳定性分析/"  title="排序（十一）-排序算法的稳定性分析">
  <strong>下一篇：</strong><br/> 
- <span>排序（七）-快速排序
+ <span>排序（十一）-排序算法的稳定性分析
 </span>
 </a>
 </div>
@@ -138,7 +149,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/28/排序（八）-桶式排序/" data-title="排序（八）-桶式排序" data-url="http://mwplll.github.io/2015/08/28/排序（八）-桶式排序/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/30/排序（八）-桶排序与基数排序/" data-title="排序（八）-桶排序与基数排序" data-url="http://mwplll.github.io/2015/08/30/排序（八）-桶排序与基数排序/"></div>
 </section>
 
 
@@ -148,7 +159,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_桶排序"><span class="toc-number">1.</span> <span class="toc-text">1. 桶排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_基数排序"><span class="toc-number">2.</span> <span class="toc-text">2. 基数排序</span></a></li></ol>
  
   </div>
 
@@ -186,7 +197,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>17</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>21</sup></a></li>
 		  
 		
 		</ul>
@@ -199,7 +210,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>17</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>21</sup></a></li>
 			
 		
 			
@@ -207,7 +218,7 @@
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>7</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>11</sup></a></li>
 			
 		
 			

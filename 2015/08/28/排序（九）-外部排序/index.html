@@ -11,15 +11,27 @@
     
 
     
-    <meta name="description" content="技术博客，程序员攻略，学习求职历程">
+    <meta name="description" content="大部分内部排序都用到了内存可直接寻址的事实，当输入数据太大装不进内存，就需要外部排序了。这里介绍下常用的四种外部排序方法.
+1. 简单算法基本的外部排序算法使用归并排序的合并算法需要log(N/M)趟合并工作
+2. 多路合并前面提到的合并算法，实际是2-路合并，可以将它扩充k-路合并。需要log k (N/M)趟合并工作
+3. 多相合并还是对前面两种算法的改进，主要改进为减少用到的磁盘空间。
+4.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="排序（九）-外部排序">
 <meta property="og:url" content="http://mwplll.github.io/2015/08/28/排序（九）-外部排序/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="技术博客，程序员攻略，学习求职历程">
+<meta property="og:description" content="大部分内部排序都用到了内存可直接寻址的事实，当输入数据太大装不进内存，就需要外部排序了。这里介绍下常用的四种外部排序方法.
+1. 简单算法基本的外部排序算法使用归并排序的合并算法需要log(N/M)趟合并工作
+2. 多路合并前面提到的合并算法，实际是2-路合并，可以将它扩充k-路合并。需要log k (N/M)趟合并工作
+3. 多相合并还是对前面两种算法的改进，主要改进为减少用到的磁盘空间。
+4.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="排序（九）-外部排序">
-<meta name="twitter:description" content="技术博客，程序员攻略，学习求职历程">
+<meta name="twitter:description" content="大部分内部排序都用到了内存可直接寻址的事实，当输入数据太大装不进内存，就需要外部排序了。这里介绍下常用的四种外部排序方法.
+1. 简单算法基本的外部排序算法使用归并排序的合并算法需要log(N/M)趟合并工作
+2. 多路合并前面提到的合并算法，实际是2-路合并，可以将它扩充k-路合并。需要log k (N/M)趟合并工作
+3. 多相合并还是对前面两种算法的改进，主要改进为减少用到的磁盘空间。
+4.">
 
     
     
@@ -88,15 +100,30 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_简单算法"><span class="toc-number">1.</span> <span class="toc-text">1. 简单算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_多路合并"><span class="toc-number">2.</span> <span class="toc-text">2. 多路合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_多相合并"><span class="toc-number">3.</span> <span class="toc-text">3. 多相合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_替换选择"><span class="toc-number">4.</span> <span class="toc-text">4. 替换选择</span></a></li></ol>
 		
 		</div>
 		
-		  
+		<p>大部分内部排序都用到了内存可直接寻址的事实，当输入数据太大装不进内存，就需要外部排序了。<br>这里介绍下常用的四种外部排序方法.</p>
+<h4 id="1-_简单算法">1. 简单算法</h4><p>基本的外部排序算法使用归并排序的<strong>合并算法</strong><br>需要log(N/M)趟合并工作</p>
+<h4 id="2-_多路合并">2. 多路合并</h4><p>前面提到的合并算法，实际是<strong>2-路合并</strong>，可以将它扩充k-路合并。<br>需要log k (N/M)趟合并工作</p>
+<h4 id="3-_多相合并">3. 多相合并</h4><p>还是对前面两种算法的改进，主要改进为减少用到的磁盘空间。</p>
+<h4 id="4-_替换选择">4. 替换选择</h4><p>这种方法可以不用每趟排序完就输出到磁盘，M个记录被读入到内存并放到一个优先队列总，我们执行一次deleteMin，把最小值写到输出磁盘上，再从输入磁盘上读入一个值，如果它比刚刚写出的值大，可以把它添加到优先队列中，否则，不能把它放入顺串。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a><a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -127,9 +154,9 @@
 
 
 <div class="next">
-<a href="/2015/08/28/排序（八）-桶式排序/"  title="排序（八）-桶式排序">
+<a href="/2015/08/28/排序（七）-快速排序/"  title="排序（七）-快速排序">
  <strong>下一篇：</strong><br/> 
- <span>排序（八）-桶式排序
+ <span>排序（七）-快速排序
 </span>
 </a>
 </div>
@@ -148,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_简单算法"><span class="toc-number">1.</span> <span class="toc-text">1. 简单算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_多路合并"><span class="toc-number">2.</span> <span class="toc-text">2. 多路合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_多相合并"><span class="toc-number">3.</span> <span class="toc-text">3. 多相合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_替换选择"><span class="toc-number">4.</span> <span class="toc-text">4. 替换选择</span></a></li></ol>
  
   </div>
 
@@ -186,7 +213,7 @@
 		  
 		
 		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>17</sup></a></li>
+			<li><a href="/categories/算法/" title="算法">算法<sup>21</sup></a></li>
 		  
 		
 		</ul>
@@ -199,7 +226,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/算法/" title="算法">算法<sup>17</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>21</sup></a></li>
 			
 		
 			
@@ -207,7 +234,7 @@
 			
 		
 			
-				<li><a href="/tags/排序/" title="排序">排序<sup>7</sup></a></li>
+				<li><a href="/tags/排序/" title="排序">排序<sup>11</sup></a></li>
 			
 		
 			
