@@ -1,0 +1,544 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>图（三）-最小生成树 | 特喜欢秋天的人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="威威小威">
+    
+
+    
+    <meta name="description" content="图论中，通常将树定义为一个无回路连通图。对于无回路连通图，只要选定某个顶点作为根，以此顶点为树根对每条边定向，就能得到通常的树。
+最小生成树是无向网的一个典型应用。
+1. 生成树定义：一个连通图G的子图如果是一棵包含G的所有顶点的树，则该子图称为G的生成树。
+性质：n个顶点的连通图G的任何生成树一定是包含n个顶点和n-1条边的连通子图。
+两种图的遍历方式都可以获得生成树，深度优先搜索遍历得到的是D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图（三）-最小生成树">
+<meta property="og:url" content="http://mwplll.github.io/2015/08/31/图（三）-最小生成树/index.html">
+<meta property="og:site_name" content="特喜欢秋天的人">
+<meta property="og:description" content="图论中，通常将树定义为一个无回路连通图。对于无回路连通图，只要选定某个顶点作为根，以此顶点为树根对每条边定向，就能得到通常的树。
+最小生成树是无向网的一个典型应用。
+1. 生成树定义：一个连通图G的子图如果是一棵包含G的所有顶点的树，则该子图称为G的生成树。
+性质：n个顶点的连通图G的任何生成树一定是包含n个顶点和n-1条边的连通子图。
+两种图的遍历方式都可以获得生成树，深度优先搜索遍历得到的是D">
+<meta property="og:image" content="/img/dfstree_bfstree1.png">
+<meta property="og:image" content="/img/dfstree_bfstree2.png">
+<meta property="og:image" content="/img/prim1.png">
+<meta property="og:image" content="/img/prim2.png">
+<meta property="og:image" content="/img/kruskal1.png">
+<meta property="og:image" content="/img/kruskal2.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图（三）-最小生成树">
+<meta name="twitter:description" content="图论中，通常将树定义为一个无回路连通图。对于无回路连通图，只要选定某个顶点作为根，以此顶点为树根对每条边定向，就能得到通常的树。
+最小生成树是无向网的一个典型应用。
+1. 生成树定义：一个连通图G的子图如果是一棵包含G的所有顶点的树，则该子图称为G的生成树。
+性质：n个顶点的连通图G的任何生成树一定是包含n个顶点和n-1条边的连通子图。
+两种图的遍历方式都可以获得生成树，深度优先搜索遍历得到的是D">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特喜欢秋天的人">特喜欢秋天的人</a></h1>
+				<h2 class="blog-motto">keep going，多尝试，就不会害怕...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mwplll.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/31/图（三）-最小生成树/" title="图（三）-最小生成树" itemprop="url">图（三）-最小生成树</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-31T03:09:47.000Z" itemprop="datePublished"> 发表于 2015-08-31</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_生成树"><span class="toc-number">1.</span> <span class="toc-text">1. 生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_最小生成树"><span class="toc-number">2.</span> <span class="toc-text">2. 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_普里姆（Prim）算法"><span class="toc-number">3.</span> <span class="toc-text">3. 普里姆（Prim）算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_克鲁斯卡尔（Kruskal）算法"><span class="toc-number">4.</span> <span class="toc-text">4. 克鲁斯卡尔（Kruskal）算法</span></a></li></ol>
+		
+		</div>
+		
+		<p>图论中，<strong>通常将树定义为一个无回路连通图</strong>。对于无回路连通图，只要选定某个顶点作为根，以此顶点为树根对每条边定向，就能得到通常的树。</p>
+<p>最小生成树是无向网的一个典型应用。</p>
+<h4 id="1-_生成树">1. 生成树</h4><p>定义：一个连通图G的子图如果是一棵包含G的所有顶点的树，则该子图称为G的生成树。</p>
+<p>性质：n个顶点的连通图G的任何生成树一定是包含n个顶点和n-1条边的连通子图。</p>
+<p>两种图的遍历方式都可以获得生成树，深度优先搜索遍历得到的是DFS生成树，广度优先搜索遍历得到的是BFS生成树。生成树的图例如下：<br><img src="/img/dfstree_bfstree1.png" alt=""><br><img src="/img/dfstree_bfstree2.png" alt=""></p>
+<h4 id="2-_最小生成树">2. 最小生成树</h4><p>定义：对于连通网络G=(V,E)，边是带权的，因而G的生成树的各边也是带权的。生成树的各边的权值总和称为生成树的权，权最小的生成树称为G的最小生成树。</p>
+<p>构建最小生成树的算法有很多种，普里姆（Prim）算法、克鲁斯卡尔（Kruskal）算法是两种经典算法。无论哪种算法，都用到了最小生成树的MST性质。</p>
+<blockquote>
+<p>MST性质：设G=(V,E)是一个连通网路，U是顶点集V的一个真子集。如果(u,v)是G中所有的一个端点在U里，另一个端点不在U里的边中，具有最小权值的一条边，则一定存在G的一棵最小生成树包括此边(u,v).</p>
+</blockquote>
+<h4 id="3-_普里姆（Prim）算法">3. 普里姆（Prim）算法</h4><p>设G(V，E)为一个连通网，顶点集V=(v1,v2,…,vn)。设T(U,TE)是所要求的G的一棵最小生成树，其中U是T的顶点集，TE是T的边集，并且将G中边上的圈看做是长度。</p>
+<p>Prim算法思路：（1）首先任选V中的一顶点（设为v1），构成入选顶点集U={v1}，此时入选边集TE为空集，V中剩余顶点构成待选顶点集V-U;<br>（2）在所有关联于入选顶点集和待选顶点集的边中选取权值最小的一条边(vi.vj)加入入选边集（这里vi为入选顶点，vj为待选顶点）,同时将vj加入入选顶点集；<br>（3）重复以上过程，直到入选顶点集包含所有顶点。</p>
+<p>Prim算法的关键在于<strong>如何找到连接U和V-U的最短边来扩充生成树T</strong>。一个简单的方法是实施算法之前，将所有的边排序，<strong>准备加入生成树的边不仅不会在树中生成环路，而且也和树中已有的一个顶点关联</strong>。</p>
+<p>Prim算法图示：<br><img src="/img/prim1.png" alt=""></p>
+<p>Prim算法伪代码描述：<br><img src="/img/prim2.png" alt=""></p>
+<h4 id="4-_克鲁斯卡尔（Kruskal）算法">4. 克鲁斯卡尔（Kruskal）算法</h4><p>算法思路：（1）设G=(V,E)是连通网络，令最小生成树的初始状态为只有n个顶点而无边的非连通图T,T中的每个顶点自成一个连通分量；<br>（2）按照长度递增的顺序依次选择E中的边（u,v），如果该边端点u,v分别是当前T中两个连通分量T1,T2中的顶点，则将该边加入T中，T1,T2构成一个连通分量；如果u,v是当前同一个连通分量中的顶点，则舍去此边；<br>（3）重复步骤2，直到T中所有顶点都在同一个连通分量上为止。</p>
+<p>Kruskal算法图示：<br><img src="/img/kruskal1.png" alt=""></p>
+<p>Kruskal算法伪代码描述：<br><img src="/img/kruskal2.png" alt=""></p>
+<p><strong>Kruskal算法比Prim算法更快</strong></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/图/">图</a><a href="/tags/算法/">算法</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mwplll.github.io/2015/08/31/图（三）-最小生成树/" data-title="图（三）-最小生成树 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/31/图（二）-图的遍历/"  title="图（二）-图的遍历">
+ <strong>下一篇：</strong><br/> 
+ <span>图（二）-图的遍历
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/31/图（三）-最小生成树/" data-title="图（三）-最小生成树" data-url="http://mwplll.github.io/2015/08/31/图（三）-最小生成树/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_生成树"><span class="toc-number">1.</span> <span class="toc-text">1. 生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_最小生成树"><span class="toc-number">2.</span> <span class="toc-text">2. 最小生成树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_普里姆（Prim）算法"><span class="toc-number">3.</span> <span class="toc-text">3. 普里姆（Prim）算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_克鲁斯卡尔（Kruskal）算法"><span class="toc-number">4.</span> <span class="toc-text">4. 克鲁斯卡尔（Kruskal）算法</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C/" title="C">C<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/求职笔试面试/" title="求职笔试面试">求职笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>24</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>24</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>6</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/图/" title="图">图<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/堆/" title="堆">堆<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Mao Weipeng in ZJU. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:maoweipeng@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="威威小威">威威小威</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"mwplll"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
