@@ -4,42 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>树（四）-AVL树 | 特喜欢秋天的人</title>
+    <title>哈夫曼编码 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+    <meta name="description" content="1. 算法产生的背景哈弗曼编码主要是为了解决文件压缩问题，当文件进行压缩时，需要对不同的字符进行编码，编码需要达到两个目标：
 
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
+编码后的总比特数最小，即编码后文件最小，显然对每一个字符等长编码不如不等长编码，不等长编码能让出现频率高的字符采用最短的比特序列表示。
+编码后读取文件还需要解码，要使每个字符序列独一无二地解码到一个字符，则关键是只要没有字符代码是别的字符代码的前缀。采用二叉树表示，并将字">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树（四）-AVL树">
-<meta property="og:url" content="http://mwplll.github.io/2015/08/27/树（四）-AVL树/index.html">
+<meta property="og:title" content="哈夫曼编码">
+<meta property="og:url" content="http://mwplll.github.io/2015/09/03/哈夫曼编码/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+<meta property="og:description" content="1. 算法产生的背景哈弗曼编码主要是为了解决文件压缩问题，当文件进行压缩时，需要对不同的字符进行编码，编码需要达到两个目标：
 
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
-<meta property="og:image" content="/img/rorate_with_left_child.png">
-<meta property="og:image" content="/img/double_with_left_child.png">
+编码后的总比特数最小，即编码后文件最小，显然对每一个字符等长编码不如不等长编码，不等长编码能让出现频率高的字符采用最短的比特序列表示。
+编码后读取文件还需要解码，要使每个字符序列独一无二地解码到一个字符，则关键是只要没有字符代码是别的字符代码的前缀。采用二叉树表示，并将字">
+<meta property="og:image" content="/img/huffman_tree.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树（四）-AVL树">
-<meta name="twitter:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
+<meta name="twitter:title" content="哈夫曼编码">
+<meta name="twitter:description" content="1. 算法产生的背景哈弗曼编码主要是为了解决文件压缩问题，当文件进行压缩时，需要对不同的字符进行编码，编码需要达到两个目标：
 
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
+编码后的总比特数最小，即编码后文件最小，显然对每一个字符等长编码不如不等长编码，不等长编码能让出现频率高的字符采用最短的比特序列表示。
+编码后读取文件还需要解码，要使每个字符序列独一无二地解码到一个字符，则关键是只要没有字符代码是别的字符代码的前缀。采用二叉树表示，并将字">
 
     
     
@@ -92,14 +82,14 @@ AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/27/树（四）-AVL树/" title="树（四）-AVL树" itemprop="url">树（四）-AVL树</a>
+      <a href="/2015/09/03/哈夫曼编码/" title="哈夫曼编码" itemprop="url">哈夫曼编码</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-27T02:12:09.000Z" itemprop="datePublished"> 发表于 2015-08-27</time>
+    <time datetime="2015-09-03T02:12:04.000Z" itemprop="datePublished"> 发表于 2015-09-03</time>
     
   </p>
 </header>
@@ -108,43 +98,25 @@ AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法产生的背景"><span class="toc-number">1.</span> <span class="toc-text">1. 算法产生的背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_算法思路"><span class="toc-number">2.</span> <span class="toc-text">2. 算法思路</span></a></li></ol>
 		
 		</div>
 		
-		<h4 id="1-_AVL树的定义和性质">1. AVL树的定义和性质</h4><p>定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。</p>
-<p>AVL树是<strong>带有平衡条件</strong>的二叉查找树，保证树的深度必须是O(log N)</p>
-<h4 id="2-_AVL树的操作">2. AVL树的操作</h4><p>插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为<strong>旋转</strong>。<br>我们把必须重新平衡的节点称为α，则α具有以下4种情况：</p>
+		<h4 id="1-_算法产生的背景">1. 算法产生的背景</h4><p>哈弗曼编码主要是为了解决<strong>文件压缩</strong>问题，当文件进行压缩时，需要对不同的字符进行编码，编码需要达到两个目标：</p>
 <ol>
-<li>对α的左儿子的左子树进行一次插入</li>
-<li>对α的左儿子的右子树进行一次插入</li>
-<li>对α的右儿子的右子树进行一次插入</li>
-<li>对α的右儿子的左子树进行一次插入</li>
+<li>编码后的总比特数最小，即编码后文件最小，显然对每一个字符<strong>等长编码</strong>不如<strong>不等长编码</strong>，不等长编码能让出现频率高的字符采用最短的比特序列表示。</li>
+<li>编码后读取文件还需要解码，要使每个字符序列独一无二地解码到一个字符，则关键是<strong>只要没有字符代码是别的字符代码的前缀</strong>。采用二叉树表示，并将字符都放在树叶节点上能满足这个要求。</li>
 </ol>
-<p>1、3采用单旋转调整，2、4采用双旋转调整。</p>
-<p>单旋转示例图：<img src="/img/rorate_with_left_child.png" alt=""></p>
-<p>java代码：</p>
-<pre><code>/**
-* 左旋转实现
-*/
-private AvlNode&lt;AnyType&gt; rorateWithLeftChild(AvlNode&lt;AnyType&gt; <span class="literal">k2</span>){
-    AvlNode&lt;AnyType&gt; <span class="literal">k1</span> = <span class="literal">k2</span>.left<span class="comment">;</span>
-    <span class="literal">k2</span>.left = <span class="literal">k1</span>.right<span class="comment">;</span>
-    <span class="literal">k1</span>.right = <span class="literal">k2</span><span class="comment">;</span>
-    <span class="literal">k2</span>.height = Math.max(height(<span class="literal">k2</span>.left),height(<span class="literal">k2</span>.right))+<span class="number">1</span><span class="comment">;</span>
-    <span class="literal">k1</span>.height = Math.amx(height(<span class="literal">k1</span>.left),<span class="literal">k2</span>.height)+<span class="number">1</span><span class="comment">;</span>
-    return <span class="literal">k1</span><span class="comment">;</span>
-}
-</code></pre><p>双旋转示例图：<img src="/img/double_with_left_child.png" alt=""></p>
-<p>java代码：</p>
-<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
-<span class="keyword">*</span> 双旋转实现
-<span class="keyword">*</span>/
-private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild(AvlNode<span class="variable">&lt;AnyType&gt;</span> k3){
-    k3.left = rorateWithRightChild(k3.left);
-    return rorateWithLeftChild(k3);
-}
-</code></pre>  
+<p>所以文件压缩的基本问题就是找到总价值最小的满二叉树。对于如何构造编码树，Huffman给出了一个算法，采用这种算吗的编码系统就称为哈夫曼编码。</p>
+<h4 id="2-_算法思路">2. 算法思路</h4><p>一个概念：</p>
+<blockquote>
+<p>最优二叉树：给定n个权值（这相当于在编码问题中字符出现的频率）作为n个叶子结点，按照一定规则构造一棵二叉树，使带权路径长度达到最小，称这样的二叉树为最优二叉树，也称为哈夫曼树。</p>
+</blockquote>
+<p><strong>哈弗曼树的构造</strong>：</p>
+<p>假设有n个权值，则构造出的哈夫曼树有n个叶子结点。n个权值分别设为W1,W2,…,Wn，则哈夫曼树的构造规则为：<br>（1）将W1,W2,…,Wn看成是n棵树的森林（每棵树仅有一个结点）<br>（2）<strong>在森林中选出两个根结点的权值最小的树合并</strong>,作为一棵新树的左、右子树，且新树的根结点权值为其左、右子树的根节点权值之和；<br>（3）在森林中删除选取的两棵树，并将新树加入森林；<br>（4）重复（2）、（3），直到森林中只剩一棵树为止，该树即为所求的哈夫曼树。</p>
+<p>哈夫曼树构造图例：<br><img src="/img/huffman_tree.png" alt=""></p>
+<p>，则</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -166,7 +138,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/09/03/哈夫曼编码/" data-title="哈夫曼编码 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -179,19 +151,11 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/08/27/树（五）-伸展树/" title="树（五）-伸展树">
-  <strong>上一篇：</strong><br/>
-  <span>
-  树（五）-伸展树</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/26/树（三）-二叉查找树/"  title="树（三）-二叉查找树">
+<a href="/2015/09/03/贪心算法/"  title="贪心算法">
  <strong>下一篇：</strong><br/> 
- <span>树（三）-二叉查找树
+ <span>贪心算法
 </span>
 </a>
 </div>
@@ -200,7 +164,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树" data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/"></div>
+	<div class="ds-thread" data-thread-key="2015/09/03/哈夫曼编码/" data-title="哈夫曼编码" data-url="http://mwplll.github.io/2015/09/03/哈夫曼编码/"></div>
 </section>
 
 
@@ -210,7 +174,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_算法产生的背景"><span class="toc-number">1.</span> <span class="toc-text">1. 算法产生的背景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_算法思路"><span class="toc-number">2.</span> <span class="toc-text">2. 算法思路</span></a></li></ol>
  
   </div>
 

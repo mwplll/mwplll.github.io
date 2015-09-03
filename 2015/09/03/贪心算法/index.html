@@ -4,42 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>树（四）-AVL树 | 特喜欢秋天的人</title>
+    <title>贪心算法 | 特喜欢秋天的人</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="威威小威">
     
 
     
-    <meta name="description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
-
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
+    <meta name="description" content="1. 基本概念所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。所以对所采用的贪心策略一定要仔细分析其是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="树（四）-AVL树">
-<meta property="og:url" content="http://mwplll.github.io/2015/08/27/树（四）-AVL树/index.html">
+<meta property="og:title" content="贪心算法">
+<meta property="og:url" content="http://mwplll.github.io/2015/09/03/贪心算法/index.html">
 <meta property="og:site_name" content="特喜欢秋天的人">
-<meta property="og:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
-
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
-<meta property="og:image" content="/img/rorate_with_left_child.png">
-<meta property="og:image" content="/img/double_with_left_child.png">
+<meta property="og:description" content="1. 基本概念所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。所以对所采用的贪心策略一定要仔细分析其是">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="树（四）-AVL树">
-<meta name="twitter:description" content="1. AVL树的定义和性质定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。
-AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log N)
-2. AVL树的操作插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为旋转。我们把必须重新平衡的节点称为α，则α具有以下4种情况：
-
-对α的左儿子的左子树进行一次插入
-对α的左儿子的右子树进行一次插入
-对α">
+<meta name="twitter:title" content="贪心算法">
+<meta name="twitter:description" content="1. 基本概念所谓贪心算法是指，在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。所以对所采用的贪心策略一定要仔细分析其是">
 
     
     
@@ -92,14 +72,14 @@ AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/27/树（四）-AVL树/" title="树（四）-AVL树" itemprop="url">树（四）-AVL树</a>
+      <a href="/2015/09/03/贪心算法/" title="贪心算法" itemprop="url">贪心算法</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-27T02:12:09.000Z" itemprop="datePublished"> 发表于 2015-08-27</time>
+    <time datetime="2015-09-03T01:52:44.000Z" itemprop="datePublished"> 发表于 2015-09-03</time>
     
   </p>
 </header>
@@ -108,43 +88,20 @@ AVL树是带有平衡条件的二叉查找树，保证树的深度必须是O(log
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_基本概念"><span class="toc-number">1.</span> <span class="toc-text">1. 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_贪心算法的基本思路"><span class="toc-number">2.</span> <span class="toc-text">2. 贪心算法的基本思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_贪心算法的适用问题"><span class="toc-number">3.</span> <span class="toc-text">3. 贪心算法的适用问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_几种典型的贪心算法"><span class="toc-number">4.</span> <span class="toc-text">4. 几种典型的贪心算法</span></a></li></ol>
 		
 		</div>
 		
-		<h4 id="1-_AVL树的定义和性质">1. AVL树的定义和性质</h4><p>定义：一棵AVL树是其每个节点的左子树和右子树的高度最多差1的二叉查找树。</p>
-<p>AVL树是<strong>带有平衡条件</strong>的二叉查找树，保证树的深度必须是O(log N)</p>
-<h4 id="2-_AVL树的操作">2. AVL树的操作</h4><p>插入操作会破坏AVL树的平衡性，需要在插入后进行修正，这种修正调整称为<strong>旋转</strong>。<br>我们把必须重新平衡的节点称为α，则α具有以下4种情况：</p>
-<ol>
-<li>对α的左儿子的左子树进行一次插入</li>
-<li>对α的左儿子的右子树进行一次插入</li>
-<li>对α的右儿子的右子树进行一次插入</li>
-<li>对α的右儿子的左子树进行一次插入</li>
+		<h4 id="1-_基本概念">1. 基本概念</h4><p>所谓贪心算法是指，在对问题求解时，<strong>总是做出在当前看来是最好的选择</strong>。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的<strong>局部最优解</strong>。<br>贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择。必须注意的是，贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，<strong>即某个状态以后的过程不会影响以前的状态，只与当前状态有关</strong>。<br>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
+<h4 id="2-_贪心算法的基本思路">2. 贪心算法的基本思路</h4><ol>
+<li>建立数学模型来描述问题。</li>
+<li>把求解的问题分成若干个子问题。</li>
+<li>对每一子问题求解，得到子问题的局部最优解。</li>
+<li>把子问题的解局部最优解合成原来解问题的一个解。</li>
 </ol>
-<p>1、3采用单旋转调整，2、4采用双旋转调整。</p>
-<p>单旋转示例图：<img src="/img/rorate_with_left_child.png" alt=""></p>
-<p>java代码：</p>
-<pre><code>/**
-* 左旋转实现
-*/
-private AvlNode&lt;AnyType&gt; rorateWithLeftChild(AvlNode&lt;AnyType&gt; <span class="literal">k2</span>){
-    AvlNode&lt;AnyType&gt; <span class="literal">k1</span> = <span class="literal">k2</span>.left<span class="comment">;</span>
-    <span class="literal">k2</span>.left = <span class="literal">k1</span>.right<span class="comment">;</span>
-    <span class="literal">k1</span>.right = <span class="literal">k2</span><span class="comment">;</span>
-    <span class="literal">k2</span>.height = Math.max(height(<span class="literal">k2</span>.left),height(<span class="literal">k2</span>.right))+<span class="number">1</span><span class="comment">;</span>
-    <span class="literal">k1</span>.height = Math.amx(height(<span class="literal">k1</span>.left),<span class="literal">k2</span>.height)+<span class="number">1</span><span class="comment">;</span>
-    return <span class="literal">k1</span><span class="comment">;</span>
-}
-</code></pre><p>双旋转示例图：<img src="/img/double_with_left_child.png" alt=""></p>
-<p>java代码：</p>
-<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
-<span class="keyword">*</span> 双旋转实现
-<span class="keyword">*</span>/
-private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild(AvlNode<span class="variable">&lt;AnyType&gt;</span> k3){
-    k3.left = rorateWithRightChild(k3.left);
-    return rorateWithLeftChild(k3);
-}
-</code></pre>  
+<h4 id="3-_贪心算法的适用问题">3. 贪心算法的适用问题</h4><p>贪心策略适用的前提是：<strong>局部最优策略能导致产生全局最优解</strong>。<br>实际上，<strong>贪心算法适用的情况很少</strong>。一般，对一个问题分析是否适用于贪心算法，可以先选择该问题下的几个实际数据进行分析，就可做出判断。</p>
+<h4 id="4-_几种典型的贪心算法">4. 几种典型的贪心算法</h4><p>图论中求最短路径的Dijkstra算法、求最小生成树的Prim算法和Kruskal算法、哈夫曼生成树</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -157,7 +114,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/树/">树</a><a href="/tags/算法/">算法</a>
+  <span></span> <a href="/tags/算法/">算法</a>
   </div>
 
 </div>
@@ -166,7 +123,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  <div data-url="http://mwplll.github.io/2015/09/03/贪心算法/" data-title="贪心算法 | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -180,18 +137,18 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/08/27/树（五）-伸展树/" title="树（五）-伸展树">
+ <a href="/2015/09/03/哈夫曼编码/" title="哈夫曼编码">
   <strong>上一篇：</strong><br/>
   <span>
-  树（五）-伸展树</span>
+  哈夫曼编码</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/08/26/树（三）-二叉查找树/"  title="树（三）-二叉查找树">
+<a href="/2015/08/31/图（四）-最短路径和拓扑排序/"  title="图（四）-最短路径和拓扑排序">
  <strong>下一篇：</strong><br/> 
- <span>树（三）-二叉查找树
+ <span>图（四）-最短路径和拓扑排序
 </span>
 </a>
 </div>
@@ -200,7 +157,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/27/树（四）-AVL树/" data-title="树（四）-AVL树" data-url="http://mwplll.github.io/2015/08/27/树（四）-AVL树/"></div>
+	<div class="ds-thread" data-thread-key="2015/09/03/贪心算法/" data-title="贪心算法" data-url="http://mwplll.github.io/2015/09/03/贪心算法/"></div>
 </section>
 
 
@@ -210,7 +167,7 @@ private AvlNode<span class="variable">&lt;AnyType&gt;</span> doubleWithLeftChild
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_AVL树的定义和性质"><span class="toc-number">1.</span> <span class="toc-text">1. AVL树的定义和性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_AVL树的操作"><span class="toc-number">2.</span> <span class="toc-text">2. AVL树的操作</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_基本概念"><span class="toc-number">1.</span> <span class="toc-text">1. 基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_贪心算法的基本思路"><span class="toc-number">2.</span> <span class="toc-text">2. 贪心算法的基本思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_贪心算法的适用问题"><span class="toc-number">3.</span> <span class="toc-text">3. 贪心算法的适用问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_几种典型的贪心算法"><span class="toc-number">4.</span> <span class="toc-text">4. 几种典型的贪心算法</span></a></li></ol>
  
   </div>
 
