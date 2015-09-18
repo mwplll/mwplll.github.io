@@ -1,0 +1,534 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>互联网公司面试常考题（一） | 特喜欢秋天的人</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="威威小威">
+    
+
+    
+    <meta name="description" content="腾讯面试准备JAVA语言1. 面向对象的特征 1）抽象。包括两个方面：过程抽象和数据抽象； 2）继承。 3）封装。 4）多态。
+2. java和php的区别 1）首先，php是一种解释执行的脚本语言，java是一种纯面向对象的语言，需要先编译成字节码文件（.class文件），然后在java虚拟机上运行。 2）在安全性上，java要优于php。 3）数据库连接上，java是通过统一的JDBC来连接，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="互联网公司面试常考题（一）">
+<meta property="og:url" content="http://mwplll.github.io/2015/09/14/互联网公司面试常考题（一）/index.html">
+<meta property="og:site_name" content="特喜欢秋天的人">
+<meta property="og:description" content="腾讯面试准备JAVA语言1. 面向对象的特征 1）抽象。包括两个方面：过程抽象和数据抽象； 2）继承。 3）封装。 4）多态。
+2. java和php的区别 1）首先，php是一种解释执行的脚本语言，java是一种纯面向对象的语言，需要先编译成字节码文件（.class文件），然后在java虚拟机上运行。 2）在安全性上，java要优于php。 3）数据库连接上，java是通过统一的JDBC来连接，">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="互联网公司面试常考题（一）">
+<meta name="twitter:description" content="腾讯面试准备JAVA语言1. 面向对象的特征 1）抽象。包括两个方面：过程抽象和数据抽象； 2）继承。 3）封装。 4）多态。
+2. java和php的区别 1）首先，php是一种解释执行的脚本语言，java是一种纯面向对象的语言，需要先编译成字节码文件（.class文件），然后在java虚拟机上运行。 2）在安全性上，java要优于php。 3）数据库连接上，java是通过统一的JDBC来连接，">
+
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="特喜欢秋天的人">特喜欢秋天的人</a></h1>
+				<h2 class="blog-motto">keep going，多尝试，就不会害怕...</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:mwplll.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/09/14/互联网公司面试常考题（一）/" title="互联网公司面试常考题（一）" itemprop="url">互联网公司面试常考题（一）</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="威威小威" target="_blank" itemprop="author">威威小威</a>
+		
+  <p class="article-time">
+    <time datetime="2015-09-14T15:26:33.000Z" itemprop="datePublished"> 发表于 2015-09-14</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试准备"><span class="toc-number">1.</span> <span class="toc-text">腾讯面试准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA语言"><span class="toc-number">2.</span> <span class="toc-text">JAVA语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_面向对象的特征"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 面向对象的特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java和php的区别"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. java和php的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_覆盖和重载的区别"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 覆盖和重载的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_JAVA内存模型"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. JAVA内存模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_GC"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. GC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构与算法"><span class="toc-number">3.</span> <span class="toc-text">数据结构与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_排序"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_海量数据处理"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 海量数据处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统"><span class="toc-number">4.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_进程间通信机制"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 进程间通信机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_内存管理"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 内存管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web基础"><span class="toc-number">5.</span> <span class="toc-text">web基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_TCP的三次握手、四次挥手"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. TCP的三次握手、四次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_TCP滑动窗口机制"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. TCP滑动窗口机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_TCP拥塞控制机制"><span class="toc-number">5.0.3.</span> <span class="toc-text">3. TCP拥塞控制机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_socket模型"><span class="toc-number">5.0.4.</span> <span class="toc-text">4. socket模型</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="腾讯面试准备">腾讯面试准备</h2><h2 id="JAVA语言">JAVA语言</h2><h4 id="1-_面向对象的特征">1. 面向对象的特征</h4><p> 1）抽象。包括两个方面：过程抽象和数据抽象；<br> 2）继承。<br> 3）封装。<br> 4）多态。</p>
+<h4 id="2-_java和php的区别">2. java和php的区别</h4><p> 1）首先，php是一种解释执行的脚本语言，java是一种纯面向对象的语言，需要先编译成字节码文件（.class文件），然后在java虚拟机上运行。<br> 2）在安全性上，java要优于php。<br> 3）数据库连接上，java是通过统一的JDBC来连接，php连接不同的数据库需要不同的访问接口，当然也可以通过PDO提供统一的数据库连接接口。<br> 4）在性能上，java要优于php。<br> 5）java和php都具有跨平台性<br> 6）php适合快速开发，开发成本低，适合中小型的网站的开发。java扩展性好，性能出色，适合大型网站的开发。</p>
+<h4 id="3-_覆盖和重载的区别">3. 覆盖和重载的区别</h4><p>重载和覆盖是多态的不同表现方式。<br>重载是在<strong>一个类中</strong>多态性的表现，是指在一个类中定义多个不同的方法，它们或许有不同的参数个数、不同的参数类型。<br>重载需要注意以下几点：<br>1）重载是通过不同的参数来区分的。例如不同的参数个数、不同的参数类型、不同的参数顺序。<br>2）重载不能通过方法的访问权限、返回值的类型和抛出的异常来进行重载。<br>3）对于继承来说，如果基类方法的访问权限为private，那么就不能在派生类对其重载；如果派生类定义了一个同名的函数，这只是一个新的方法，达不到重载的效果。<br>覆盖是指派生类覆盖基类的函数，对基类的方法进行重写。<br>覆盖需要注意以下几点：<br>1）派生类中的覆盖方法必须与基类中的被覆盖方法有相同的函数名、参数、返回值、抛出的异常。<br>2）基类中被覆盖的方法不能为private，否则子类只是定义了一个方法，并没有对其覆盖。</p>
+<p>总的来说，重载和覆盖的区别为以下4点：<br>1）重载是同一个类中方法之间的关系，是水平关系；覆盖是子类与父类的关系，是垂直关系；<br>2）重载是多个方法之间的关系；覆盖是一对方法之间的关系；<br>3）重载要求参数列表相同；覆盖要求参数列表相同<br>4）重载在调用时是根据实参表和形参表来选择方法体的；覆盖在调用时时根据对象的类型来决定的。</p>
+<h4 id="4-_JAVA内存模型">4. JAVA内存模型</h4><p>1）程序计数器，可看做是当前线程所执行的字节码的指示器，是线程独立的；<br>2）java虚拟机栈，线程独立，描述的是java方法执行的内存模型：每个方法执行的同时都会创建一个栈帧，用于存储局部变量表（基本数据类型、对象引用、returnAdress类型）、操作数栈、动态链接、方法出口等信息。每个方法从调用直至执行完成的过程，就对应着一个栈帧在虚拟机中入栈到出栈的过程。<br>3）本地方法栈：用于java虚拟机本身的native方法.<br>4）java堆：线程共享的区域，存储对象实例。<br>5）方法区：线程共享的，存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。<br>   <strong>运行时常量池</strong>是方法区的一部分，用于存放编译时期生成的各种字面量和符号引用。</p>
+<h4 id="5-_GC">5. GC</h4><h2 id="数据结构与算法">数据结构与算法</h2><h4 id="1-_排序">1. 排序</h4><p>参考关于排序的总结<br><a href="http://mwplll.github.io/tags/%E6%8E%92%E5%BA%8F/" target="_blank" rel="external">http://mwplll.github.io/tags/%E6%8E%92%E5%BA%8F/</a></p>
+<p>稳定性记住：插入排序、冒泡排序、归并排序、基数排序稳定，其他的不稳定</p>
+<h4 id="2-_海量数据处理">2. 海量数据处理</h4><p>参考这篇博客<br><a href="http://blog.csdn.net/v_JULY_v/article/details/6279498" target="_blank" rel="external">http://blog.csdn.net/v_JULY_v/article/details/6279498</a></p>
+<h2 id="操作系统">操作系统</h2><h4 id="1-_进程间通信机制">1. 进程间通信机制</h4><p>两种基本模式：1）共享内存 2）消息传递</p>
+<p>消息传递方式包括信号、管道、套接口（消息队列、信号灯、共享内存）</p>
+<h4 id="2-_内存管理">2. 内存管理</h4><p>1）内存通常分为两个区域：一个用于驻留操作系统，一个用于用户进程。为了保护操作系统，采用重定位寄存器和界限地址寄存器将进程的逻辑地址映射到物理地址。<br>2）通常需要将多个进程同时放入内存中，因此需要考虑如何为输入队列需要调入内存的进程分配内存空间。<br>3) 连续内存分配中的可变分区方案容易产生外部碎片和内部碎片（内存以固定大小的块而不是字节来分配造成的）。<br>4）分页内存管理方案允许进程的物理地址空间是非连续的。物理内存分为固定大小的块，称为帧；逻辑内存也分为同样大小的块，称为页。通过页表实现页到帧的映射，维护一张帧表来表示帧是空闲的还是已占用的。分页内存管理解决了外部碎片的问题，但内部碎片的问题依旧存在。<br>5）TLB(转换表缓冲区)可以加快页号与帧号对应关系的查找<br>6）保护措施，设置页表保护位<br>7）页表结构：多级页表，哈希页表，反向页表<br>8）分段：段的划分从用户视角的程序出发，段的大小是不定的，通过段表维护段名称和偏移、界限</p>
+<h2 id="web基础">web基础</h2><h4 id="1-_TCP的三次握手、四次挥手">1. TCP的三次握手、四次挥手</h4><p>TCP连接建立的三次握手<br>1）客户端发送SYN和初始序号（ISN）到服务端。<br>2）服务端发回包含服务器初始序号的SYN作为应答，同时，发送ACK给客户端，ACK的值为客户的ISN值加1<br>3）客户端发送ACK给服务端，ACK的值为服务端的ISN值加1.</p>
+<p>TCP连接终止的四次挥手<br>1）客户端发送FIN给服务器端。<br>2）服务器端收到FIN,发回一个ACK,ACK的值为收到的序号加1.<br>3）同时TCP服务器还向应用程序传送一个文件结束符，接着这个服务器程序就关闭它的连接，服务器端向客户端发送一个FIN.<br>4) 客户端收到FIN,发回一个ACK,ACK的值为收到的序号加1.</p>
+<h4 id="2-_TCP滑动窗口机制">2. TCP滑动窗口机制</h4><p>TCP的滑动窗口协议允许发送方在停止并等待确认前可连续发送多个分组，由于发送方不必每发一个分组就停下来等待确认，因此该协议可以加速数据的传输。</p>
+<p>接收方的窗口大小指接收方的TCP缓冲区还剩的空间。</p>
+<p>TCP的流量控制由连接的每一端通过声明的窗口大小来提供。<br>1）接收方通告的窗口称为提供的窗口，发送发通过确认序列号计算它的可用窗口，该窗口表明多少数据可以被发送。<br>2）发送方根据可用窗口大小发送数据，但不必发送一个全窗口的数据。<br>3）接收方收到数据后，当向发送方确认时，把窗口向右边滑动。窗口的大小是相对于确认序列号的。<br>4）窗口的大小可以减小，但是窗口的右边沿却不能向左移动。<br>5）接收方在发送一个ACK前不必等待窗口被填满。</p>
+<p>流量控制作为接受方管理发送方发送数据的方式，用来防止接受方可用的数据缓存空间的溢出。流控制是一种局部控制机制，其参与者仅仅是发送方和接收方，它只考虑了接收端的接收能力，而没有考虑到网络的传输能力</p>
+<h4 id="3-_TCP拥塞控制机制">3. TCP拥塞控制机制</h4><p>TCP的拥塞控制由四个核心算法组成：慢启动、拥塞避免、快速重传、快速恢复</p>
+<p>参考这篇博客<br><a href="http://blog.sina.com.cn/s/blog_48ebca64010003t0.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_48ebca64010003t0.html</a></p>
+<h4 id="4-_socket模型">4. socket模型</h4><p>主要有阻塞模型、多进程模型、进程池、连接池、select事件模型、epoll事件模型</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/笔试面试/">笔试面试</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/经验/">经验</a><a href="/tags/面试/">面试</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://mwplll.github.io/2015/09/14/互联网公司面试常考题（一）/" data-title="互联网公司面试常考题（一） | 特喜欢秋天的人" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/09/03/哈夫曼编码/"  title="哈夫曼编码">
+ <strong>下一篇：</strong><br/> 
+ <span>哈夫曼编码
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/09/14/互联网公司面试常考题（一）/" data-title="互联网公司面试常考题（一）" data-url="http://mwplll.github.io/2015/09/14/互联网公司面试常考题（一）/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#腾讯面试准备"><span class="toc-number">1.</span> <span class="toc-text">腾讯面试准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA语言"><span class="toc-number">2.</span> <span class="toc-text">JAVA语言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_面向对象的特征"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 面向对象的特征</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_java和php的区别"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. java和php的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_覆盖和重载的区别"><span class="toc-number">2.0.3.</span> <span class="toc-text">3. 覆盖和重载的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_JAVA内存模型"><span class="toc-number">2.0.4.</span> <span class="toc-text">4. JAVA内存模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-_GC"><span class="toc-number">2.0.5.</span> <span class="toc-text">5. GC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据结构与算法"><span class="toc-number">3.</span> <span class="toc-text">数据结构与算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_排序"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. 排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_海量数据处理"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. 海量数据处理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统"><span class="toc-number">4.</span> <span class="toc-text">操作系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_进程间通信机制"><span class="toc-number">4.0.1.</span> <span class="toc-text">1. 进程间通信机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_内存管理"><span class="toc-number">4.0.2.</span> <span class="toc-text">2. 内存管理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web基础"><span class="toc-number">5.</span> <span class="toc-text">web基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_TCP的三次握手、四次挥手"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. TCP的三次握手、四次挥手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_TCP滑动窗口机制"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. TCP滑动窗口机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-_TCP拥塞控制机制"><span class="toc-number">5.0.3.</span> <span class="toc-text">3. TCP拥塞控制机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-_socket模型"><span class="toc-number">5.0.4.</span> <span class="toc-text">4. socket模型</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C/" title="C">C<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Java/" title="Java">Java<sup>12</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/markdown/" title="markdown">markdown<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/求职笔试面试/" title="求职笔试面试">求职笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/笔试面试/" title="笔试面试">笔试面试<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>27</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>27</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java编程思想/" title="Java编程思想">Java编程思想<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/排序/" title="排序">排序<sup>11</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/树/" title="树">树<sup>7</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/图/" title="图">图<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/基础/" title="基础">基础<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/c/" title="c">c<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据结构/" title="数据结构">数据结构<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/经验/" title="经验">经验<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/面试/" title="面试">面试<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/leetcode/" title="leetcode">leetcode<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Java/" title="Java">Java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/散列/" title="散列">散列<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统/" title="操作系统">操作系统<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/堆/" title="堆">堆<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C/" title="C">C<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Mao Weipeng in ZJU. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:maoweipeng@126.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="威威小威">威威小威</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"mwplll"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
