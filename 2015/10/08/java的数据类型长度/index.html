@@ -25,49 +25,33 @@ Java提供8种基本数据类型，每种类型的长度如下表所示：
 
 
 boolean
-
-
-
+—
+—
+—
 
 
 char
 16位
-
-
+Unicode 0
+Unicode 2^16-1
 
 
 byte
 8位
-
-
+-128
++127
 
 
 short
 16位
-
-
+-2^15
++2^15-1
 
 
 int
 32位
-
-
-
-
-long
-64位
-
-
-
-
-float
-32位
-
-
-
-
-double
-64位">
+-2^31
++2^31-1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java的数据类型长度">
 <meta property="og:url" content="http://mwplll.github.io/2015/10/08/java的数据类型长度/index.html">
@@ -86,49 +70,33 @@ Java提供8种基本数据类型，每种类型的长度如下表所示：
 
 
 boolean
-
-
-
+—
+—
+—
 
 
 char
 16位
-
-
+Unicode 0
+Unicode 2^16-1
 
 
 byte
 8位
-
-
+-128
++127
 
 
 short
 16位
-
-
+-2^15
++2^15-1
 
 
 int
 32位
-
-
-
-
-long
-64位
-
-
-
-
-float
-32位
-
-
-
-
-double
-64位">
+-2^31
++2^31-1">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java的数据类型长度">
 <meta name="twitter:description" content="Java具有平台无关性，即对每种数据类型分配固定长度。
@@ -145,49 +113,33 @@ Java提供8种基本数据类型，每种类型的长度如下表所示：
 
 
 boolean
-
-
-
+—
+—
+—
 
 
 char
 16位
-
-
+Unicode 0
+Unicode 2^16-1
 
 
 byte
 8位
-
-
+-128
++127
 
 
 short
 16位
-
-
+-2^15
++2^15-1
 
 
 int
 32位
-
-
-
-
-long
-64位
-
-
-
-
-float
-32位
-
-
-
-
-double
-64位">
+-2^31
++2^31-1">
 
     
     
@@ -274,53 +226,57 @@ double
 <tbody>
 <tr>
 <td>boolean</td>
-<td></td>
-<td></td>
-<td></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
 </tr>
 <tr>
 <td>char</td>
 <td>16位</td>
-<td></td>
-<td></td>
+<td>Unicode 0</td>
+<td>Unicode 2^16-1</td>
 </tr>
 <tr>
 <td>byte</td>
 <td>8位</td>
-<td></td>
-<td></td>
+<td>-128</td>
+<td>+127</td>
 </tr>
 <tr>
 <td>short</td>
 <td>16位</td>
-<td></td>
-<td></td>
+<td>-2^15</td>
+<td>+2^15-1</td>
 </tr>
 <tr>
 <td>int</td>
 <td>32位</td>
-<td></td>
-<td></td>
+<td>-2^31</td>
+<td>+2^31-1</td>
 </tr>
 <tr>
 <td>long</td>
 <td>64位</td>
-<td></td>
-<td></td>
+<td>-2^63</td>
+<td>+2^63-1</td>
 </tr>
 <tr>
 <td>float</td>
 <td>32位</td>
-<td></td>
-<td></td>
+<td>IEEE754</td>
+<td>IEEE754</td>
 </tr>
 <tr>
 <td>double</td>
 <td>64位</td>
-<td></td>
+<td>IEEE754</td>
+<td>IEEE754</td>
 </tr>
 </tbody>
 </table>
+<blockquote>
+<p>IEEE 754 浮点单精度数字格式定义了一个用于存储浮点数的比特布局。在空比特布局中，一个比特留作符号位，八个比特留作指数，23个比特留作尾数。</p>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
